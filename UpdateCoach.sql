@@ -1,9 +1,9 @@
 Use FitnessBot
 Go
 
-Create procedure UpdateCoach2
+Create procedure UpdateCoach
 @Id int, @FamilyName nvarchar(20), @FirstName nvarchar(20), @Patronymic  nvarchar(20), @PhoneNumber nvarchar(12), 
-@Email nvarchar(40), @Age int, @Sex bit, @SportTypeId int
+@Email nvarchar(40), @Age int, @Sex bit
 As
 Begin
 Update  [Persons]
