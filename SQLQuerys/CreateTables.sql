@@ -20,7 +20,7 @@ Create table [Persons]
 	[Patronymic] nvarchar (20),
 	[PhoneNumber] nvarchar (12),
 	[Email] nvarchar (40),
-	[Age] int,
+	[DateBirth] nvarchar (20),
 	[Sex] bit,
 	[IsDeleted] bit NOT NULL
 )
@@ -66,7 +66,7 @@ Go
 Create table [Timetables]
 (
 	[Id] int NOT NULL PRIMARY KEY IDENTITY,
-	[DateTime] nvarchar (8) NOT NULL,
+	[DateTime] nvarchar (20) NOT NULL,
 	[CoachId] int NOT NULL,
 	[WorkoutId] int NOT NULL,
 	[GymId] int NOT NULL,
