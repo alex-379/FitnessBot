@@ -1,7 +1,7 @@
-Create database FitnessBot
+Create database FitnessClub
 Go
 
-Use FitnessBot
+Use FitnessClub
 
 Create table [Roles]
 (
