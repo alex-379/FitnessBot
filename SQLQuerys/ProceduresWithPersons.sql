@@ -10,6 +10,8 @@ Insert dbo.[Persons] Values (@RoleId, @FamilyName, @FirstName, @Patronymic, @Pho
 End
 Go
 
+exec AddPerson @RoleId=2
+
 Create procedure AddCoachSportType
 @CoachId int, @SportTypeId int
 As
@@ -46,8 +48,6 @@ exec GetPersonById 1
 Go
 
 Create procedure UpdatePersonById
---@Id int, @RoleId int = 'GetPersonById 2', @FamilyName nvarchar(20)= [FamilyName], @FirstName nvarchar(20) = [FirstName], @Patronymic  nvarchar(20) = [Patronymic], @PhoneNumber nvarchar(12) = [PhoneNumber], 
---@Email nvarchar(40) = [Email], @DateBirth int = [DateBirth], @Sex bit = [Sex]
 @Id int, @RoleId int, @FamilyName nvarchar(20), @FirstName nvarchar(20), @Patronymic  nvarchar(20), @PhoneNumber nvarchar(12), 
 @Email nvarchar(40), @DateBirth int, @Sex bit
 As
@@ -108,11 +108,38 @@ Where [CoachId]=@CoachId
 End
 Go
 
-Create procedure GetAllPersonsByRole
-@Id int
+Create procedure GetAllPersonsByRoleId
+@RoleId int
 As
 Begin
-Select P.[Id], [FamilyName], [FirstName], [Patronymic], [PhoneNumber], [Email], [Age], [Sex],
+Select P.[Id], P.[RoleId], P.[FamilyName], P.[FirstName], P.[Patronymic], P.[PhoneNumber], P.[Email], P.[DateBirth], P.[Sex], R.[Id], R.[Name] From dbo.[Persons] As P
+join dbo.[Roles] As R On P.[RoleId] = R.[Id]
+Where P.[RoleId]=@RoleId and P.[IsDeleted]=0
+End
+
+Create procedure GetAllCoachesWithSportTypesWorkoutTypes
+@RoleId int = 2
+As
+Begin
+Select P.[Id], P.[RoleId], P.[FamilyName], P.[FirstName], P.[Patronymic], P.[PhoneNumber], P.[Email], P.[DateBirth], P.[Sex], R.[Id], R.[Name] From dbo.[Persons] As P
+join dbo.[Roles] As R On P.[RoleId] = R.[Id]
+Where P.[RoleId]=@RoleId and P.[IsDeleted]=0
+End
+
+Create procedure GetAllCoachesWithSportTypesWorkoutTypes
+@RoleId int = 2
+As
+Begin
+Select P.[Id], P.[RoleId], P.[FamilyName], P.[FirstName], P.[Patronymic], P.[PhoneNumber], P.[Email], P.[DateBirth], P.[Sex], R.[Id], R.[Name] From dbo.[Persons] As P
+join dbo.[Roles] As R On P.[RoleId] = R.[Id]
+join dbo.[Coa] As R On P.[RoleId] = R.[Id]
+Where P.[RoleId]=@RoleId and P.[IsDeleted]=0
+End
+
+
+
+
+P.[Id], [FamilyName], [FirstName], [Patronymic], [PhoneNumber], [Email], [Age], [Sex],
 ST.[Id] as SportTypeId, ST.[Name] as SportTypeName, WT.[Id] as WorkTypeId, WT.[Name] as WorkTypeName from dbo.[Persons] as P
 Join dbo.[Coaches_SportTypes] as CST on P.[Id]=CST.[CoachId]
 Join dbo.[SportTypes] as ST on CST.[SportTypeId]=ST.[Id]
