@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace FitnessClub.DAL.IRepositories
 {
-    internal interface IPersonRepository
+    public interface IPersonRepository
     {
+
     }
 }

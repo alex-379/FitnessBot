@@ -5,6 +5,7 @@
 
 FitnessClub/ConsoleApp1/
 FitnessClub/FitnessClub.DAL/Options.cs
+/.gitignore
 # User-specific files
 *.rsuser
 *.suo
