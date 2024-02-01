@@ -4,7 +4,7 @@
 ## Get latest from https://github.com/github/gitignore/blob/master/VisualStudio.gitignore
 
 FitnessClub/ConsoleApp1/
-
+FitnessClub/FitnessClub.DAL/Options.cs
 # User-specific files
 *.rsuser
 *.suo
