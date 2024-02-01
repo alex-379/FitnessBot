@@ -30,7 +30,7 @@ End
 
 Go
 
-Create procedure GetAllPerson As
+Create procedure GetAllPersons As
 Begin
 Select [Id], [RoleId], [FamilyName], [FirstName], [Patronymic], [PhoneNumber], [Email], [DateBirth], [Sex] from dbo.[Persons]
 Where [IsDeleted] = 0
