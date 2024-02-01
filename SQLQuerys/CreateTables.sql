@@ -7,7 +7,6 @@ Create table [Roles]
 (
 	[Id] int NOT NULL PRIMARY KEY IDENTITY,
 	[Name] nvarchar (20) NOT NULL,
-	[IsDeleted] bit NOT NULL
 )
 Go
 
@@ -30,7 +29,6 @@ Create table [WorkoutTypes]
 (
 	[Id] int NOT NULL PRIMARY KEY IDENTITY,
 	[Name] nvarchar (50) NOT NULL,
-	[IsDeleted] bit NOT NULL
 )
 Go
 
@@ -38,7 +36,6 @@ Create table SportTypes
 (
 	[Id] int NOT NULL PRIMARY KEY IDENTITY,
 	[Name] nvarchar (50) NOT NULL,
-	[IsDeleted] bit NOT NULL
 )
 Go
 
@@ -59,7 +56,6 @@ Create table [Gyms]
 (
 	[Id] int NOT NULL PRIMARY KEY IDENTITY,
 	[Name] nvarchar (50) NOT NULL,
-	[IsDeleted] bit NOT NULL
 )
 Go
 
