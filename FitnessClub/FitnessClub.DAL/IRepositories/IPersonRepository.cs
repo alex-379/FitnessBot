@@ -9,7 +9,9 @@ namespace FitnessClub.DAL.IRepositories
 {
     public interface IPersonRepository
     {
-        //public void AddPerson();
+        public void AddPerson(PersonDTO person);
+
+
         public List<PersonDTO> GetAllPersons();
         public PersonDTO GetPersonById(int id);
     }
