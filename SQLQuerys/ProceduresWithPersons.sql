@@ -1,4 +1,5 @@
 Use FitnessClub
+
 Go
 
 Create procedure AddPerson
@@ -8,6 +9,7 @@ As
 Begin
 Insert dbo.[Persons] Values (@RoleId, @FamilyName, @FirstName, @Patronymic, @PhoneNumber, @Email, @DateBirth, @Sex, 0)
 End
+
 Go
 
 Create procedure AddCoachSportType
@@ -16,6 +18,7 @@ As
 Begin
 Insert dbo.[Coaches_SportTypes] Values (@CoachId, @SportTypeId)
 End
+
 Go
 
 Create procedure AddCoachWorkoutType
@@ -24,13 +27,15 @@ As
 Begin
 Insert dbo.[Coaches_WorkoutTypes] Values (@CoachId, @WorkoutTypeId)
 End
+
 Go
 
-Create procedure GetAllPerson As
+Create procedure GetAllPersons As
 Begin
 Select [Id], [RoleId], [FamilyName], [FirstName], [Patronymic], [PhoneNumber], [Email], [DateBirth], [Sex] from dbo.[Persons]
 Where [IsDeleted] = 0
 End
+
 Go
 
 Create procedure GetPersonById
@@ -40,6 +45,7 @@ Begin
 Select [Id], [RoleId], [FamilyName], [FirstName], [Patronymic], [PhoneNumber], [Email], [DateBirth], [Sex] from dbo.[Persons]
 Where [Id]=@Id and [IsDeleted] <> 0
 End
+
 Go
 
 Create procedure UpdatePersonById
@@ -52,7 +58,8 @@ Set [RoleId]=@RoleId, [FamilyName]=@FamilyName, [FirstName]=@FirstName, [Patrony
 [DateBirth]=@DateBirth, [Sex]=@Sex
 Where [Id]=@Id and [IsDeleted]=0
 End
-Go
+
+Go 
 
 Create procedure DeletePersonById 
 @Id int
@@ -62,6 +69,7 @@ Update dbo.[Persons]
 Set  [IsDeleted]=1
 Where [Id]=@Id
 End
+
 Go
 
 Create procedure DeleteCoachSportType
@@ -71,6 +79,7 @@ Begin
 Delete From dbo.[Coaches_SportTypes]
 Where [CoachId]=@CoachId and [SportTypeId]=@SportTypeId
 End
+
 Go
 
 Create procedure DeleteCoachWorkoutType
@@ -80,6 +89,7 @@ Begin
 Delete From dbo.[Coaches_WorkoutTypes]
 Where [CoachId]=@CoachId and [WorkoutTypeId]=@WorkoutTypeId
 End
+
 Go
 
 Create procedure GetAllPersonsByRoleId
@@ -90,6 +100,7 @@ Select P.[Id], P.[RoleId], P.[FamilyName], P.[FirstName], P.[Patronymic], P.[Pho
 join dbo.[Roles] As R On P.[RoleId] = R.[Id]
 Where P.[RoleId]=@RoleId and P.[IsDeleted]=0
 End
+
 Go
 
 Create procedure GetAllCoachesWithSportTypesWorkoutTypes
@@ -105,6 +116,5 @@ join dbo.[Coaches_WorkoutTypes] As CWT On P.[Id] = CWT.[CoachId]
 join dbo.[WorkoutTypes] As WT On CWT.[WorkoutTypeId] = WT.[Id]
 Where P.[RoleId]=@RoleId and P.[IsDeleted]=0
 End
-Go
 
-exec GetAllCoachesWithSportTypesWorkoutTypes
+Go
