@@ -23,9 +23,7 @@ namespace FitnessClub.DAL
         {
             using (IDbConnection connection = new SqlConnection(Options.connectionString))
             {
-                connection.Query<PersonDTO>(PersonStoredProcedures.AddPerson,
-                    new { person.RoleId, person.FamilyName, person.FirstName, person.Patronymic, person.PhoneNumber, person.Email, person.DateBirth, person.Sex },
-                    commandType: CommandType.StoredProcedure);
+
             }
         }
 
