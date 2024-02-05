@@ -1,32 +1,39 @@
-﻿using FitnessClub.DAL.DTOs;
+﻿using Dapper;
+using FitnessClub.DAL.DTOs;
 using FitnessClub.DAL.IRepositories;
-using Microsoft.Data.SqlClient;
-using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Dapper;
 using FitnessClub.DAL.StoredProcedures;
+using Microsoft.Data.SqlClient;
+using System.Data;
 
 namespace FitnessClub.DAL
 {
     public class PersonRepository : IPersonRepository
     {
-        //public void AddPerson(int roleId, string familyName, string firstName, string patronymic, string phoneNumber, string email, string dateBirth, bool sex)
-        //{
-        //    using (IDbConnection connection = new SqlConnection(Options.connectionString))
-        //    {
-        //        return connection.QuerySingle<PersonDTO>(PersonStoredProcedures.AddPerson, new { roleId, familyName, firstName, patronymic, phoneNumber, email, dateBirth, sex }, commandType: CommandType.StoredProcedure);
-        //    }
-        //}
+        public void AddPerson(PersonDTO person)
+        {
+            using (IDbConnection connection = new SqlConnection(Options.connectionString))
+            {
+                connection.Query<PersonDTO>(PersonStoredProcedures.AddPerson,
+                    new {person.RoleId, person.FamilyName, person.FirstName, person.Patronymic, person.PhoneNumber, person.Email, person.DateBirth, person.Sex},
+                    commandType: CommandType.StoredProcedure);
+            }
+        }
+
+        public void AddCoachSportType(PersonDTO person)
+        {
+            using (IDbConnection connection = new SqlConnection(Options.connectionString))
+            {
+                connection.Query<PersonDTO>(PersonStoredProcedures.AddPerson,
+                    new { person.RoleId, person.FamilyName, person.FirstName, person.Patronymic, person.PhoneNumber, person.Email, person.DateBirth, person.Sex },
+                    commandType: CommandType.StoredProcedure);
+            }
+        }
 
         public List<PersonDTO> GetAllPersons()
         {
             using (IDbConnection connection = new SqlConnection(Options.connectionString))
             {
-                return connection.Query<PersonDTO>(PersonStoredProcedures.GetAllPersons, commandType: CommandType.StoredProcedure).ToList();
+                return connection.Query<PersonDTO>(PersonStoredProcedures.GetAllPersons,commandType: CommandType.StoredProcedure).ToList();
             }
         }
 
@@ -34,7 +41,7 @@ namespace FitnessClub.DAL
         {
             using (IDbConnection connection = new SqlConnection(Options.connectionString))
             {
-                return connection.QuerySingle<PersonDTO>(PersonStoredProcedures.GetPersonById, new {id}, commandType: CommandType.StoredProcedure);
+                return connection.QuerySingle<PersonDTO>(PersonStoredProcedures.GetPersonById, new { id }, commandType: CommandType.StoredProcedure);
             }
         }
     }
