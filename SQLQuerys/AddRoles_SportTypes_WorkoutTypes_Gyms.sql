@@ -20,8 +20,8 @@ Insert WorkoutTypes Values
 Go
 
 Insert Gyms Values
-    ('Зал 1'), 
-    ('Зал 2'),
-    ('Зал 3'),
+    ('Зал1'), 
+    ('Зал2'),
+    ('Зал3'),
 	('Бассейн')
 Go
