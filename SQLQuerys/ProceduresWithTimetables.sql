@@ -27,12 +27,12 @@ Where [Id]=@Id
 End
 Go
 
-Create procedure DeleteClientTimetableByClientId
-@ClientId int
+Create procedure DeleteClientTimetable
+@ClientId int, @TimetableId int
 As
 Begin
 Delete From dbo.[Clients_Timetables]
-Where [ClientId]=@ClientId
+Where [ClientId]=@ClientId and [TimetableId]=@TimetableId
 End
 Go
 
