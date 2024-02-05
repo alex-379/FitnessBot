@@ -10,9 +10,9 @@ namespace FitnessClub.DAL.IRepositories
 {
     public interface IWorkoutRepositories
     {
-        public void AddWorkots (WorkoutDTO workout);
+        public void AddWorkouts (WorkoutDTO workout);
         public void DeleteWorkoutsById (WorkoutDTO workout);
-        public void UpdateWorkoutsById(List<WorkoutDTO> workouts);
+        public void UpdateWorkoutsById(WorkoutDTO workouts);
 
         public List<WorkoutDTO> GetAllWorkots ();
         public List<WorkoutDTO> GetWorkoutsById ();
