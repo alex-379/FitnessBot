@@ -1,5 +1,5 @@
 ﻿using Dapper;
-using FitnessClub.DAL.DTOs;
+using FitnessClub.DAL.Dtos;
 using FitnessClub.DAL.IRepositories;
 using FitnessClub.DAL.StoredProcedures;
 using Microsoft.Data.SqlClient;
@@ -9,17 +9,17 @@ namespace FitnessClub.DAL
 {
     public class PersonRepository : IPersonRepository
     {
-        public void AddPerson(PersonDTO person)
+        public void AddPerson(PersonDto person)
         {
             using (IDbConnection connection = new SqlConnection(Options.connectionString))
             {
-                connection.Query<PersonDTO>(PersonStoredProcedures.AddPerson,
-                    new {person.RoleId, person.FamilyName, person.FirstName, person.Patronymic, person.PhoneNumber, person.Email, person.DateBirth, person.Sex},
+                connection.Query<PersonDto>(PersonStoredProcedures.AddPerson,
+                    new { person.RoleId, person.FamilyName, person.FirstName, person.Patronymic, person.PhoneNumber, person.Email, person.DateBirth, person.Sex },
                     commandType: CommandType.StoredProcedure);
             }
         }
 
-        public void AddCoachSportType(PersonDTO person)
+        public void AddCoachSportType(PersonDto coach, SportTypeDto sportType)
         {
             using (IDbConnection connection = new SqlConnection(Options.connectionString))
             {
@@ -27,19 +27,19 @@ namespace FitnessClub.DAL
             }
         }
 
-        public List<PersonDTO> GetAllPersons()
+        public List<PersonDto> GetAllPersons()
         {
             using (IDbConnection connection = new SqlConnection(Options.connectionString))
             {
-                return connection.Query<PersonDTO>(PersonStoredProcedures.GetAllPersons,commandType: CommandType.StoredProcedure).ToList();
+                return connection.Query<PersonDto>(PersonStoredProcedures.GetAllPersons, commandType: CommandType.StoredProcedure).ToList();
             }
         }
 
-        public PersonDTO GetPersonById(int id)
+        public PersonDto GetPersonById(int id)
         {
             using (IDbConnection connection = new SqlConnection(Options.connectionString))
             {
-                return connection.QuerySingle<PersonDTO>(PersonStoredProcedures.GetPersonById, new { id }, commandType: CommandType.StoredProcedure);
+                return connection.QuerySingle<PersonDto>(PersonStoredProcedures.GetPersonById, new { id }, commandType: CommandType.StoredProcedure);
             }
         }
     }

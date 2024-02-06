@@ -1,13 +1,15 @@
-Create database FitnessClub
+Create database [FitnessClub] Collate Cyrillic_General_CI_AS;
+
 Go
 
-Use FitnessClub
+Use [FitnessClub]
 
 Create table [Roles]
 (
 	[Id] int NOT NULL PRIMARY KEY IDENTITY,
 	[Name] nvarchar (20) NOT NULL,
 )
+
 Go
 
 Create table [Persons]
@@ -23,6 +25,7 @@ Create table [Persons]
 	[Sex] bit,
 	[IsDeleted] bit NOT NULL
 )
+
 Go
 
 Create table [WorkoutTypes]
@@ -30,16 +33,18 @@ Create table [WorkoutTypes]
 	[Id] int NOT NULL PRIMARY KEY IDENTITY,
 	[Name] nvarchar (50) NOT NULL,
 )
+
 Go
 
-Create table SportTypes
+Create table [SportTypes]
 (
 	[Id] int NOT NULL PRIMARY KEY IDENTITY,
 	[Name] nvarchar (50) NOT NULL,
 )
+
 Go
 
-Create table Workouts
+Create table [Workouts]
 (
 	[Id] int NOT NULL PRIMARY KEY IDENTITY,
 	[SportTypeId] int NOT NULL,
@@ -50,6 +55,7 @@ Create table Workouts
 	[Comment] nvarchar (255),
 	[IsDeleted] bit NOT NULL
 )
+
 Go
 
 Create table [Gyms]
@@ -57,6 +63,7 @@ Create table [Gyms]
 	[Id] int NOT NULL PRIMARY KEY IDENTITY,
 	[Name] nvarchar (50) NOT NULL,
 )
+
 Go
 
 Create table [Timetables]
@@ -68,20 +75,23 @@ Create table [Timetables]
 	[GymId] int NOT NULL,
 	[IsDeleted] bit NOT NULL
 )
+
 Go
 
-Create table Coaches_WorkoutTypes
+Create table [Coaches_WorkoutTypes]
 (
 	[CoachId] int NOT NULL,
 	[WorkoutTypeId] int NOT NULL
 )
+
 Go
 
-Create table Coaches_SportTypes
+Create table [Coaches_SportTypes]
 (
 	[CoachId] int NOT NULL,
 	[SportTypeId] int NOT NULL
 )
+
 Go
 
 Create table [Clients_Timetables]
@@ -89,33 +99,40 @@ Create table [Clients_Timetables]
 	[ClientId] int NOT NULL,
 	[TimetableId] int NOT NULL
 )
+
 Go
 
 Alter table [Persons]
 Add FOREIGN KEY([RoleId]) REFERENCES [Roles] ([Id]);
+
 Go
 
 Alter table [Workouts]
 Add FOREIGN KEY([SportTypeId]) REFERENCES [SportTypes] ([Id]);
+
 Go
 
 Alter table [Timetables]
 Add FOREIGN KEY([CoachId]) REFERENCES [Persons] ([Id]),
 	FOREIGN KEY([WorkoutId]) REFERENCES [Workouts] ([Id]),
 	FOREIGN KEY([GymId]) REFERENCES [Gyms] ([Id]);
+
 Go
 
 Alter table [Coaches_WorkoutTypes]
 Add FOREIGN KEY([CoachId]) REFERENCES Persons ([Id]),
 	FOREIGN KEY([WorkoutTypeId]) REFERENCES WorkoutTypes ([Id]);
+
 Go
 
 Alter table [Coaches_SportTypes]
 Add FOREIGN KEY([CoachId]) REFERENCES [Persons] ([Id]),
 	FOREIGN KEY([SportTypeId]) REFERENCES [SportTypes] ([Id]);
+
 Go
 
 Alter table [Clients_Timetables]
 Add FOREIGN KEY([ClientId]) REFERENCES [Persons] ([Id]),
 	FOREIGN KEY([TimetableId]) REFERENCES [Timetables] ([Id]);
+
 Go
