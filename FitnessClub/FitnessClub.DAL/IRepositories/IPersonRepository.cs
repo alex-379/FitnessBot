@@ -9,5 +9,7 @@ namespace FitnessClub.DAL.IRepositories
         public List<PersonDto> GetAllPersons();
 
         public PersonDto GetPersonById(int id);
+
+        public void UpdatePersonById(int id);
     }
 }
