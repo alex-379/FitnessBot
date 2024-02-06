@@ -1,21 +1,21 @@
-﻿using FitnessClub.DAL.DTOs;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Dapper;
+﻿using FitnessClub.DAL.Dtos;
 
 namespace FitnessClub.DAL.IRepositories
 {
     public interface ITimetableRepository
     {
-        public void AddTimetable(TimetableDTO timetable);
-        public void AddClientTimetable(TimetableDTO timetable);
-        public void DeleteTimetableById(TimetableDTO timetable);
-        public void DeleteClientTimetable(TimetableDTO timetable);
-        public List<TimetableDTO> GetTimetableWithWorkoutById();
-        public List<TimetableDTO> GetAllTimetablesWithWorkouts();
-        public List<TimetableDTO> GetAllDeletedTimetablesWithWorkouts();
+        public void AddTimetable(TimetableDto timetable);
+
+        public void AddClientTimetable(TimetableDto timetable);
+
+        public void DeleteTimetableById(TimetableDto timetable);
+
+        public void DeleteClientTimetable(TimetableDto timetable);
+
+        public List<TimetableDto> GetTimetableWithWorkoutById();
+
+        public List<TimetableDto> GetAllTimetablesWithWorkouts();
+
+        public List<TimetableDto> GetAllDeletedTimetablesWithWorkouts();
     }
 }

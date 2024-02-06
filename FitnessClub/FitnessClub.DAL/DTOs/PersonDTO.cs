@@ -1,6 +1,6 @@
-﻿namespace FitnessClub.DAL.DTOs
+﻿namespace FitnessClub.DAL.Dtos
 {
-    public class PersonDTO
+    public class PersonDto
     {
         public int Id { get; set; }
 
@@ -21,5 +21,9 @@
         public bool? Sex { get; set; }
 
         public int IsDeleted { get; set; }
+
+        public List<SportTypeDto>? SportTypes { get; set; }
+
+        public List<WorkoutTypeDto>? WorkoutTypes { get; set; }
     }
 }

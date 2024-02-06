@@ -1,4 +1,4 @@
-Use FitnessClub
+Use [FitnessClub]
 
 Go
 

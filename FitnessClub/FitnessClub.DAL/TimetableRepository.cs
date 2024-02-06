@@ -1,4 +1,4 @@
-﻿using FitnessClub.DAL.DTOs;
+﻿using FitnessClub.DAL.Dtos;
 using FitnessClub.DAL.IRepositories;
 using Microsoft.Data.SqlClient;
 using System;
@@ -14,7 +14,7 @@ namespace FitnessClub.DAL
 {
     public class TimetableRepository : ITimetableRepository
     {
-        public void AddTimetable(TimetableDTO timetable)
+        public void AddTimetable(TimetableDto timetable)
         {
             using (IDbConnection connection = new SqlConnection(Options.connectionString))
             {
@@ -23,7 +23,7 @@ namespace FitnessClub.DAL
             }
         }
 
-        public void AddClientTimetable(TimetableDTO timetable)
+        public void AddClientTimetable(TimetableDto timetable)
         {
             using (IDbConnection connection = new SqlConnection(Options.connectionString))
             {
@@ -32,7 +32,7 @@ namespace FitnessClub.DAL
             }
         }
 
-        public void DeleteTimetableById(TimetableDTO timetable)
+        public void DeleteTimetableById(TimetableDto timetable)
         {
             using (IDbConnection connection = new SqlConnection(Options.connectionString))
             {
@@ -40,7 +40,7 @@ namespace FitnessClub.DAL
                     commandType: CommandType.StoredProcedure);
             }
         }
-        public void DeleteClientTimetable(TimetableDTO timetable)
+        public void DeleteClientTimetable(TimetableDto timetable)
         {
             using (IDbConnection connection = new SqlConnection(Options.connectionString))
             {
@@ -49,11 +49,11 @@ namespace FitnessClub.DAL
             }
         }
 
-        public List<TimetableDTO> GetTimetableWithWorkoutById()
+        public List<TimetableDto> GetTimetableWithWorkoutById()
         {
             using (IDbConnection connection = new SqlConnection(Options.connectionString))
             {
-                return connection.Query<TimetableDTO, WorkoutDTO, TimetableDTO>(TimetableStoredProcedures.GetTimetableWithWorkoutById,
+                return connection.Query<TimetableDto, WorkoutDto, TimetableDto>(TimetableStoredProcedures.GetTimetableWithWorkoutById,
                     (timetable, workout) =>
                     {
                         timetable.Workout = workout;
@@ -63,11 +63,11 @@ namespace FitnessClub.DAL
                     commandType: CommandType.StoredProcedure).ToList();
             }
         }
-        public List<TimetableDTO> GetAllTimetablesWithWorkouts()
+        public List<TimetableDto> GetAllTimetablesWithWorkouts()
         {
             using (IDbConnection connection = new SqlConnection(Options.connectionString))
             {
-                return connection.Query<TimetableDTO, WorkoutDTO, TimetableDTO>(TimetableStoredProcedures.GetAllTimetablesWithWorkouts,
+                return connection.Query<TimetableDto, WorkoutDto, TimetableDto>(TimetableStoredProcedures.GetAllTimetablesWithWorkouts,
                     (timetable, workout) =>
                     {
                         timetable.Workout = workout;
@@ -77,11 +77,11 @@ namespace FitnessClub.DAL
                     commandType: CommandType.StoredProcedure).ToList();
             }
         }
-        public List<TimetableDTO> GetAllDeletedTimetablesWithWorkouts()
+        public List<TimetableDto> GetAllDeletedTimetablesWithWorkouts()
         {
             using (IDbConnection connection = new SqlConnection(Options.connectionString))
             {
-                return connection.Query<TimetableDTO, WorkoutDTO, TimetableDTO>(TimetableStoredProcedures.GetAllDeletedTimetablesWithWorkouts,
+                return connection.Query<TimetableDto, WorkoutDto, TimetableDto>(TimetableStoredProcedures.GetAllDeletedTimetablesWithWorkouts,
                     (timetable, workout) =>
                     {
                         timetable.Workout = workout;
