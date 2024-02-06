@@ -19,7 +19,7 @@ namespace FitnessClub.DAL
             }
         }
 
-        public void AddCoachSportType(PersonDto coach, SportTypeDto sportType)
+        public void AddCoachSportType()
         {
             using (IDbConnection connection = new SqlConnection(Options.connectionString))
             {
@@ -42,5 +42,15 @@ namespace FitnessClub.DAL
                 return connection.QuerySingle<PersonDto>(PersonStoredProcedures.GetPersonById, new { id }, commandType: CommandType.StoredProcedure);
             }
         }
+
+        public void UpdatePersonById(int id)
+        {
+            using (IDbConnection connection = new SqlConnection(Options.connectionString))
+            {
+
+            }
+        }
+
+
     }
 }
