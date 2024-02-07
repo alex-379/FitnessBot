@@ -25,5 +25,7 @@
         public List<SportTypeDto>? SportTypes { get; set; }
 
         public List<WorkoutTypeDto>? WorkoutTypes { get; set; }
+
+        public RoleDto? Role { get; set; }
     }
 }

@@ -9,5 +9,7 @@
         public const string GetAllPersons = "GetAllPersons";
 
         public const string GetPersonById = "GetPersonById";
+
+        public const string GetAllPersonsByRoleId = "GetAllPersonsByRoleId";
     }
 }
