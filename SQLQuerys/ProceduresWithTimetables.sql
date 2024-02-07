@@ -103,7 +103,7 @@ Where T.[IsDeleted]=0
 End
 Go
 
-Create procedure GetAllTimetablesWithWorkoutsClientsById
+Create procedure GetTimetableWithWorkoutsClientsById
 @Id int
 As
 Begin
