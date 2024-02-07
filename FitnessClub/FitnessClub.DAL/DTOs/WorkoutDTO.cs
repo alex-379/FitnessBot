@@ -18,7 +18,7 @@ namespace FitnessClub.DAL.Dtos
 
         public int NumberPlaces { get; set; }
 
-        public int? Comment { get; set; }
+        public string? Comment { get; set; }
 
         public bool? IsDeleted { get; set; }
     }
