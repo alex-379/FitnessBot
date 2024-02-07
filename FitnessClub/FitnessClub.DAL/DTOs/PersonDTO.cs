@@ -2,9 +2,9 @@
 {
     public class PersonDto
     {
-        public int Id { get; set; }
+        public int? Id { get; set; }
 
-        public int RoleId { get; set; }
+        public int? RoleId { get; set; }
 
         public string? FamilyName { get; set; }
 

@@ -58,13 +58,13 @@ namespace FitnessClub.DAL
         {
             using (IDbConnection connection = new SqlConnection(Options.connectionString))
             {
-                return connection.Query<PersonDto, RoleDto, PersonDto>(PersonStoredProcedures.GetAllPersonsByRoleId,
+                return connection.Query<PersonDto, RoleDto, PersonDto>(PersonStoredProcedures.GetAllPersonsByRoleId, 
                     (person, role) =>
                     {
-                        person.RoleId = id;
                         person.Role = role;
                         return person;
                     },
+
                     splitOn:"Id",
                     commandType: CommandType.StoredProcedure).ToList();
             }
