@@ -9,6 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Dapper;
 using FitnessClub.DAL.StoredProcedures;
+using FitnessClub.DAL.DTOs;
 
 namespace FitnessClub.DAL
 {
@@ -53,13 +54,18 @@ namespace FitnessClub.DAL
         {
             using (IDbConnection connection = new SqlConnection(Options.connectionString))
             {
-                return connection.Query<TimetableDto, WorkoutDto, TimetableDto>(TimetableStoredProcedures.GetTimetableWithWorkoutById,
-                    (timetable, workout) =>
+                return connection.Query<TimetableDto, PersonDto, GymDto, SportTypeDto, WorkoutTypeDto, WorkoutDto, TimetableDto>
+                    (TimetableStoredProcedures.GetTimetableWithWorkoutById,
+                    (timetable, coach, gym, sportType, workoutType, workout) =>
                     {
+                        timetable.Person = coach;
+                        timetable.Gym = gym;
+                        timetable.SportType = sportType;
+                        timetable.WorkoutType = workoutType;
                         timetable.Workout = workout;
                         return timetable;
                     },
-                    splitOn: "Id",
+                    splitOn: "id",
                     commandType: CommandType.StoredProcedure).ToList();
             }
         }
@@ -67,13 +73,18 @@ namespace FitnessClub.DAL
         {
             using (IDbConnection connection = new SqlConnection(Options.connectionString))
             {
-                return connection.Query<TimetableDto, WorkoutDto, TimetableDto>(TimetableStoredProcedures.GetAllTimetablesWithWorkouts,
-                    (timetable, workout) =>
+                return connection.Query<TimetableDto, PersonDto, GymDto, SportTypeDto, WorkoutTypeDto, WorkoutDto, TimetableDto>
+                    (TimetableStoredProcedures.GetAllTimetablesWithWorkouts,
+                    (timetable, coach, gym, sportType, workoutType, workout) =>
                     {
+                        timetable.Person = coach;
+                        timetable.Gym = gym;
+                        timetable.SportType = sportType;
+                        timetable.WorkoutType = workoutType;
                         timetable.Workout = workout;
                         return timetable;
                     },
-                    splitOn: "Id",
+                    splitOn: "id",
                     commandType: CommandType.StoredProcedure).ToList();
             }
         }
@@ -81,17 +92,87 @@ namespace FitnessClub.DAL
         {
             using (IDbConnection connection = new SqlConnection(Options.connectionString))
             {
-                return connection.Query<TimetableDto, WorkoutDto, TimetableDto>(TimetableStoredProcedures.GetAllDeletedTimetablesWithWorkouts,
-                    (timetable, workout) =>
+                return connection.Query<TimetableDto, PersonDto, GymDto, SportTypeDto, WorkoutTypeDto, WorkoutDto, TimetableDto>
+                    (TimetableStoredProcedures.GetAllDeletedTimetablesWithWorkouts,
+                    (timetable, coach, gym, sportType, workoutType, workout) =>
                     {
+                        timetable.Person = coach;
+                        timetable.Gym = gym;
+                        timetable.SportType = sportType;
+                        timetable.WorkoutType = workoutType;
                         timetable.Workout = workout;
                         return timetable;
                     },
-                    splitOn: "Id",
+                    splitOn: "id",
                     commandType: CommandType.StoredProcedure).ToList();
             }
         }
+        public List<TimetableDto> GetAllTimetablesWithWorkoutsClients()
+        {
+            using (IDbConnection connection = new SqlConnection(Options.connectionString))
+            {
+                Dictionary<int, TimetableDto> timetableClients = new Dictionary<int, TimetableDto>();
 
+                connection.Query<TimetableDto, PersonDto, GymDto, SportTypeDto, WorkoutTypeDto, WorkoutDto, PersonDto, TimetableDto>
+                   (TimetableStoredProcedures.GetAllTimetablesWithWorkoutsClients,
+                   (timetable, coach, gym, sportType, workoutType, workout, client) =>
+                   {
+                       timetable.Person = coach;
+                       timetable.Gym = gym;
+                       timetable.SportType = sportType;
+                       timetable.WorkoutType = workoutType;
+                       timetable.Workout = workout;
+
+                       if (!timetableClients.ContainsKey((int)timetable.Id))
+                       {
+                           timetableClients.Add((int)timetable.Id, timetable);
+                       }
+
+                       TimetableDto crntTimetable = timetableClients[(int)timetable.Id];
+
+                       crntTimetable.Clients.Add(client);
+
+                       return crntTimetable;
+                   },
+                   splitOn: "id",
+                   commandType: CommandType.StoredProcedure);
+
+                return timetableClients.Values.ToList();
+            }
+        }
+        public List<TimetableDto> GetAllTimetablesWithWorkoutsClientsById()
+        {
+            using (IDbConnection connection = new SqlConnection(Options.connectionString))
+            {
+                Dictionary<int, TimetableDto> timetableClients = new Dictionary<int, TimetableDto>();
+
+                connection.Query<TimetableDto, PersonDto, GymDto, SportTypeDto, WorkoutTypeDto, WorkoutDto, PersonDto, TimetableDto>
+                   (TimetableStoredProcedures.GetAllTimetablesWithWorkoutsClientsById,
+                   (timetable, coach, gym, sportType, workoutType, workout, client) =>
+                   {
+                       timetable.Person = coach;
+                       timetable.Gym = gym;
+                       timetable.SportType = sportType;
+                       timetable.WorkoutType = workoutType;
+                       timetable.Workout = workout;
+
+                       if (!timetableClients.ContainsKey((int)timetable.Id))
+                       {
+                           timetableClients.Add((int)timetable.Id, timetable);
+                       }
+
+                       TimetableDto crntTimetable = timetableClients[(int)timetable.Id];
+
+                       crntTimetable.Clients.Add(client);
+
+                       return crntTimetable;
+                   },
+                   splitOn: "id",
+                   commandType: CommandType.StoredProcedure);
+
+                return timetableClients.Values.ToList();
+            }
+        }
 
     }
 }
