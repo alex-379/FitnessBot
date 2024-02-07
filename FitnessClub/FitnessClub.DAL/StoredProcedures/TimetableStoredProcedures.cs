@@ -16,6 +16,6 @@
 
         public const string GetAllDeletedTimetablesWithWorkouts = "GetAllDeletedTimetablesWithWorkouts";
         public const string GetAllTimetablesWithWorkoutsClients = "GetAllTimetablesWithWorkoutsClients";
-        public const string GetAllTimetablesWithWorkoutsClientsById = "GetAllTimetablesWithWorkoutsClientsById";
+        public const string GetTimetableWithWorkoutsClientsById = "GetTimetableWithWorkoutsClientsById";
     }
 }
