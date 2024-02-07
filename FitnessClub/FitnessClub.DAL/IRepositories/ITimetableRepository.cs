@@ -20,7 +20,7 @@ namespace FitnessClub.DAL.IRepositories
 
         public List<TimetableDto> GetAllTimetablesWithWorkoutsClients();
 
-        public List<TimetableDto> GetAllTimetablesWithWorkoutsClientsById();
+        public List<TimetableDto> GetTimetableWithWorkoutsClientsById();
 
     }
 }

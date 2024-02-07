@@ -140,14 +140,14 @@ namespace FitnessClub.DAL
                 return timetableClients.Values.ToList();
             }
         }
-        public List<TimetableDto> GetAllTimetablesWithWorkoutsClientsById()
+        public List<TimetableDto> GetTimetableWithWorkoutsClientsById()
         {
             using (IDbConnection connection = new SqlConnection(Options.connectionString))
             {
                 Dictionary<int, TimetableDto> timetableClients = new Dictionary<int, TimetableDto>();
 
                 connection.Query<TimetableDto, PersonDto, GymDto, SportTypeDto, WorkoutTypeDto, WorkoutDto, PersonDto, TimetableDto>
-                   (TimetableStoredProcedures.GetAllTimetablesWithWorkoutsClientsById,
+                   (TimetableStoredProcedures.GetTimetableWithWorkoutsClientsById,
                    (timetable, coach, gym, sportType, workoutType, workout, client) =>
                    {
                        timetable.Person = coach;
