@@ -21,5 +21,9 @@ namespace FitnessClub.DAL.IRepositories
         public void DeleteCoachSportType(int coachId, int sportTypeId);
 
         public void DeleteCoachWorkoutType(int coachId, int workoutTypeId);
+
+        public List<PersonDto> GetAllPersonsByRoleId(int roleId);
+
+        public List<PersonDto> GetAllCoachesWithSportTypesWorkoutTypes();
     }
 }

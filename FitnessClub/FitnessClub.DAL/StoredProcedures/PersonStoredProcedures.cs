@@ -21,5 +21,7 @@
         public const string DeleteCoachWorkoutType = "DeleteCoachWorkoutType";
 
         public const string GetAllPersonsByRoleId = "GetAllPersonsByRoleId";
+
+        public const string GetAllCoachesWithSportTypesWorkoutTypes = "GetAllCoachesWithSportTypesWorkoutTypes";
     }
 }

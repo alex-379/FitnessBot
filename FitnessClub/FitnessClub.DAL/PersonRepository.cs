@@ -25,7 +25,8 @@ namespace FitnessClub.DAL
         {
             using (IDbConnection connection = new SqlConnection(Options.connectionString))
             {
-                connection.Query<int>(PersonStoredProcedures.AddCoachSportType, new { coachId, sportTypeId },
+                connection.Query<int>(PersonStoredProcedures.AddCoachSportType,
+                    new { coachId, sportTypeId },
                     commandType: CommandType.StoredProcedure);
             }
         }
@@ -34,7 +35,8 @@ namespace FitnessClub.DAL
         {
             using (IDbConnection connection = new SqlConnection(Options.connectionString))
             {
-                connection.Query<int>(PersonStoredProcedures.AddCoachWorkoutType, new { coachId, workoutTypeId },
+                connection.Query<int>(PersonStoredProcedures.AddCoachWorkoutType,
+                    new { coachId, workoutTypeId },
                     commandType: CommandType.StoredProcedure);
             }
         }
@@ -111,5 +113,22 @@ namespace FitnessClub.DAL
                     commandType: CommandType.StoredProcedure).ToList();
             }
         }
+
+        public List<PersonDto> GetAllCoachesWithSportTypesWorkoutTypes()
+        {
+            using (IDbConnection connection = new SqlConnection(Options.connectionString))
+            {
+                return connection.Query<PersonDto, RoleDto, PersonDto>(PersonStoredProcedures.GetAllPersonsByRoleId,
+                    (person, role) =>
+                    {
+                        person.Role = role;
+                        return person;
+                    },
+
+                    splitOn: "Id",
+                    commandType: CommandType.StoredProcedure).ToList();
+            }
+        }
+
     }
 }
