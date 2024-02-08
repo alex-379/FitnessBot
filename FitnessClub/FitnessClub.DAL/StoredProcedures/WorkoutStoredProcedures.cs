@@ -11,5 +11,9 @@
         public const string UpdateWorkoutById = "UpdateWorkoutById";
 
         public const string DeleteWorkoutById = "DeleteWorkoutById";
+
+        public const string GetWorkoutWithSportTypes = "GetWorkoutWithSportTypes";
+
+        public const string GetWorkoutWithSportTypeCoaches = "GetWorkoutWithSportTypeCoaches";
     }
 }

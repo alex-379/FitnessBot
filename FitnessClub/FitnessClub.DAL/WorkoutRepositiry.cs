@@ -56,6 +56,24 @@ namespace FitnessClub.DAL
                     new { workout.Id },
                     commandType: CommandType.StoredProcedure);
             }
-        }      
+        }
+        
+        public List<WorkoutDto> GetWorkoutWithSportTypes()
+        {
+            using (IDbConnection connection = new SqlConnection(Options.connectionString))
+            {
+                return connection.Query<WorkoutDto>(WorkoutStoredProcedures.GetWorkoutWithSportTypes,
+                    commandType: CommandType.StoredProcedure).ToList();
+            }
+        }
+
+        public List<WorkoutDto> GetWorkoutWithSportTypeCoaches()
+        {
+            using (IDbConnection connection = new SqlConnection(Options.connectionString))
+            {
+                return connection.Query<WorkoutDto>(WorkoutStoredProcedures.GetWorkoutWithSportTypeCoaches,
+                    commandType: CommandType.StoredProcedure).ToList();
+            }
+        }
     }
 }
