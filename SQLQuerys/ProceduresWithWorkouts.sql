@@ -14,7 +14,7 @@ BEGIN
 END
 Go
 
-Create Procedure GetAllWorkots AS
+Create Procedure GetAllWorkouts As
 BEGIN
 	Select [Id], [SportTypeId], [Price], [Duration], [NumberPlaces], [IsGroup], [Comment] from dbo.[Workouts]
 	Where [IsDeleted] = 0

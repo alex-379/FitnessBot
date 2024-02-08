@@ -1,21 +1,17 @@
-﻿using FitnessClub.DAL.DTOs;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Dapper;
+﻿using FitnessClub.DAL.Dtos;
 
 namespace FitnessClub.DAL.IRepositories
 {
     public interface IWorkoutRepositories
     {
-        public void AddWorkouts (WorkoutDTO workout);
-        public void DeleteWorkoutsById (WorkoutDTO workout);
-        public void UpdateWorkoutsById(WorkoutDTO workouts);
+        public void AddWorkouts(WorkoutDto workout);
 
-        public List<WorkoutDTO> GetAllWorkots ();
-        public List<WorkoutDTO> GetWorkoutsById ();
+        public void DeleteWorkoutsById(WorkoutDto workout);
 
+        public void UpdateWorkoutsById(WorkoutDto workouts);
+
+        public List<WorkoutDto> GetAllWorkots();
+
+        public List<WorkoutDto> GetWorkoutsById();
     }
 }

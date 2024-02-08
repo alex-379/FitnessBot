@@ -1,4 +1,4 @@
-Use FitnessClub
+Use [FitnessClub]
 
 Go
 
@@ -43,7 +43,7 @@ Create procedure GetPersonById
 As
 Begin
 Select [Id], [RoleId], [FamilyName], [FirstName], [Patronymic], [PhoneNumber], [Email], [DateBirth], [Sex] from dbo.[Persons]
-Where [Id]=@Id and [IsDeleted] <> 0
+Where [Id]=@Id and [IsDeleted] = 0
 End
 
 Go

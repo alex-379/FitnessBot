@@ -1,4 +1,4 @@
-﻿using FitnessClub.DAL.DTOs;
+﻿using FitnessClub.DAL.Dtos;
 using FitnessClub.DAL.IRepositories;
 using Microsoft.Data.SqlClient;
 using System;
@@ -14,7 +14,7 @@ namespace FitnessClub.DAL
 {
     public class WorkoutRepositiry: IWorkoutRepositories
     {
-        public void AddWorkouts(WorkoutDTO workout)
+        public void AddWorkouts(WorkoutDto workout)
         {
             using (IDbConnection connection = new SqlConnection(Options.connectionString))
             {
@@ -23,7 +23,7 @@ namespace FitnessClub.DAL
             }
         }
 
-        public void DeleteWorkoutsById(WorkoutDTO workout)
+        public void DeleteWorkoutsById(WorkoutDto workout)
         {
             using (IDbConnection connection = new SqlConnection(Options.connectionString))
             {
@@ -32,7 +32,7 @@ namespace FitnessClub.DAL
             }
         }
 
-        public void UpdateWorkoutsById(WorkoutDTO workout)
+        public void UpdateWorkoutsById(WorkoutDto workout)
         {
             using (IDbConnection connection = new SqlConnection(Options.connectionString))
             {
@@ -41,20 +41,20 @@ namespace FitnessClub.DAL
             }
         }
 
-        public List<WorkoutDTO> GetAllWorkots()
+        public List<WorkoutDto> GetAllWorkots()
         {
             using (IDbConnection connection = new SqlConnection(Options.connectionString))
             {
-                return connection.Query<WorkoutDTO>(WorkoutStoredProcedures.GetAllWorkouts,
+                return connection.Query<WorkoutDto>(WorkoutStoredProcedures.GetAllWorkouts,
                     commandType: CommandType.StoredProcedure).ToList();
             }
         }
 
-        public List<WorkoutDTO> GetWorkoutsById()
+        public List<WorkoutDto> GetWorkoutsById()
         {
             using (IDbConnection connection = new SqlConnection(Options.connectionString))
             {
-                return connection.Query<WorkoutDTO>(WorkoutStoredProcedures.GetWorkoutsById,
+                return connection.Query<WorkoutDto>(WorkoutStoredProcedures.GetWorkoutsById,
                     commandType: CommandType.StoredProcedure).ToList();
             }
         }
