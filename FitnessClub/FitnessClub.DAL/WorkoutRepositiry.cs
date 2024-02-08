@@ -41,7 +41,7 @@ namespace FitnessClub.DAL
             }
         }
 
-        public List<WorkoutDTO> GetAllWorkouts()
+        public List<WorkoutDTO> GetAllWorkots()
         {
             using (IDbConnection connection = new SqlConnection(Options.connectionString))
             {

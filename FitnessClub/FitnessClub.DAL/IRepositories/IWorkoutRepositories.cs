@@ -14,7 +14,7 @@ namespace FitnessClub.DAL.IRepositories
         public void DeleteWorkoutsById (WorkoutDTO workout);
         public void UpdateWorkoutsById(WorkoutDTO workouts);
 
-        public List<WorkoutDTO> GetAllWorkouts ();
+        public List<WorkoutDTO> GetAllWorkots ();
         public List<WorkoutDTO> GetWorkoutsById ();
 
     }
