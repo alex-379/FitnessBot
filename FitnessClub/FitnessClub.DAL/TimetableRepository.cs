@@ -1,15 +1,9 @@
-﻿using FitnessClub.DAL.Dtos;
+﻿using Dapper;
+using FitnessClub.DAL.Dtos;
 using FitnessClub.DAL.IRepositories;
-using Microsoft.Data.SqlClient;
-using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Dapper;
 using FitnessClub.DAL.StoredProcedures;
-using FitnessClub.DAL.DTOs;
+using Microsoft.Data.SqlClient;
+using System.Data;
 
 namespace FitnessClub.DAL
 {

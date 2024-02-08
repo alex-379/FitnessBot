@@ -21,6 +21,5 @@ namespace FitnessClub.DAL.IRepositories
         public List<TimetableDto> GetAllTimetablesWithWorkoutsClients();
 
         public List<TimetableDto> GetTimetableWithWorkoutsClientsById();
-
     }
 }
