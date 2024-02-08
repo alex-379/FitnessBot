@@ -2,9 +2,9 @@
 {
     public class PersonDto
     {
-        public int Id { get; set; }
+        public int? Id { get; set; }
 
-        public int RoleId { get; set; }
+        public int? RoleId { get; set; }
 
         public string? FamilyName { get; set; }
 
@@ -20,10 +20,12 @@
 
         public bool? Sex { get; set; }
 
-        public int IsDeleted { get; set; }
+        public int? IsDeleted { get; set; }
 
         public List<SportTypeDto>? SportTypes { get; set; }
 
         public List<WorkoutTypeDto>? WorkoutTypes { get; set; }
+
+        public RoleDto? Role { get; set; }
     }
 }
