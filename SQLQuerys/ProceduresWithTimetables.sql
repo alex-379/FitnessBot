@@ -1,20 +1,55 @@
-Use FitnessClub
+Use [FitnessClub]
+
 Go
 
 Create procedure AddTimetable
 @DateTime nvarchar(40), @CoachId int, @WorkoutId int, @GymId int
 As
 Begin
-Insert dbo.[Timetables] Values (@DateTime, @CoachId, @WorkoutId, @GymId, 0)
+Insert dbo.[Timetables]
+Output Inserted.Id
+Values (@DateTime, @CoachId, @WorkoutId, @GymId, 0)
 End
+
 Go
 
 Create procedure AddClientTimetable
 @ClientId int, @TimetableId int
 As
 Begin
-Insert dbo.[Clients_Timetables] Values (@ClientId, @TimetableId)
+Insert dbo.[Clients_Timetables]
+Values (@ClientId, @TimetableId)
 End
+
+Go
+
+Create procedure GetAllTimetables As
+Begin
+Select [Id], [DateTime], [CoachId], [WorkoutId], [GymId] from dbo.[Timetables]
+Where [IsDeleted] = 0
+End
+
+Go
+
+Create procedure GetTimetableById
+@Id int
+As
+Begin
+Select [Id], [DateTime], [CoachId], [WorkoutId], [GymId] from dbo.[Timetables]
+Where [Id]=@Id and [IsDeleted] = 0
+End
+
+Go
+
+Create procedure UpdateTimetableById
+@Id int, @DateTime nvarchar(20), @CoachId int, @WorkoutId int, @GymId int
+As
+Begin
+Update dbo.[Timetables]
+Set [DateTime]=@DateTime, [CoachId]=@CoachId, [WorkoutId]=@WorkoutId, [GymId]=@GymId
+Where [Id]=@Id
+End
+
 Go
 
 Create procedure DeleteTimetableById 
@@ -25,6 +60,7 @@ Update dbo.[Timetables]
 Set  [IsDeleted]=1
 Where [Id]=@Id
 End
+
 Go
 
 Create procedure DeleteClientTimetable
@@ -34,6 +70,7 @@ Begin
 Delete From dbo.[Clients_Timetables]
 Where [ClientId]=@ClientId and [TimetableId]=@TimetableId
 End
+
 Go
 
 Create procedure GetTimetableWithWorkoutById 

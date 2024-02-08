@@ -9,34 +9,17 @@ namespace FitnessClub.DAL
 {
     public class WorkoutRepositiry : IWorkoutRepositories
     {
-        public void AddWorkouts(WorkoutDto workout)
+        public int? AddWorkout(WorkoutDto workout)
         {
             using (IDbConnection connection = new SqlConnection(Options.connectionString))
             {
-                connection.Query(WorkoutStoredProcedures.AddWorkouts, new { workout.SportTypeId, workout.Price, workout.Duration, workout.NumberPlaces },
+                return connection.QuerySingle<int>(WorkoutStoredProcedures.AddWorkout,
+                    new { workout.SportTypeId, workout.Price, workout.Duration, workout.NumberPlaces, workout.IsGroup, workout.Comment },
                     commandType: CommandType.StoredProcedure);
             }
         }
 
-        public void DeleteWorkoutsById(WorkoutDto workout)
-        {
-            using (IDbConnection connection = new SqlConnection(Options.connectionString))
-            {
-                connection.Query(WorkoutStoredProcedures.DeleteWorkoutsById, new { workout.Id },
-                    commandType: CommandType.StoredProcedure);
-            }
-        }
-
-        public void UpdateWorkoutsById(WorkoutDto workout)
-        {
-            using (IDbConnection connection = new SqlConnection(Options.connectionString))
-            {
-                connection.Query(WorkoutStoredProcedures.UpdateWorkoutsById, new { workout.SportTypeId, workout.Price, workout.Duration, workout.NumberPlaces },
-                    commandType: CommandType.StoredProcedure);
-            }
-        }
-
-        public List<WorkoutDto> GetAllWorkots()
+        public List<WorkoutDto> GetAllWorkouts()
         {
             using (IDbConnection connection = new SqlConnection(Options.connectionString))
             {
@@ -45,13 +28,34 @@ namespace FitnessClub.DAL
             }
         }
 
-        public List<WorkoutDto> GetWorkoutsById()
+        public WorkoutDto GetWorkoutById(int id)
         {
             using (IDbConnection connection = new SqlConnection(Options.connectionString))
             {
-                return connection.Query<WorkoutDto>(WorkoutStoredProcedures.GetWorkoutsById,
-                    commandType: CommandType.StoredProcedure).ToList();
+                return connection.QuerySingle<WorkoutDto>(WorkoutStoredProcedures.GetWorkoutById,
+                    new { id },
+                    commandType: CommandType.StoredProcedure);
             }
         }
+
+        public void UpdateWorkoutById(WorkoutDto workout)
+        {
+            using (IDbConnection connection = new SqlConnection(Options.connectionString))
+            {
+                connection.Query(WorkoutStoredProcedures.UpdateWorkoutById,
+                    new { workout.Id, workout.SportTypeId, workout.Price, workout.Duration, workout.NumberPlaces, workout.IsGroup, workout.Comment },
+                    commandType: CommandType.StoredProcedure);
+            }
+        }
+
+        public void DeleteWorkoutById(WorkoutDto workout)
+        {
+            using (IDbConnection connection = new SqlConnection(Options.connectionString))
+            {
+                connection.Query(WorkoutStoredProcedures.DeleteWorkoutById,
+                    new { workout.Id },
+                    commandType: CommandType.StoredProcedure);
+            }
+        }      
     }
 }

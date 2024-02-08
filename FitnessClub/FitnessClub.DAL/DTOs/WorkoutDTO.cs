@@ -6,11 +6,13 @@
 
         public int? SportTypeId { get; set; }
 
-        public int? Price { get; set; }
+        public decimal? Price { get; set; }
 
         public int? Duration { get; set; }
 
         public int? NumberPlaces { get; set; }
+
+        public bool? IsGroup { get; set; }
 
         public string? Comment { get; set; }
 

@@ -6,6 +6,12 @@
 
         public const string AddClientTimetable = "AddClientTimetable";
 
+        public const string GetAllTimetables = "GetAllTimetables";
+
+        public const string GetTimetableById = "GetTimetableById";
+
+        public const string UpdateTimetableById = "UpdateTimetableById";
+
         public const string DeleteTimetableById = "DeleteTimetableById";
 
         public const string DeleteClientTimetable = "DeleteClientTimetable";

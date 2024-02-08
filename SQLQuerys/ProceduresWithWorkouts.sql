@@ -1,58 +1,66 @@
-Use FitnessClub
+Use [FitnessClub]
+
 Go
 
-Create procedure AddWorkouts
+Create procedure AddWorkout
 	@SportTypeId int,
-	@Price int NULL,
+	@Price decimal NULL,
 	@Duration int NULL,
 	@NumberPlaces int NULL,
 	@IsGroup bit NULL,
 	@Comment nvarchar(250) NULL 
 As
-BEGIN
-	INSERT dbo.[Workouts] Values (@SportTypeId, @Price, @Duration, @NumberPlaces, @IsGroup, @Comment, 0)
-END
+Begin
+	Insert dbo.[Workouts]
+	Output Inserted.Id
+	Values (@SportTypeId, @Price, @Duration, @NumberPlaces, @IsGroup, @Comment, 0)
+End
+
 Go
 
 Create Procedure GetAllWorkouts As
-BEGIN
+Begin
 	Select [Id], [SportTypeId], [Price], [Duration], [NumberPlaces], [IsGroup], [Comment] from dbo.[Workouts]
 	Where [IsDeleted] = 0
-END
+End
+
 Go
 
-Create Procedure GetWorkoutsById
+Create Procedure GetWorkoutById
 @Id int
 AS
-BEGIN
+Begin
 	Select [Id], [SportTypeId], [Price], [Duration], [NumberPlaces], [IsGroup], [Comment] from dbo.[Workouts]
-	Where [Id]=@Id and [IsDeleted] <> 0
-END
+	Where [Id]=@Id and [IsDeleted] = 0
+End
+
 Go
 
-Create procedure DeleteWorkoutsById  
-	@Id int 
-As 
-BEGIN 
-	Update dbo.[Workouts] 
-	Set  [IsDeleted]=1 
-	Where [Id]=@Id 
-END
-Go 
-
-Create procedure UpdateWorkoutsById
+Create procedure UpdateWorkoutById
 	@Id int,
 	@SportTypeId int,
-	@Price int NULL,
+	@Price decimal NULL,
 	@Duration int NULL,
 	@NumberPlaces int NULL,
 	@IsGroup bit NULL,
 	@Comment nvarchar(250) NULL 
 As
-BEGIN
+Begin
 	Update dbo.[Workouts]
 	Set [SportTypeId] = @SportTypeId, [Price] = @Price, [Duration] = @Duration, [NumberPlaces] = @NumberPlaces, 
 	[IsGroup] = @IsGroup, [Comment] = @Comment
-	Where [Id]=@Id and [IsDeleted]=0
-END
+	Where [Id]=@Id
+End
+
+Go
+
+Create procedure DeleteWorkoutById  
+	@Id int 
+As 
+Begin 
+	Update dbo.[Workouts] 
+	Set  [IsDeleted]=1 
+	Where [Id]=@Id 
+End
+
 Go

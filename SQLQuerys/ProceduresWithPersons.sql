@@ -18,7 +18,8 @@ Create procedure AddCoachSportType
 @CoachId int, @SportTypeId int
 As
 Begin
-Insert dbo.[Coaches_SportTypes] Values (@CoachId, @SportTypeId)
+Insert dbo.[Coaches_SportTypes]
+Values (@CoachId, @SportTypeId)
 End
 
 Go
@@ -27,7 +28,8 @@ Create procedure AddCoachWorkoutType
 @CoachId int, @WorkoutTypeId int
 As
 Begin
-Insert dbo.[Coaches_WorkoutTypes] Values (@CoachId, @WorkoutTypeId)
+Insert dbo.[Coaches_WorkoutTypes]
+Values (@CoachId, @WorkoutTypeId)
 End
 
 Go
@@ -51,7 +53,7 @@ End
 Go
 
 Create procedure UpdatePersonById
-@Id int, @RoleId int, @FamilyName nvarchar(20), @FirstName nvarchar(20), @Patronymic  nvarchar(20), @PhoneNumber nvarchar(12), 
+@Id int, @RoleId int, @FamilyName nvarchar(20), @FirstName nvarchar(20), @Patronymic nvarchar(20), @PhoneNumber nvarchar(12), 
 @Email nvarchar(40), @DateBirth nvarchar(40), @Sex bit
 As
 Begin

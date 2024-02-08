@@ -9,20 +9,51 @@ namespace FitnessClub.DAL
 {
     public class TimetableRepository : ITimetableRepository
     {
-        public void AddTimetable(TimetableDto timetable)
+        public int? AddTimetable(TimetableDto timetable)
         {
             using (IDbConnection connection = new SqlConnection(Options.connectionString))
             {
-                connection.Query(TimetableStoredProcedures.AddTimetable, new { timetable.DateTime, timetable.CoachId, timetable.WorkoutId, timetable.GymId },
+                return connection.QuerySingle<int>(TimetableStoredProcedures.AddTimetable,
+                    new { timetable.DateTime, timetable.CoachId, timetable.WorkoutId, timetable.GymId },
                     commandType: CommandType.StoredProcedure);
             }
         }
 
-        public void AddClientTimetable(TimetableDto timetable)
+        public void AddClientTimetable(int clientId, int timetableId)
         {
             using (IDbConnection connection = new SqlConnection(Options.connectionString))
             {
-                connection.Query(TimetableStoredProcedures.AddClientTimetable, new { timetable.ClientId, timetable.TimetableId },
+                connection.Query<int>(TimetableStoredProcedures.AddClientTimetable,
+                    new { clientId, timetableId },
+                    commandType: CommandType.StoredProcedure);
+            }
+        }
+
+        public List<TimetableDto> GetAllTimetables()
+        {
+            using (IDbConnection connection = new SqlConnection(Options.connectionString))
+            {
+                return connection.Query<TimetableDto>(TimetableStoredProcedures.GetAllTimetables,
+                commandType: CommandType.StoredProcedure).ToList();
+            }
+        }
+
+        public TimetableDto GetTimetableById(int id)
+        {
+            using (IDbConnection connection = new SqlConnection(Options.connectionString))
+            {
+                return connection.QuerySingle<TimetableDto>(TimetableStoredProcedures.GetTimetableById,
+                new { id },
+                commandType: CommandType.StoredProcedure);
+            }
+        }
+
+        public void UpdateTimetableById(TimetableDto timetable)
+        {
+            using (IDbConnection connection = new SqlConnection(Options.connectionString))
+            {
+                connection.Query<TimetableDto>(TimetableStoredProcedures.UpdateTimetableById,
+                    new { timetable.Id, timetable.DateTime, timetable.CoachId, timetable.WorkoutId, timetable.GymId },
                     commandType: CommandType.StoredProcedure);
             }
         }
@@ -31,15 +62,18 @@ namespace FitnessClub.DAL
         {
             using (IDbConnection connection = new SqlConnection(Options.connectionString))
             {
-                connection.Query(TimetableStoredProcedures.DeleteTimetableById, new { timetable.Id },
+                connection.Query<TimetableDto>(TimetableStoredProcedures.DeleteTimetableById,
+                    new { timetable.Id },
                     commandType: CommandType.StoredProcedure);
             }
         }
-        public void DeleteClientTimetable(TimetableDto timetable)
+
+        public void DeleteClientTimetable(int clientId, int timetableId)
         {
             using (IDbConnection connection = new SqlConnection(Options.connectionString))
             {
-                connection.Query(TimetableStoredProcedures.DeleteClientTimetable, new { timetable.ClientId, timetable.TimetableId },
+                connection.Query(TimetableStoredProcedures.DeleteClientTimetable,
+                    new { clientId, timetableId },
                     commandType: CommandType.StoredProcedure);
             }
         }
