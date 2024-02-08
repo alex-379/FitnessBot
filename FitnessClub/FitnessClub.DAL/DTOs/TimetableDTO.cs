@@ -1,6 +1,4 @@
-﻿using FitnessClub.DAL.DTOs;
-
-namespace FitnessClub.DAL.Dtos
+﻿namespace FitnessClub.DAL.Dtos
 {
     public class TimetableDto
     {

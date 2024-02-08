@@ -7,7 +7,9 @@ Create procedure AddPerson
 @Email nvarchar(40) =null, @DateBirth nvarchar(20) = null, @Sex bit = null
 As
 Begin
-Insert dbo.[Persons] Values (@RoleId, @FamilyName, @FirstName, @Patronymic, @PhoneNumber, @Email, @DateBirth, @Sex, 0)
+Insert dbo.[Persons] 
+Output Inserted.Id
+Values (@RoleId, @FamilyName, @FirstName, @Patronymic, @PhoneNumber, @Email, @DateBirth, @Sex, 0)
 End
 
 Go
@@ -50,18 +52,18 @@ Go
 
 Create procedure UpdatePersonById
 @Id int, @RoleId int, @FamilyName nvarchar(20), @FirstName nvarchar(20), @Patronymic  nvarchar(20), @PhoneNumber nvarchar(12), 
-@Email nvarchar(40), @DateBirth int, @Sex bit
+@Email nvarchar(40), @DateBirth nvarchar(40), @Sex bit
 As
 Begin
 Update dbo.[Persons]
 Set [RoleId]=@RoleId, [FamilyName]=@FamilyName, [FirstName]=@FirstName, [Patronymic]=@Patronymic, [PhoneNumber]=@PhoneNumber, [Email]=@Email,
 [DateBirth]=@DateBirth, [Sex]=@Sex
-Where [Id]=@Id and [IsDeleted]=0
+Where [Id]=@Id
 End
 
 Go 
 
-Create procedure DeletePersonById 
+Create procedure DeletePersonById
 @Id int
 As
 Begin
