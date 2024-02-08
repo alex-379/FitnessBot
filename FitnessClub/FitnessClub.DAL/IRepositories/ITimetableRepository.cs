@@ -4,13 +4,19 @@ namespace FitnessClub.DAL.IRepositories
 {
     public interface ITimetableRepository
     {
-        public void AddTimetable(TimetableDto timetable);
+        public int? AddTimetable(TimetableDto timetable);
 
-        public void AddClientTimetable(TimetableDto timetable);
+        public void AddClientTimetable(int clientId, int timetableId);
+
+        public List<TimetableDto> GetAllTimetables();
+
+        public TimetableDto GetTimetableById(int id);
+
+        public void UpdateTimetableById(TimetableDto person);
 
         public void DeleteTimetableById(TimetableDto timetable);
 
-        public void DeleteClientTimetable(TimetableDto timetable);
+        public void DeleteClientTimetable(int clientId, int timetableId);
 
         public List<TimetableDto> GetTimetableWithWorkoutById();
 

@@ -2,14 +2,14 @@
 {
     public class WorkoutStoredProcedures
     {
-        public const string AddWorkouts = "AddWorkouts";
-
-        public const string DeleteWorkoutsById = "DeleteWorkoutsById";
-
-        public const string UpdateWorkoutsById = "UpdateWorkoutsById";
+        public const string AddWorkout = "AddWorkout";
 
         public const string GetAllWorkouts = "GetAllWorkouts";
 
-        public const string GetWorkoutsById = "GetWorkoutsById";
+        public const string GetWorkoutById = "GetWorkoutById";
+
+        public const string UpdateWorkoutById = "UpdateWorkoutById";
+
+        public const string DeleteWorkoutById = "DeleteWorkoutById";
     }
 }
