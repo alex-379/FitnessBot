@@ -64,3 +64,24 @@ Begin
 End
 
 Go
+
+Create procedure GetWorkoutWithSportTypes
+As
+BEGIN
+	Select W.[Id],  W.[Price], W.[Duration], W.[NumberPlaces], W.[IsGroup], 
+	St.[Id], St.[Name] from dbo.[Workouts] as W 
+	join dbo.[SportTypes] as St on W.[SportTypeId] = St.[Id]
+END
+
+Go
+
+Create procedure GetWorkoutWithSportTypeCoaches
+As
+BEGIN
+	Select W.[Id], W.[Price], W.[Duration], W.[NumberPlaces], W.[IsGroup],
+	St.[Id], St.[Name], C.[CoachId] from dbo.[Workouts] as W
+	join dbo.SportTypes as St on W.[SportTypeId] = St.[Id]
+	join dbo.Coaches_SportTypes as C on St.[Id] = C.[SportTypeId]
+END
+
+Go
