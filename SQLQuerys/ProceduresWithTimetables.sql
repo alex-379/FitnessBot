@@ -88,6 +88,7 @@ Join dbo.[Coaches_WorkoutTypes] as CW on T.[CoachId]=CW.[CoachId]
 Join dbo.[WorkoutTypes] as WT on CW.[WorkoutTypeId]=WT.[Id]
 Where T.[Id]=@Id and T.[IsDeleted]=0
 End
+
 Go
 
 Create procedure GetAllTimetablesWithWorkouts
@@ -104,6 +105,7 @@ Join dbo.[Coaches_WorkoutTypes] as CW on T.[CoachId]=CW.[CoachId]
 Join dbo.[WorkoutTypes] as WT on CW.[WorkoutTypeId]=WT.[Id]
 Where T.[IsDeleted]=0
 End
+
 Go
 
 Create procedure GetAllDeletedTimetablesWithWorkouts
@@ -120,6 +122,7 @@ Join dbo.[Coaches_WorkoutTypes] as CW on T.[CoachId]=CW.[CoachId]
 Join dbo.[WorkoutTypes] as WT on CW.[WorkoutTypeId]=WT.[Id]
 Where T.[IsDeleted]=1
 End
+
 Go
 
 Create procedure GetAllTimetablesWithWorkoutsClients
@@ -138,6 +141,7 @@ Join dbo.[Clients_Timetables] As CT On T.[Id] = CT.[TimetableId]
 Join dbo.[Persons] as C on CT.[ClientId]=C.[Id]
 Where T.[IsDeleted]=0
 End
+
 Go
 
 Create procedure GetTimetableWithWorkoutsClientsById
@@ -157,4 +161,5 @@ Join dbo.[Clients_Timetables] As CT On T.[Id] = CT.[TimetableId]
 Join dbo.[Persons] as C on CT.[ClientId]=C.[Id]
 Where T.[Id]=@Id and T.[IsDeleted]=0
 End
+
 Go

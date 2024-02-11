@@ -22,6 +22,8 @@
 
         public const string GetAllPersonsByRoleId = "GetAllPersonsByRoleId";
 
+        public const string GetAllCoachesWithSportTypes = "GetAllCoachesWithSportTypes";
+
         public const string GetAllCoachesWithSportTypesWorkoutTypes = "GetAllCoachesWithSportTypesWorkoutTypes";
     }
 }

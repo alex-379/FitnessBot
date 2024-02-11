@@ -114,22 +114,56 @@ namespace FitnessClub.DAL
             }
         }
 
-        public List<PersonDto> GetAllCoachesWithSportTypesWorkoutTypes()
+        //public List<PersonDto> GetAllCoachesWithSportTypesWorkoutTypes()
+        //{
+        //    const int roleId = 2;
+
+        //    using (IDbConnection connection = new SqlConnection(Options.connectionString))
+        //    {
+        //        return connection.Query<PersonDto, RoleDto, List<SportTypeDto>, List<WorkoutTypeDto>, PersonDto>(PersonStoredProcedures.GetAllPersonsByRoleId,
+        //            (person, role, sportTypes, workoutTypes) =>
+        //            {
+        //                person.Role = role;
+        //                person.SportTypes = sportTypes;
+        //                person.WorkoutTypes = workoutTypes;
+        //                return person;
+        //            },
+        //            new { roleId },
+        //            splitOn: "Id,CoachId,RoleId,SportTypeId,WorkoutId",
+        //            commandType: CommandType.StoredProcedure).ToList();
+        //    }
+        //}
+
+        public List<PersonDto> GetAllCoachesWithSportTypes()
         {
             const int roleId = 2;
 
+            Dictionary<int, PersonDto> coaches = new();
+
             using (IDbConnection connection = new SqlConnection(Options.connectionString))
             {
-                return connection.Query<PersonDto, RoleDto, PersonDto>(PersonStoredProcedures.GetAllPersonsByRoleId,
-                    (person, role) =>
+                connection.Query<PersonDto, RoleDto, SportTypeDto, PersonDto>(PersonStoredProcedures.GetAllPersonsByRoleId,
+                    (coach, role, sportType) =>
                     {
-                        person.Role = role;
-                        return person;
+                        coach.Role = role;
+
+                        if (!coaches.ContainsKey((int)coach.Id)) 
+                        {
+                            coaches.Add((int)coach.Id, coach);
+                        }
+
+                        PersonDto crntCoach = coaches[(int)coach.Id];
+
+                        crntCoach.SportTypes.Add(sportType);
+
+                        return crntCoach;
                     },
                     new { roleId },
-                    splitOn: "Id",
-                    commandType: CommandType.StoredProcedure).ToList();
+                    splitOn: "id",
+                    commandType: CommandType.StoredProcedure);
             }
+
+            return coaches.Values.ToList();
         }
 
     }
