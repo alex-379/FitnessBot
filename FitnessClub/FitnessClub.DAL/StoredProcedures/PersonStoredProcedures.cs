@@ -26,6 +26,8 @@ namespace FitnessClub.DAL.StoredProcedures
 
         public const string GetAllCoachesWithSportTypesWorkoutTypes = "GetAllCoachesWithSportTypesWorkoutTypes";
 
-        public const string GetCoacheWithSportTypesWorkoutTypesById = "GetCoacheWithSportTypesWorkoutTypesById";
+        public const string GetCoachWithSportTypesWorkoutTypesById = "GetCoachWithSportTypesWorkoutTypesById";
+
+        public const string GetAllTimetablesWithCoachWorkoutsGymsClients = "GetAllTimetablesWithCoachWorkoutsGymsClients";
     }
 }

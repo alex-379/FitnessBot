@@ -126,12 +126,12 @@ namespace FitnessClub.DAL
                     connection.Query<PersonDto, SportTypeDto, WorkoutTypeDto, PersonDto>(PersonStoredProcedures.GetAllCoachesWithSportTypesWorkoutTypes,
                         (coach, sportType, workoutType) =>
                         {
-                            if (!coaches.ContainsKey((int)coach.CoachId))
+                            if (!coaches.ContainsKey((int)coach.Id))
                             {
-                                coaches.Add((int)coach.CoachId, coach);
+                                coaches.Add((int)coach.Id, coach);
                             }
 
-                            PersonDto crntCoach = coaches[(int)coach.CoachId];
+                            PersonDto crntCoach = coaches[(int)coach.Id];
 
                             crntCoach.SportTypes.Add(sportType);
 
@@ -148,7 +148,7 @@ namespace FitnessClub.DAL
             }
         }
 
-        public PersonDto GetCoacheWithSportTypesWorkoutTypesById(int coachId)
+        public PersonDto GetCoachWithSportTypesWorkoutTypesById(int coachId)
         {
             const int roleId = 2;
 
@@ -157,7 +157,7 @@ namespace FitnessClub.DAL
             using (IDbConnection connection = new SqlConnection(Options.connectionString))
             {
                 {
-                    connection.Query<PersonDto, SportTypeDto, WorkoutTypeDto, PersonDto>(PersonStoredProcedures.GetCoacheWithSportTypesWorkoutTypesById,
+                    connection.Query<PersonDto, SportTypeDto, WorkoutTypeDto, PersonDto>(PersonStoredProcedures.GetCoachWithSportTypesWorkoutTypesById,
                         (coach, sportType, workoutType) =>
                         {
                             if (!coaches.ContainsKey(coachId))
@@ -181,5 +181,10 @@ namespace FitnessClub.DAL
                 return coaches[coachId];
             }
         }
+
+        //public List<PersonDto> GetAllTimetablesWithCoachWorkoutsGymsClients()
+        //{
+
+        //}
     }
 }
