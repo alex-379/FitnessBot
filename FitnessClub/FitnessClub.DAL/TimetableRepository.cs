@@ -78,134 +78,167 @@ namespace FitnessClub.DAL
             }
         }
 
-        public List<TimetableDto> GetTimetableWithWorkoutById(int id)
+        //public List<TimetableDto> GetTimetableWithWorkoutById(int id)
+        //{
+        //    using (IDbConnection connection = new SqlConnection(Options.connectionString))
+        //    {
+        //        return connection.Query<TimetableDto, PersonDto, GymDto, SportTypeDto, WorkoutTypeDto, WorkoutDto, TimetableDto>
+        //            (TimetableStoredProcedures.GetTimetableWithWorkoutById,
+        //            (timetable, coach, gym, sportType, workoutType, workout) =>
+        //            {
+        //                timetable.Person = coach;
+        //                timetable.Gym = gym;
+        //                timetable.SportType = sportType;
+        //                timetable.WorkoutType = workoutType;
+        //                timetable.Workout = workout;
+        //                return timetable;
+        //            },
+        //            new { id },
+        //            splitOn: "id",
+        //            commandType: CommandType.StoredProcedure).ToList();
+        //    }
+        //}
+
+        //public List<TimetableDto> GetAllTimetablesWithWorkouts()
+        //{
+        //    using (IDbConnection connection = new SqlConnection(Options.connectionString))
+        //    {
+        //        return connection.Query<TimetableDto, PersonDto, GymDto, SportTypeDto, WorkoutTypeDto, WorkoutDto, TimetableDto>
+        //            (TimetableStoredProcedures.GetAllTimetablesWithWorkouts,
+        //            (timetable, coach, gym, sportType, workoutType, workout) =>
+        //            {
+        //                timetable.Person = coach;
+        //                timetable.Gym = gym;
+        //                timetable.SportType = sportType;
+        //                timetable.WorkoutType = workoutType;
+        //                timetable.Workout = workout;
+        //                return timetable;
+        //            },
+        //            splitOn: "id",
+        //            commandType: CommandType.StoredProcedure).ToList();
+        //    }
+        //}
+
+        //public List<TimetableDto> GetAllDeletedTimetablesWithWorkouts()
+        //{
+        //    using (IDbConnection connection = new SqlConnection(Options.connectionString))
+        //    {
+        //        return connection.Query<TimetableDto, PersonDto, GymDto, SportTypeDto, WorkoutTypeDto, WorkoutDto, TimetableDto>
+        //            (TimetableStoredProcedures.GetAllDeletedTimetablesWithWorkouts,
+        //            (timetable, coach, gym, sportType, workoutType, workout) =>
+        //            {
+        //                timetable.Person = coach;
+        //                timetable.Gym = gym;
+        //                timetable.SportType = sportType;
+        //                timetable.WorkoutType = workoutType;
+        //                timetable.Workout = workout;
+        //                return timetable;
+        //            },
+        //            splitOn: "id",
+        //            commandType: CommandType.StoredProcedure).ToList();
+        //    }
+        //}
+
+        //public List<TimetableDto> GetAllTimetablesWithWorkoutsClients()
+        //{
+        //    using (IDbConnection connection = new SqlConnection(Options.connectionString))
+        //    {
+        //        Dictionary<int, TimetableDto> timetableClients = new Dictionary<int, TimetableDto>();
+
+        //        connection.Query<TimetableDto, PersonDto, GymDto, SportTypeDto, WorkoutTypeDto, WorkoutDto, PersonDto, TimetableDto>
+        //           (TimetableStoredProcedures.GetAllTimetablesWithWorkoutsClients,
+        //           (timetable, coach, gym, sportType, workoutType, workout, client) =>
+        //           {
+        //               timetable.Person = coach;
+        //               timetable.Gym = gym;
+        //               timetable.SportType = sportType;
+        //               timetable.WorkoutType = workoutType;
+        //               timetable.Workout = workout;
+
+        //               if (!timetableClients.ContainsKey((int)timetable.Id))
+        //               {
+        //                   timetableClients.Add((int)timetable.Id, timetable);
+        //               }
+
+        //               TimetableDto crntTimetable = timetableClients[(int)timetable.Id];
+
+        //               crntTimetable.Clients.Add(client);
+
+        //               return crntTimetable;
+        //           },
+        //           splitOn: "id",
+        //           commandType: CommandType.StoredProcedure);
+
+        //        return timetableClients.Values.ToList();
+        //    }
+        //}
+
+        //public List<TimetableDto> GetTimetableWithWorkoutsClientsById()
+        //{
+        //    using (IDbConnection connection = new SqlConnection(Options.connectionString))
+        //    {
+        //        Dictionary<int, TimetableDto> timetableClients = new Dictionary<int, TimetableDto>();
+
+        //        connection.Query<TimetableDto, PersonDto, GymDto, SportTypeDto, WorkoutTypeDto, WorkoutDto, PersonDto, TimetableDto>
+        //           (TimetableStoredProcedures.GetTimetableWithWorkoutsClientsById,
+        //           (timetable, coach, gym, sportType, workoutType, workout, client) =>
+        //           {
+        //               timetable.Person = coach;
+        //               timetable.Gym = gym;
+        //               timetable.SportType = sportType;
+        //               timetable.WorkoutType = workoutType;
+        //               timetable.Workout = workout;
+
+        //               if (!timetableClients.ContainsKey((int)timetable.Id))
+        //               {
+        //                   timetableClients.Add((int)timetable.Id, timetable);
+        //               }
+
+        //               TimetableDto crntTimetable = timetableClients[(int)timetable.Id];
+
+        //               crntTimetable.Clients.Add(client);
+
+        //               return crntTimetable;
+        //           },
+        //           splitOn: "id",
+        //           commandType: CommandType.StoredProcedure);
+
+        //        return timetableClients.Values.ToList();
+        //    }
+        //}
+
+
+
+        public List<TimetableDto> GetAllTimetablesWithCoachWorkoutsGymsClients()
         {
             using (IDbConnection connection = new SqlConnection(Options.connectionString))
             {
-                return connection.Query<TimetableDto, PersonDto, GymDto, SportTypeDto, WorkoutTypeDto, WorkoutDto, TimetableDto>
-                    (TimetableStoredProcedures.GetTimetableWithWorkoutById,
-                    (timetable, coach, gym, sportType, workoutType, workout) =>
-                    {
-                        timetable.Person = coach;
-                        timetable.Gym = gym;
-                        timetable.SportType = sportType;
-                        timetable.WorkoutType = workoutType;
-                        timetable.Workout = workout;
-                        return timetable;
-                    },
-                    new { id },
-                    splitOn: "id",
-                    commandType: CommandType.StoredProcedure).ToList();
-            }
-        }
+                Dictionary<int, TimetableDto> timetables = new Dictionary<int, TimetableDto>();
 
-        public List<TimetableDto> GetAllTimetablesWithWorkouts()
-        {
-            using (IDbConnection connection = new SqlConnection(Options.connectionString))
-            {
-                return connection.Query<TimetableDto, PersonDto, GymDto, SportTypeDto, WorkoutTypeDto, WorkoutDto, TimetableDto>
-                    (TimetableStoredProcedures.GetAllTimetablesWithWorkouts,
-                    (timetable, coach, gym, sportType, workoutType, workout) =>
-                    {
-                        timetable.Person = coach;
-                        timetable.Gym = gym;
-                        timetable.SportType = sportType;
-                        timetable.WorkoutType = workoutType;
-                        timetable.Workout = workout;
-                        return timetable;
-                    },
-                    splitOn: "id",
-                    commandType: CommandType.StoredProcedure).ToList();
-            }
-        }
-
-        public List<TimetableDto> GetAllDeletedTimetablesWithWorkouts()
-        {
-            using (IDbConnection connection = new SqlConnection(Options.connectionString))
-            {
-                return connection.Query<TimetableDto, PersonDto, GymDto, SportTypeDto, WorkoutTypeDto, WorkoutDto, TimetableDto>
-                    (TimetableStoredProcedures.GetAllDeletedTimetablesWithWorkouts,
-                    (timetable, coach, gym, sportType, workoutType, workout) =>
-                    {
-                        timetable.Person = coach;
-                        timetable.Gym = gym;
-                        timetable.SportType = sportType;
-                        timetable.WorkoutType = workoutType;
-                        timetable.Workout = workout;
-                        return timetable;
-                    },
-                    splitOn: "id",
-                    commandType: CommandType.StoredProcedure).ToList();
-            }
-        }
-
-        public List<TimetableDto> GetAllTimetablesWithWorkoutsClients()
-        {
-            using (IDbConnection connection = new SqlConnection(Options.connectionString))
-            {
-                Dictionary<int, TimetableDto> timetableClients = new Dictionary<int, TimetableDto>();
-
-                connection.Query<TimetableDto, PersonDto, GymDto, SportTypeDto, WorkoutTypeDto, WorkoutDto, PersonDto, TimetableDto>
-                   (TimetableStoredProcedures.GetAllTimetablesWithWorkoutsClients,
-                   (timetable, coach, gym, sportType, workoutType, workout, client) =>
+                connection.Query<TimetableDto, ClientDto, CoachDto, WorkoutDto, SportTypeDto, GymDto, TimetableDto>
+                   (TimetableStoredProcedures.GetAllTimetablesWithCoachWorkoutsGymsClients,
+                   (timetable, client, coach, workout, sportType, gym) =>
                    {
-                       timetable.Person = coach;
-                       timetable.Gym = gym;
-                       timetable.SportType = sportType;
-                       timetable.WorkoutType = workoutType;
-                       timetable.Workout = workout;
-
-                       if (!timetableClients.ContainsKey((int)timetable.Id))
+                       if (!timetables.ContainsKey((int)timetable.Id))
                        {
-                           timetableClients.Add((int)timetable.Id, timetable);
+                           timetables.Add((int)timetable.Id, timetable);
                        }
 
-                       TimetableDto crntTimetable = timetableClients[(int)timetable.Id];
+                       TimetableDto crntTimetable = timetables[(int)timetable.Id];
 
                        crntTimetable.Clients.Add(client);
+                       crntTimetable.Coach = coach;
+                       crntTimetable.Workout = workout;
+                       crntTimetable.SportType = sportType;
+                       crntTimetable.Gym = gym;
 
                        return crntTimetable;
                    },
-                   splitOn: "id",
+                   splitOn: "ClientId,CoachId,WorkoutId,SportTypeId,GymId",
                    commandType: CommandType.StoredProcedure);
 
-                return timetableClients.Values.ToList();
+                return timetables.Values.ToList();
             }
         }
-
-        public List<TimetableDto> GetTimetableWithWorkoutsClientsById()
-        {
-            using (IDbConnection connection = new SqlConnection(Options.connectionString))
-            {
-                Dictionary<int, TimetableDto> timetableClients = new Dictionary<int, TimetableDto>();
-
-                connection.Query<TimetableDto, PersonDto, GymDto, SportTypeDto, WorkoutTypeDto, WorkoutDto, PersonDto, TimetableDto>
-                   (TimetableStoredProcedures.GetTimetableWithWorkoutsClientsById,
-                   (timetable, coach, gym, sportType, workoutType, workout, client) =>
-                   {
-                       timetable.Person = coach;
-                       timetable.Gym = gym;
-                       timetable.SportType = sportType;
-                       timetable.WorkoutType = workoutType;
-                       timetable.Workout = workout;
-
-                       if (!timetableClients.ContainsKey((int)timetable.Id))
-                       {
-                           timetableClients.Add((int)timetable.Id, timetable);
-                       }
-
-                       TimetableDto crntTimetable = timetableClients[(int)timetable.Id];
-
-                       crntTimetable.Clients.Add(client);
-
-                       return crntTimetable;
-                   },
-                   splitOn: "id",
-                   commandType: CommandType.StoredProcedure);
-
-                return timetableClients.Values.ToList();
-            }
-        }
-
     }
 }

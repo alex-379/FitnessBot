@@ -11,8 +11,6 @@
 
         public int? Id { get; set; }
 
-        public int? CoachId { get; set; }
-
         public int? RoleId { get; set; }
 
         public string? FamilyName { get; set; }

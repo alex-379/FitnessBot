@@ -18,14 +18,17 @@ namespace FitnessClub.DAL.IRepositories
 
         public void DeleteClientTimetable(int clientId, int timetableId);
 
-        public List<TimetableDto> GetTimetableWithWorkoutById(int id);
 
-        public List<TimetableDto> GetAllTimetablesWithWorkouts();
+        public List<TimetableDto> GetAllTimetablesWithCoachWorkoutsGymsClients ();
 
-        public List<TimetableDto> GetAllDeletedTimetablesWithWorkouts();
+        //public List<TimetableDto> GetTimetableWithWorkoutById(int id);
 
-        public List<TimetableDto> GetAllTimetablesWithWorkoutsClients();
+        //public List<TimetableDto> GetAllTimetablesWithWorkouts();
 
-        public List<TimetableDto> GetTimetableWithWorkoutsClientsById();
+        //public List<TimetableDto> GetAllDeletedTimetablesWithWorkouts();
+
+        //public List<TimetableDto> GetAllTimetablesWithWorkoutsClients();
+
+        //public List<TimetableDto> GetTimetableWithWorkoutsClientsById();
     }
 }
