@@ -98,7 +98,7 @@ namespace FitnessClub.DAL
             }
         }
 
-        public List<PersonDto> GetAllPersonsByRoleId(int id)
+        public List<PersonDto> GetAllPersonsByRoleId(int roleId)
         {
             using (IDbConnection connection = new SqlConnection(Options.connectionString))
             {
@@ -108,7 +108,7 @@ namespace FitnessClub.DAL
                         person.Role = role;
                         return person;
                     },
-
+                    new { roleId },
                     splitOn: "Id",
                     commandType: CommandType.StoredProcedure).ToList();
             }
@@ -116,6 +116,8 @@ namespace FitnessClub.DAL
 
         public List<PersonDto> GetAllCoachesWithSportTypesWorkoutTypes()
         {
+            const int roleId = 2;
+
             using (IDbConnection connection = new SqlConnection(Options.connectionString))
             {
                 return connection.Query<PersonDto, RoleDto, PersonDto>(PersonStoredProcedures.GetAllPersonsByRoleId,
@@ -124,7 +126,7 @@ namespace FitnessClub.DAL
                         person.Role = role;
                         return person;
                     },
-
+                    new { roleId },
                     splitOn: "Id",
                     commandType: CommandType.StoredProcedure).ToList();
             }

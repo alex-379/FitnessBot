@@ -108,7 +108,7 @@ End
 Go
 
 Create procedure GetAllCoachesWithSportTypesWorkoutTypes
-@RoleId int = 2
+@RoleId int
 As
 Begin
 Select P.[Id] As [CoachId], P.[FamilyName], P.[FirstName], P.[Patronymic], P.[PhoneNumber], P.[Email], P.[DateBirth], P.[Sex], R.[Id] As [RoleId], R.[Name] as [Role], 
