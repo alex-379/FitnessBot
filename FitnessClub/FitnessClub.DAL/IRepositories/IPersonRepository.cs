@@ -24,8 +24,6 @@ namespace FitnessClub.DAL.IRepositories
 
         public List<PersonDto> GetAllPersonsByRoleId(int roleId);
 
-        public List<PersonDto> GetAllCoachesWithSportTypes();
-
-        //public List<PersonDto> GetAllCoachesWithSportTypesWorkoutTypes();
+        public List<PersonDto> GetAllCoachesWithSportTypesWorkoutTypes();
     }
 }

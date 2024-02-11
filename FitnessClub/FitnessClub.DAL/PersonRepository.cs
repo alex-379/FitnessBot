@@ -109,32 +109,12 @@ namespace FitnessClub.DAL
                         return person;
                     },
                     new { roleId },
-                    splitOn: "Id",
+                    splitOn: "RoleId",
                     commandType: CommandType.StoredProcedure).ToList();
             }
         }
 
-        //public List<PersonDto> GetAllCoachesWithSportTypesWorkoutTypes()
-        //{
-        //    const int roleId = 2;
-
-        //    using (IDbConnection connection = new SqlConnection(Options.connectionString))
-        //    {
-        //        return connection.Query<PersonDto, RoleDto, List<SportTypeDto>, List<WorkoutTypeDto>, PersonDto>(PersonStoredProcedures.GetAllPersonsByRoleId,
-        //            (person, role, sportTypes, workoutTypes) =>
-        //            {
-        //                person.Role = role;
-        //                person.SportTypes = sportTypes;
-        //                person.WorkoutTypes = workoutTypes;
-        //                return person;
-        //            },
-        //            new { roleId },
-        //            splitOn: "Id,CoachId,RoleId,SportTypeId,WorkoutId",
-        //            commandType: CommandType.StoredProcedure).ToList();
-        //    }
-        //}
-
-        public List<PersonDto> GetAllCoachesWithSportTypes()
+        public List<PersonDto> GetAllCoachesWithSportTypesWorkoutTypes()
         {
             const int roleId = 2;
 
@@ -142,29 +122,30 @@ namespace FitnessClub.DAL
 
             using (IDbConnection connection = new SqlConnection(Options.connectionString))
             {
-                connection.Query<PersonDto, RoleDto, SportTypeDto, PersonDto>(PersonStoredProcedures.GetAllCoachesWithSportTypes,
-                    (coach, role, sportType) =>
-                    {
-                        coach.Role = role;
-
-                        if (!coaches.ContainsKey((int)coach.Id)) 
+                {
+                    connection.Query<PersonDto, SportTypeDto, WorkoutTypeDto, PersonDto>(PersonStoredProcedures.GetAllCoachesWithSportTypesWorkoutTypes,
+                        (coach, sportType, workoutType) =>
                         {
-                            coaches.Add((int)coach.Id, coach);
-                        }
+                            if (!coaches.ContainsKey((int)coach.CoachId))
+                            {
+                                coaches.Add((int)coach.CoachId, coach);
+                            }
 
-                        PersonDto crntCoach = coaches[(int)coach.Id];
+                            PersonDto crntCoach = coaches[(int)coach.CoachId];
 
-                        crntCoach.SportTypes.Add(sportType);
+                            crntCoach.SportTypes.Add(sportType);
 
-                        return crntCoach;
-                    },
-                    new { roleId },
-                    splitOn: "id1",
-                    commandType: CommandType.StoredProcedure);
+                            crntCoach.WorkoutTypes.Add(workoutType);
+
+                            return crntCoach;
+                        },
+                        new { roleId },
+                        splitOn: "SportTypeId,WorkoutTypeId",
+                        commandType: CommandType.StoredProcedure);
+                }
+
+                return coaches.Values.ToList();
             }
-
-            return coaches.Values.ToList();
         }
-
     }
 }

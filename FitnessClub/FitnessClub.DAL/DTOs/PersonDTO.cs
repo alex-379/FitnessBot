@@ -2,7 +2,16 @@
 {
     public class PersonDto
     {
+        public PersonDto()
+        {
+            SportTypes = new List<SportTypeDto>();
+
+            WorkoutTypes = new List<WorkoutTypeDto>();
+        }
+
         public int? Id { get; set; }
+
+        public int? CoachId { get; set; }
 
         public int? RoleId { get; set; }
 
@@ -22,17 +31,10 @@
 
         public int? IsDeleted { get; set; }
 
-        public List<SportTypeDto>? SportTypes { get; set; }
+        public List<SportTypeDto> SportTypes { get; set; }
 
-        public List<WorkoutTypeDto>? WorkoutTypes { get; set; }
+        public List<WorkoutTypeDto> WorkoutTypes { get; set; }
 
         public RoleDto Role { get; set; }
-
-        public List<PersonDto>? Clients { get; set; }
-
-        public PersonDto()
-        {
-            SportTypes = new List<SportTypeDto>();
-        }
     }
 }
