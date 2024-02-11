@@ -12,13 +12,13 @@ namespace FitnessClub.DAL.IRepositories
 
         public TimetableDto GetTimetableById(int id);
 
-        public void UpdateTimetableById(TimetableDto person);
+        public void UpdateTimetableOnId(TimetableDto person);
 
-        public void DeleteTimetableById(TimetableDto timetable);
+        public void DeleteTimetableOnId(TimetableDto timetable);
 
         public void DeleteClientTimetable(int clientId, int timetableId);
 
-        public List<TimetableDto> GetTimetableWithWorkoutById();
+        public List<TimetableDto> GetTimetableWithWorkoutById(int id);
 
         public List<TimetableDto> GetAllTimetablesWithWorkouts();
 

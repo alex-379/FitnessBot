@@ -10,9 +10,9 @@
 
         public const string GetTimetableById = "GetTimetableById";
 
-        public const string UpdateTimetableById = "UpdateTimetableById";
+        public const string UpdateTimetableOnId = "UpdateTimetableOnId";
 
-        public const string DeleteTimetableById = "DeleteTimetableById";
+        public const string DeleteTimetableOnId = "DeleteTimetableOnId";
 
         public const string DeleteClientTimetable = "DeleteClientTimetable";
 
