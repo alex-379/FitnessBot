@@ -12,8 +12,10 @@
 
         public const string DeleteWorkoutOnId = "DeleteWorkoutOnId";
 
-        public const string GetWorkoutWithSportTypes = "GetWorkoutWithSportTypes";
+        public const string GetAllWorkoutsWithSportType = "GetAllWorkoutsWithSportType";
 
-        public const string GetWorkoutWithSportTypeCoaches = "GetWorkoutWithSportTypeCoaches";
+        public const string GetWorkoutWithSportTypeById = "GetWorkoutWithSportTypeById";
+
+        public const string GetWorkoutsWithSportTypeBySportTypeId = "GetWorkoutsWithSportTypeBySportTypeId";
     }
 }

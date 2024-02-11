@@ -57,22 +57,87 @@ namespace FitnessClub.DAL
                     commandType: CommandType.StoredProcedure);
             }
         }
-        
-        public List<WorkoutDto> GetWorkoutWithSportTypes()
+
+        public List<WorkoutDto> GetAllWorkoutsWithSportType()
         {
             using (IDbConnection connection = new SqlConnection(Options.connectionString))
             {
-                return connection.Query<WorkoutDto>(WorkoutStoredProcedures.GetWorkoutWithSportTypes,
-                    commandType: CommandType.StoredProcedure).ToList();
+                Dictionary<int, WorkoutDto> workouts = new();
+
+                connection.Query<WorkoutDto, SportTypeDto, WorkoutDto>(WorkoutStoredProcedures.GetAllWorkoutsWithSportType,
+                        (workout, sportType) =>
+                        {
+                            if (!workouts.ContainsKey((int)workout.Id))
+                            {
+                                workouts.Add((int)workout.Id, workout);
+                            }
+
+                            WorkoutDto crntWorkout = workouts[(int)workout.Id];
+
+                            crntWorkout.SportType = sportType;
+
+                            return crntWorkout;
+                        },
+                        splitOn: "SportTypeId",
+                        commandType: CommandType.StoredProcedure);
+
+                return workouts.Values.ToList();
             }
         }
 
-        public List<WorkoutDto> GetWorkoutWithSportTypeCoaches()
+        public WorkoutDto GetWorkoutWithSportTypeById(int id)
         {
             using (IDbConnection connection = new SqlConnection(Options.connectionString))
             {
-                return connection.Query<WorkoutDto>(WorkoutStoredProcedures.GetWorkoutWithSportTypeCoaches,
-                    commandType: CommandType.StoredProcedure).ToList();
+                Dictionary<int, WorkoutDto> workouts = new();
+
+                connection.Query<WorkoutDto, SportTypeDto, WorkoutDto>(WorkoutStoredProcedures.GetWorkoutWithSportTypeById,
+                        (workout, sportType) =>
+                        {
+                            if (!workouts.ContainsKey(id))
+                            {
+                                workouts.Add(id, workout);
+                            }
+
+                            WorkoutDto crntWorkout = workouts[id];
+
+                            crntWorkout.SportType = sportType;
+
+                            return crntWorkout;
+                        },
+                        new { id },
+                        splitOn: "SportTypeId",
+                        commandType: CommandType.StoredProcedure);
+
+                return workouts[id];
+            }
+        }
+
+        public List<WorkoutDto> GetWorkoutsWithSportTypeBySportTypeId(int sportTypeId)
+        {
+            using (IDbConnection connection = new SqlConnection(Options.connectionString))
+            {
+                Dictionary<int, WorkoutDto> workouts = new();
+
+                connection.Query<WorkoutDto, SportTypeDto, WorkoutDto>(WorkoutStoredProcedures.GetWorkoutsWithSportTypeBySportTypeId,
+                        (workout, sportType) =>
+                        {
+                            if (!workouts.ContainsKey((int)workout.Id))
+                            {
+                                workouts.Add((int)workout.Id, workout);
+                            }
+
+                            WorkoutDto crntWorkout = workouts[(int)workout.Id];
+
+                            crntWorkout.SportType = sportType;
+
+                            return crntWorkout;
+                        },
+                        new { sportTypeId },
+                        splitOn: "SportTypeId",
+                        commandType: CommandType.StoredProcedure);
+
+                return workouts.Values.ToList();
             }
         }
     }

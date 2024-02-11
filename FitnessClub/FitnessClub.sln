@@ -4,7 +4,7 @@ VisualStudioVersion = 17.8.34525.116
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FitnessClub.DAL", "FitnessClub.DAL\FitnessClub.DAL.csproj", "{CCEB279D-23EE-4758-9CA9-71AFF986A7F9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FitnessClub.BLL", "FitnessClub.BLL\FitnessClub.BLL.csproj", "{F98D21A6-0765-4D4C-8370-1C25B841BADD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FitnessClub.BLL", "FitnessClub.BLL\FitnessClub.BLL.csproj", "{F98D21A6-0765-4D4C-8370-1C25B841BADD}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

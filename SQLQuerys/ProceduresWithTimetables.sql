@@ -111,3 +111,5 @@ Join dbo.[SportTypes] as ST on W.[SportTypeId]=ST.[Id]
 Join dbo.[Gyms] as G on T.[GymId]=G.[Id]
 Where T.[Id]=@Id and T.[IsDeleted]=0
 End
+
+Go

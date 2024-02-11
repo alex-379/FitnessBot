@@ -65,23 +65,37 @@ End
 
 Go
 
-Create procedure GetWorkoutWithSportTypes
+Create procedure GetAllWorkoutsWithSportType
 As
-BEGIN
-	Select W.[Id],  W.[Price], W.[Duration], W.[NumberPlaces], W.[IsGroup], 
-	St.[Id], St.[Name] from dbo.[Workouts] as W 
-	join dbo.[SportTypes] as St on W.[SportTypeId] = St.[Id]
-END
+Begin
+	Select W.[Id], W.[Price], W.[Duration], W.[NumberPlaces], W.[IsGroup], W.[Comment],
+	ST.[Id] As [SportTypeId], ST.[Name] As [SportType] from dbo.[Workouts] as W
+	Join dbo.SportTypes as ST on W.[SportTypeId] = ST.[Id]
+	Where W.[IsDeleted] = 0
+End
 
 Go
 
-Create procedure GetWorkoutWithSportTypeCoaches
+Create procedure GetWorkoutWithSportTypeById
+	@Id int
 As
-BEGIN
-	Select W.[Id], W.[Price], W.[Duration], W.[NumberPlaces], W.[IsGroup],
-	St.[Id], St.[Name], C.[CoachId] from dbo.[Workouts] as W
-	join dbo.SportTypes as St on W.[SportTypeId] = St.[Id]
-	join dbo.Coaches_SportTypes as C on St.[Id] = C.[SportTypeId]
-END
+Begin
+	Select W.[Id], W.[Price], W.[Duration], W.[NumberPlaces], W.[IsGroup], W.[Comment],
+	ST.[Id] As [SportTypeId], ST.[Name] As [SportType] from dbo.[Workouts] as W
+	Join dbo.SportTypes as ST on W.[SportTypeId] = ST.[Id]
+	Where W.[Id]=@Id and W.[IsDeleted] = 0
+End
+
+Go
+
+Create procedure GetWorkoutWithSportTypeBySportTypeId
+	@SportTypeId int
+As
+Begin
+	Select W.[Id], W.[Price], W.[Duration], W.[NumberPlaces], W.[IsGroup], W.[Comment],
+	ST.[Id] As [SportTypeId], ST.[Name] As [SportType] from dbo.[Workouts] as W
+	Join dbo.SportTypes as ST on W.[SportTypeId] = ST.[Id]
+	Where W.[SportTypeId]=@SportTypeId and W.[IsDeleted] = 0
+End
 
 Go
