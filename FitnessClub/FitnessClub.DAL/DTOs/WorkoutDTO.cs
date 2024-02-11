@@ -16,6 +16,8 @@
 
         public string? Comment { get; set; }
 
-        public bool? IsDeleted { get; set; }
+        public int? WorkoutId { get; set; }
+
+        public SportTypeDto SportType { get; set; }
     }
 }
