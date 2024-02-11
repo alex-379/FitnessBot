@@ -52,7 +52,7 @@ End
 
 Go
 
-Create procedure UpdatePersonById
+Create procedure UpdatePersonOnId
 @Id int, @RoleId int, @FamilyName nvarchar(20), @FirstName nvarchar(20), @Patronymic nvarchar(20), @PhoneNumber nvarchar(12), 
 @Email nvarchar(40), @DateBirth nvarchar(40), @Sex bit
 As
@@ -65,7 +65,7 @@ End
 
 Go 
 
-Create procedure DeletePersonById
+Create procedure DeletePersonOnId
 @Id int
 As
 Begin
@@ -100,25 +100,39 @@ Create procedure GetAllPersonsByRoleId
 @RoleId int
 As
 Begin
-Select P.[Id], P.[RoleId], P.[FamilyName], P.[FirstName], P.[Patronymic], P.[PhoneNumber], P.[Email], P.[DateBirth], P.[Sex], R.[Id], R.[Name] From dbo.[Persons] As P
-join dbo.[Roles] As R On P.[RoleId] = R.[Id]
+Select P.[Id], P.[FamilyName], P.[FirstName], P.[Patronymic], P.[PhoneNumber], P.[Email], P.[DateBirth], P.[Sex], R.[Id] As [RoleId], R.[Name] As [Role] From dbo.[Persons] As P
+Join dbo.[Roles] As R On P.[RoleId] = R.[Id]
 Where P.[RoleId]=@RoleId and P.[IsDeleted]=0
 End
 
 Go
 
 Create procedure GetAllCoachesWithSportTypesWorkoutTypes
-@RoleId int = 2
+@RoleId int
 As
 Begin
-Select P.[Id] As [CoachId], P.[FamilyName], P.[FirstName], P.[Patronymic], P.[PhoneNumber], P.[Email], P.[DateBirth], P.[Sex], R.[Id] As [RoleId], R.[Name] as [Role], 
-	ST.[Id] As SportTypeId, ST.[Name] as [SportType], WT.[Id] As WorkoutId, WT.[Name] As WorkoutType From dbo.[Persons] As P
-join dbo.[Roles] As R On P.[RoleId] = R.[Id]
-join dbo.[Coaches_SportTypes] As CST On P.[Id] = CST.[CoachId]
-join dbo.[SportTypes] As ST On CST.[SportTypeId] = ST.[Id]
-join dbo.[Coaches_WorkoutTypes] As CWT On P.[Id] = CWT.[CoachId]
-join dbo.[WorkoutTypes] As WT On CWT.[WorkoutTypeId] = WT.[Id]
+Select P.[Id] As [CoachId], P.[FamilyName], P.[FirstName], P.[Patronymic], P.[PhoneNumber], P.[Email], P.[DateBirth], P.[Sex], 
+	ST.[Id] As SportTypeId, ST.[Name] as [SportType], WT.[Id] As WorkoutTypeId, WT.[Name] As WorkoutType From dbo.[Persons] As P
+Join dbo.[Coaches_SportTypes] As CST On P.[Id] = CST.[CoachId]
+Join dbo.[SportTypes] As ST On CST.[SportTypeId] = ST.[Id]
+Join dbo.[Coaches_WorkoutTypes] As CWT On P.[Id] = CWT.[CoachId]
+Join dbo.[WorkoutTypes] As WT On CWT.[WorkoutTypeId] = WT.[Id]
 Where P.[RoleId]=@RoleId and P.[IsDeleted]=0
+End
+
+Go
+
+Create procedure GetCoacheWithSportTypesWorkoutTypesById
+@RoleId int, @CoachId int
+As
+Begin
+Select P.[Id] As [CoachId], P.[FamilyName], P.[FirstName], P.[Patronymic], P.[PhoneNumber], P.[Email], P.[DateBirth], P.[Sex], 
+	ST.[Id] As SportTypeId, ST.[Name] as [SportType], WT.[Id] As WorkoutTypeId, WT.[Name] As WorkoutType From dbo.[Persons] As P
+Join dbo.[Coaches_SportTypes] As CST On P.[Id] = CST.[CoachId]
+Join dbo.[SportTypes] As ST On CST.[SportTypeId] = ST.[Id]
+Join dbo.[Coaches_WorkoutTypes] As CWT On P.[Id] = CWT.[CoachId]
+Join dbo.[WorkoutTypes] As WT On CWT.[WorkoutTypeId] = WT.[Id]
+Where P.[RoleId]=@RoleId and P.[Id]=@CoachId and P.[IsDeleted]=0
 End
 
 Go

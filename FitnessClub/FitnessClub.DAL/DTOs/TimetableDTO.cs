@@ -2,6 +2,11 @@
 {
     public class TimetableDto
     {
+        public TimetableDto()
+        {
+            Clients = new List<ClientDto>();
+        }
+
         public int? Id { get; set; }
 
         public string? DateTime { get; set; }
@@ -12,21 +17,14 @@
 
         public int? GymId { get; set; }
 
-        public WorkoutDto? Workout { get; set; }
+        public List<ClientDto> Clients { get; set; }
 
-        public PersonDto? Person { get; set; }
+        public CoachDto Coach { get; set; }
 
-        public WorkoutTypeDto? WorkoutType { get; set; }
+        public WorkoutDto Workout { get; set; }
 
-        public SportTypeDto? SportType { get; set; }
+        public GymDto Gym { get; set; }
 
-        public GymDto? Gym { get; set; }
-
-        public List<PersonDto>? Clients { get; set; }
-
-        public TimetableDto()
-        {
-            Clients = new List<PersonDto>();
-        }
+        public SportTypeDto SportType { get; set; }
     }
 }

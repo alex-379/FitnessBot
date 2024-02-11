@@ -3,9 +3,7 @@ using FitnessClub.DAL.Dtos;
 using FitnessClub.DAL.IRepositories;
 using FitnessClub.DAL.StoredProcedures;
 using Microsoft.Data.SqlClient;
-using System;
 using System.Data;
-using System.Xml;
 
 namespace FitnessClub.DAL
 {
@@ -60,21 +58,21 @@ namespace FitnessClub.DAL
             }
         }
 
-        public void UpdatePersonById(PersonDto person)
+        public void UpdatePersonOnId(PersonDto person)
         {
             using (IDbConnection connection = new SqlConnection(Options.connectionString))
             {
-                connection.Query<PersonDto>(PersonStoredProcedures.UpdatePersonById,
-                    new {person.Id, person.RoleId, person.FamilyName, person.FirstName, person.Patronymic, person.PhoneNumber, person.Email, person.DateBirth, person.Sex },
+                connection.Query<PersonDto>(PersonStoredProcedures.UpdatePersonOnId,
+                    new { person.Id, person.RoleId, person.FamilyName, person.FirstName, person.Patronymic, person.PhoneNumber, person.Email, person.DateBirth, person.Sex },
                     commandType: CommandType.StoredProcedure);
             }
         }
 
-        public void DeletePersonById(PersonDto person)
+        public void DeletePersonOnId(PersonDto person)
         {
             using (IDbConnection connection = new SqlConnection(Options.connectionString))
             {
-                connection.Query<PersonDto>(PersonStoredProcedures.DeletePersonById,
+                connection.Query<PersonDto>(PersonStoredProcedures.DeletePersonOnId,
                     new { person.Id },
                     commandType: CommandType.StoredProcedure);
             }
@@ -98,7 +96,7 @@ namespace FitnessClub.DAL
             }
         }
 
-        public List<PersonDto> GetAllPersonsByRoleId(int id)
+        public List<PersonDto> GetAllPersonsByRoleId(int roleId)
         {
             using (IDbConnection connection = new SqlConnection(Options.connectionString))
             {
@@ -108,8 +106,8 @@ namespace FitnessClub.DAL
                         person.Role = role;
                         return person;
                     },
-
-                    splitOn: "Id",
+                    new { roleId },
+                    splitOn: "RoleId",
                     commandType: CommandType.StoredProcedure).ToList();
             }
         }
@@ -118,17 +116,66 @@ namespace FitnessClub.DAL
         {
             using (IDbConnection connection = new SqlConnection(Options.connectionString))
             {
-                return connection.Query<PersonDto, RoleDto, PersonDto>(PersonStoredProcedures.GetAllPersonsByRoleId,
-                    (person, role) =>
-                    {
-                        person.Role = role;
-                        return person;
-                    },
+                const int roleId = 2;
 
-                    splitOn: "Id",
-                    commandType: CommandType.StoredProcedure).ToList();
+                Dictionary<int, PersonDto> coaches = new();
+
+                connection.Query<PersonDto, SportTypeDto, WorkoutTypeDto, PersonDto>(PersonStoredProcedures.GetAllCoachesWithSportTypesWorkoutTypes,
+                        (coach, sportType, workoutType) =>
+                        {
+                            if (!coaches.ContainsKey((int)coach.Id))
+                            {
+                                coaches.Add((int)coach.Id, coach);
+                            }
+
+                            PersonDto crntCoach = coaches[(int)coach.Id];
+
+                            crntCoach.SportTypes.Add(sportType);
+
+                            crntCoach.WorkoutTypes.Add(workoutType);
+
+                            return crntCoach;
+                        },
+                        new { roleId },
+                        splitOn: "SportTypeId,WorkoutTypeId",
+                        commandType: CommandType.StoredProcedure);
+
+
+                return coaches.Values.ToList();
             }
         }
 
+        public PersonDto GetCoachWithSportTypesWorkoutTypesById(int coachId)
+        {
+            using (IDbConnection connection = new SqlConnection(Options.connectionString))
+            {
+                const int roleId = 2;
+
+                Dictionary<int, PersonDto> coaches = new();
+
+                connection.Query<PersonDto, SportTypeDto, WorkoutTypeDto, PersonDto>(PersonStoredProcedures.GetCoachWithSportTypesWorkoutTypesById,
+                        (coach, sportType, workoutType) =>
+                        {
+                            if (!coaches.ContainsKey(coachId))
+                            {
+                                coaches.Add(coachId, coach);
+                            }
+
+                            PersonDto crntCoach = coaches[coachId];
+
+                            crntCoach.SportTypes.Add(sportType);
+
+                            crntCoach.WorkoutTypes.Add(workoutType);
+
+                            return crntCoach;
+                        },
+                        new { roleId, coachId },
+                        splitOn: "SportTypeId,WorkoutTypeId",
+                        commandType: CommandType.StoredProcedure);
+
+
+                return coaches[coachId];
+            }
+        }
     }
 }
