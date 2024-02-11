@@ -1,14 +1,12 @@
 ﻿using System;
-using AutoMapper;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-
-namespace FitnessClub.BLL.Mapping
+namespace FitnessClub.BLL.Models.WorkoutModels.OutputModels
 {
-    public class WorkoutMappingProfile: Profile
+    public class WorkoutOutputModel
     {
 
     }

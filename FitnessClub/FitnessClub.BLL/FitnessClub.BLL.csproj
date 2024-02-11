@@ -7,18 +7,16 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Models\TimetableModels\InputModels\" />
-    <Folder Include="Models\TimetableModels\OutputModels\" />
-    <Folder Include="Models\WorkoutModels\InputModels\" />
-    <Folder Include="Models\WorkoutModels\OutputModels\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <PackageReference Include="AutoMapper" Version="13.0.1" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\FitnessClub.DAL\FitnessClub.DAL.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Models\TimetableModels\InputModels\" />
+    <Folder Include="Models\TimetableModels\OutputModels\" />
   </ItemGroup>
 
 </Project>
