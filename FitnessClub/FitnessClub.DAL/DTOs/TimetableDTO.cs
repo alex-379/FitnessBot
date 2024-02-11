@@ -21,19 +21,10 @@
 
         public CoachDto Coach { get; set; }
 
-        public WorkoutDto? Workout { get; set; }
+        public WorkoutDto Workout { get; set; }
 
-        public GymDto? Gym { get; set; }
+        public GymDto Gym { get; set; }
 
-        public SportTypeDto? SportType { get; set; }
-
-
-        //public PersonDto? Person { get; set; }
-
-        //public WorkoutTypeDto? WorkoutType { get; set; }
-
-        //public SportTypeDto? SportType { get; set; }
-
-        //public List<PersonDto>? Clients { get; set; }
+        public SportTypeDto SportType { get; set; }
     }
 }

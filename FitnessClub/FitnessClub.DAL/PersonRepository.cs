@@ -3,9 +3,7 @@ using FitnessClub.DAL.Dtos;
 using FitnessClub.DAL.IRepositories;
 using FitnessClub.DAL.StoredProcedures;
 using Microsoft.Data.SqlClient;
-using System;
 using System.Data;
-using System.Xml;
 
 namespace FitnessClub.DAL
 {
@@ -116,14 +114,13 @@ namespace FitnessClub.DAL
 
         public List<PersonDto> GetAllCoachesWithSportTypesWorkoutTypes()
         {
-            const int roleId = 2;
-
-            Dictionary<int, PersonDto> coaches = new();
-
             using (IDbConnection connection = new SqlConnection(Options.connectionString))
             {
-                {
-                    connection.Query<PersonDto, SportTypeDto, WorkoutTypeDto, PersonDto>(PersonStoredProcedures.GetAllCoachesWithSportTypesWorkoutTypes,
+                const int roleId = 2;
+
+                Dictionary<int, PersonDto> coaches = new();
+
+                connection.Query<PersonDto, SportTypeDto, WorkoutTypeDto, PersonDto>(PersonStoredProcedures.GetAllCoachesWithSportTypesWorkoutTypes,
                         (coach, sportType, workoutType) =>
                         {
                             if (!coaches.ContainsKey((int)coach.Id))
@@ -142,7 +139,7 @@ namespace FitnessClub.DAL
                         new { roleId },
                         splitOn: "SportTypeId,WorkoutTypeId",
                         commandType: CommandType.StoredProcedure);
-                }
+
 
                 return coaches.Values.ToList();
             }
@@ -150,14 +147,13 @@ namespace FitnessClub.DAL
 
         public PersonDto GetCoachWithSportTypesWorkoutTypesById(int coachId)
         {
-            const int roleId = 2;
-
-            Dictionary<int, PersonDto> coaches = new();
-
             using (IDbConnection connection = new SqlConnection(Options.connectionString))
             {
-                {
-                    connection.Query<PersonDto, SportTypeDto, WorkoutTypeDto, PersonDto>(PersonStoredProcedures.GetCoachWithSportTypesWorkoutTypesById,
+                const int roleId = 2;
+
+                Dictionary<int, PersonDto> coaches = new();
+
+                connection.Query<PersonDto, SportTypeDto, WorkoutTypeDto, PersonDto>(PersonStoredProcedures.GetCoachWithSportTypesWorkoutTypesById,
                         (coach, sportType, workoutType) =>
                         {
                             if (!coaches.ContainsKey(coachId))
@@ -176,15 +172,10 @@ namespace FitnessClub.DAL
                         new { roleId, coachId },
                         splitOn: "SportTypeId,WorkoutTypeId",
                         commandType: CommandType.StoredProcedure);
-                }
+
 
                 return coaches[coachId];
             }
         }
-
-        //public List<PersonDto> GetAllTimetablesWithCoachWorkoutsGymsClients()
-        //{
-
-        //}
     }
 }
