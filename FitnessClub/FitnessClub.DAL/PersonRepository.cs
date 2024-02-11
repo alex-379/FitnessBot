@@ -65,7 +65,7 @@ namespace FitnessClub.DAL
             using (IDbConnection connection = new SqlConnection(Options.connectionString))
             {
                 connection.Query<PersonDto>(PersonStoredProcedures.UpdatePersonOnId,
-                    new {person.Id, person.RoleId, person.FamilyName, person.FirstName, person.Patronymic, person.PhoneNumber, person.Email, person.DateBirth, person.Sex },
+                    new { person.Id, person.RoleId, person.FamilyName, person.FirstName, person.Patronymic, person.PhoneNumber, person.Email, person.DateBirth, person.Sex },
                     commandType: CommandType.StoredProcedure);
             }
         }
@@ -145,6 +145,40 @@ namespace FitnessClub.DAL
                 }
 
                 return coaches.Values.ToList();
+            }
+        }
+
+        public PersonDto GetCoacheWithSportTypesWorkoutTypesById(int coachId)
+        {
+            const int roleId = 2;
+
+            Dictionary<int, PersonDto> coaches = new();
+
+            using (IDbConnection connection = new SqlConnection(Options.connectionString))
+            {
+                {
+                    connection.Query<PersonDto, SportTypeDto, WorkoutTypeDto, PersonDto>(PersonStoredProcedures.GetCoacheWithSportTypesWorkoutTypesById,
+                        (coach, sportType, workoutType) =>
+                        {
+                            if (!coaches.ContainsKey(coachId))
+                            {
+                                coaches.Add(coachId, coach);
+                            }
+
+                            PersonDto crntCoach = coaches[coachId];
+
+                            crntCoach.SportTypes.Add(sportType);
+
+                            crntCoach.WorkoutTypes.Add(workoutType);
+
+                            return crntCoach;
+                        },
+                        new { roleId, coachId },
+                        splitOn: "SportTypeId,WorkoutTypeId",
+                        commandType: CommandType.StoredProcedure);
+                }
+
+                return coaches[coachId];
             }
         }
     }

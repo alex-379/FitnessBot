@@ -1,4 +1,6 @@
-﻿namespace FitnessClub.DAL.StoredProcedures
+﻿using FitnessClub.DAL.Dtos;
+
+namespace FitnessClub.DAL.StoredProcedures
 {
     public class PersonStoredProcedures
     {
@@ -23,5 +25,7 @@
         public const string GetAllPersonsByRoleId = "GetAllPersonsByRoleId";
 
         public const string GetAllCoachesWithSportTypesWorkoutTypes = "GetAllCoachesWithSportTypesWorkoutTypes";
+
+        public const string GetCoacheWithSportTypesWorkoutTypesById = "GetCoacheWithSportTypesWorkoutTypesById";
     }
 }
