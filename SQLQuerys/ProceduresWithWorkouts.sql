@@ -36,7 +36,7 @@ End
 
 Go
 
-Create procedure UpdateWorkoutById
+Create procedure UpdateWorkoutOnId
 	@Id int,
 	@SportTypeId int,
 	@Price decimal NULL,
@@ -54,7 +54,7 @@ End
 
 Go
 
-Create procedure DeleteWorkoutById  
+Create procedure DeleteWorkoutOnId  
 	@Id int 
 As 
 Begin 

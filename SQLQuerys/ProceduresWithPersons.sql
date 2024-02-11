@@ -52,7 +52,7 @@ End
 
 Go
 
-Create procedure UpdatePersonById
+Create procedure UpdatePersonOnId
 @Id int, @RoleId int, @FamilyName nvarchar(20), @FirstName nvarchar(20), @Patronymic nvarchar(20), @PhoneNumber nvarchar(12), 
 @Email nvarchar(40), @DateBirth nvarchar(40), @Sex bit
 As
@@ -65,7 +65,7 @@ End
 
 Go 
 
-Create procedure DeletePersonById
+Create procedure DeletePersonOnId
 @Id int
 As
 Begin

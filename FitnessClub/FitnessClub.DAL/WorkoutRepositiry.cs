@@ -38,21 +38,21 @@ namespace FitnessClub.DAL
             }
         }
 
-        public void UpdateWorkoutById(WorkoutDto workout)
+        public void UpdateWorkoutOnId(WorkoutDto workout)
         {
             using (IDbConnection connection = new SqlConnection(Options.connectionString))
             {
-                connection.Query(WorkoutStoredProcedures.UpdateWorkoutById,
+                connection.Query(WorkoutStoredProcedures.UpdateWorkoutOnId,
                     new { workout.Id, workout.SportTypeId, workout.Price, workout.Duration, workout.NumberPlaces, workout.IsGroup, workout.Comment },
                     commandType: CommandType.StoredProcedure);
             }
         }
 
-        public void DeleteWorkoutById(WorkoutDto workout)
+        public void DeleteWorkoutOnId(WorkoutDto workout)
         {
             using (IDbConnection connection = new SqlConnection(Options.connectionString))
             {
-                connection.Query(WorkoutStoredProcedures.DeleteWorkoutById,
+                connection.Query(WorkoutStoredProcedures.DeleteWorkoutOnId,
                     new { workout.Id },
                     commandType: CommandType.StoredProcedure);
             }

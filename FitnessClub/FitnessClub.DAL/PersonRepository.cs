@@ -60,21 +60,21 @@ namespace FitnessClub.DAL
             }
         }
 
-        public void UpdatePersonById(PersonDto person)
+        public void UpdatePersonOnId(PersonDto person)
         {
             using (IDbConnection connection = new SqlConnection(Options.connectionString))
             {
-                connection.Query<PersonDto>(PersonStoredProcedures.UpdatePersonById,
+                connection.Query<PersonDto>(PersonStoredProcedures.UpdatePersonOnId,
                     new {person.Id, person.RoleId, person.FamilyName, person.FirstName, person.Patronymic, person.PhoneNumber, person.Email, person.DateBirth, person.Sex },
                     commandType: CommandType.StoredProcedure);
             }
         }
 
-        public void DeletePersonById(PersonDto person)
+        public void DeletePersonOnId(PersonDto person)
         {
             using (IDbConnection connection = new SqlConnection(Options.connectionString))
             {
-                connection.Query<PersonDto>(PersonStoredProcedures.DeletePersonById,
+                connection.Query<PersonDto>(PersonStoredProcedures.DeletePersonOnId,
                     new { person.Id },
                     commandType: CommandType.StoredProcedure);
             }
@@ -142,7 +142,7 @@ namespace FitnessClub.DAL
 
             using (IDbConnection connection = new SqlConnection(Options.connectionString))
             {
-                connection.Query<PersonDto, RoleDto, SportTypeDto, PersonDto>(PersonStoredProcedures.GetAllPersonsByRoleId,
+                connection.Query<PersonDto, RoleDto, SportTypeDto, PersonDto>(PersonStoredProcedures.GetAllCoachesWithSportTypes,
                     (coach, role, sportType) =>
                     {
                         coach.Role = role;
@@ -159,7 +159,7 @@ namespace FitnessClub.DAL
                         return crntCoach;
                     },
                     new { roleId },
-                    splitOn: "id",
+                    splitOn: "id1",
                     commandType: CommandType.StoredProcedure);
             }
 

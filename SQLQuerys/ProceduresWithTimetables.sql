@@ -41,7 +41,7 @@ End
 
 Go
 
-Create procedure UpdateTimetableById
+Create procedure UpdateTimetableOnId
 @Id int, @DateTime nvarchar(20), @CoachId int, @WorkoutId int, @GymId int
 As
 Begin
@@ -52,7 +52,7 @@ End
 
 Go
 
-Create procedure DeleteTimetableById 
+Create procedure DeleteTimetableOnId 
 @Id int
 As
 Begin
