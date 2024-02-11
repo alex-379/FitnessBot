@@ -240,5 +240,38 @@ namespace FitnessClub.DAL
                 return timetables.Values.ToList();
             }
         }
+
+        public TimetableDto GetTimetableWithCoachWorkoutsGymsClientsById(int id)
+        {
+            using (IDbConnection connection = new SqlConnection(Options.connectionString))
+            {
+                Dictionary<int, TimetableDto> timetables = new Dictionary<int, TimetableDto>();
+
+                connection.Query<TimetableDto, ClientDto, CoachDto, WorkoutDto, SportTypeDto, GymDto, TimetableDto>
+                   (TimetableStoredProcedures.GetTimetableWithCoachWorkoutsGymsClientsById,
+                   (timetable, client, coach, workout, sportType, gym) =>
+                   {
+                       if (!timetables.ContainsKey(id))
+                       {
+                           timetables.Add(id, timetable);
+                       }
+
+                       TimetableDto crntTimetable = timetables[id];
+
+                       crntTimetable.Clients.Add(client);
+                       crntTimetable.Coach = coach;
+                       crntTimetable.Workout = workout;
+                       crntTimetable.SportType = sportType;
+                       crntTimetable.Gym = gym;
+
+                       return crntTimetable;
+                   },
+                   new { id },
+                   splitOn: "ClientId,CoachId,WorkoutId,SportTypeId,GymId",
+                   commandType: CommandType.StoredProcedure);
+
+                return timetables[id];
+            }
+        }
     }
 }
