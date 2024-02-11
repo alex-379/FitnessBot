@@ -26,6 +26,13 @@
 
         public List<WorkoutTypeDto>? WorkoutTypes { get; set; }
 
-        public RoleDto? Role { get; set; }
+        public RoleDto Role { get; set; }
+
+        public List<PersonDto>? Clients { get; set; }
+
+        public PersonDto()
+        {
+            SportTypes = new List<SportTypeDto>();
+        }
     }
 }
