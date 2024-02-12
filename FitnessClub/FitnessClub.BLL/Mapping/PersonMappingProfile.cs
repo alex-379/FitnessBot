@@ -9,7 +9,7 @@ namespace FitnessClub.BLL.Mapping
     {
         public PersonMappingProfile()
         {
-            CreateMap<PersonDto, PersonOutputModel>();
+            CreateMap<PersonDto, ClientAndAdministratorOutputModel>();
 
             CreateMap<ClientAndAdministratorInputModel, PersonDto>();
         }

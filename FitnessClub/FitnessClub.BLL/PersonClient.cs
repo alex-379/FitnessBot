@@ -30,11 +30,11 @@ namespace FitnessClub.BLL
 
         }
 
-        public List<PersonOutputModel> GetAllPersons()
+        public List<ClientAndAdministratorOutputModel> GetAllPersons()
         {
             List <PersonDto> personDTos = _personRepository.GetAllPersons();
 
-            return _mapper.Map<List<PersonOutputModel>>(personDTos);
+            return _mapper.Map<List<ClientAndAdministratorOutputModel>>(personDTos);
         }
 
     }
