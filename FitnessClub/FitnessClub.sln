@@ -6,7 +6,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FitnessClub.DAL", "FitnessC
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FitnessClub.BLL", "FitnessClub.BLL\FitnessClub.BLL.csproj", "{F98D21A6-0765-4D4C-8370-1C25B841BADD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FitnessClub.TG", "ConsoleApp2\FitnessClub.TG.csproj", "{53E96CA5-68FB-42DD-B248-1C4A3C281C74}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FitnessClub.TG", "FitnessClub.TG\FitnessClub.TG.csproj", "{53E96CA5-68FB-42DD-B248-1C4A3C281C74}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
