@@ -4,7 +4,7 @@
     {
         public TimetableDto()
         {
-            Clients = new List<ClientDto>();
+            Clients = new List<PersonDto>();
         }
 
         public int? Id { get; set; }
@@ -17,9 +17,9 @@
 
         public int? GymId { get; set; }
 
-        public List<ClientDto> Clients { get; set; }
+        public List<PersonDto> Clients { get; set; }
 
-        public CoachDto Coach { get; set; }
+        public PersonDto Coach { get; set; }
 
         public WorkoutDto Workout { get; set; }
 

@@ -27,8 +27,6 @@
 
         public bool? Sex { get; set; }
 
-        public int? IsDeleted { get; set; }
-
         public List<SportTypeDto> SportTypes { get; set; }
 
         public List<WorkoutTypeDto> WorkoutTypes { get; set; }

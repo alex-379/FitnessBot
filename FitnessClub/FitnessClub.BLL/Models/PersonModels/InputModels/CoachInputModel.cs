@@ -1,17 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using FitnessClub.DAL.Dtos;
 
 namespace FitnessClub.BLL.Models.PersonModels.InputModels
 {
-    public class PersonInputModel
+    public class CoachInputModel
     {
-        public int Id { get; set; }
+        public CoachInputModel()
+        {
+            //SportTypes = new List<SportTypeModel>();
 
-        public int RoleId { get; set; }
-
+            //WorkoutTypes = new List<WorkoutTypeModel>();
+        }
         public string? FamilyName { get; set; }
 
         public string? FirstName { get; set; }
@@ -25,5 +23,9 @@ namespace FitnessClub.BLL.Models.PersonModels.InputModels
         public string? DateBirth { get; set; }
 
         public bool? Sex { get; set; }
+
+//        public List<SportTypeModel> SportTypes { get; set; }
+
+ //       public List<WorkoutTypeModel> WorkoutTypes { get; set; }
     }
 }

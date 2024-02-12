@@ -77,9 +77,9 @@ Create procedure GetAllTimetablesWithCoachWorkoutsGymsClients
 As
 Begin
 Select T.[Id], T.[DateTime], 
-PCL.[Id] As [ClientId], PCL.[FamilyName] As [ClientFamilyName], PCL.[FirstName] As [ClientFirstName], PCL.[Patronymic] As [ClientPatronymic], PCL.[PhoneNumber] As [ClientPhoneNumber], PCL.[Email] As [ClientEmail], PCL.[DateBirth] As [CLientDateBirth], PCL.[Sex] As [ClientSex],
-PC.[Id] As [CoachId], PC.[FamilyName] As [CoachFamilyName], PC.[FirstName] As [CoachFirstName], PC.[Patronymic] As [CoachPatronymic], PC.[PhoneNumber] As [CoachPhoneNumber], PC.[Email] As [CoachEmail], PC.[DateBirth] As [CoachDateBirth], PC.[Sex] As [CoachSex],
-W.[Id] As [WorkoutId], W.[Price], W.[Duration], W.[NumberPlaces], W.[IsGroup], W.[Comment],
+PCL.[Id], PCL.[FamilyName], PCL.[FirstName], PCL.[Patronymic], PCL.[PhoneNumber], PCL.[Email], PCL.[DateBirth], PCL.[Sex],
+PC.[Id], PC.[FamilyName], PC.[FirstName], PC.[Patronymic], PC.[PhoneNumber], PC.[Email], PC.[DateBirth], PC.[Sex],
+W.[Id], W.[Price], W.[Duration], W.[NumberPlaces], W.[IsGroup], W.[Comment],
 ST.[Id] As [SportTypeId], ST.[Name] As SportType,
 G.[Id] As [GymId], G.[Name] As [Gym] from dbo.[Timetables] as T
 Join dbo.[Clients_Timetables] As CT On T.[Id] = CT.[TimetableId]
@@ -98,9 +98,9 @@ Create procedure GetTimetableWithCoachWorkoutsGymsClientsById
 As
 Begin
 Select T.[Id], T.[DateTime], 
-PCL.[Id] As [ClientId], PCL.[FamilyName] As [ClientFamilyName], PCL.[FirstName] As [ClientFirstName], PCL.[Patronymic] As [ClientPatronymic], PCL.[PhoneNumber] As [ClientPhoneNumber], PCL.[Email] As [ClientEmail], PCL.[DateBirth] As [CLientDateBirth], PCL.[Sex] As [ClientSex],
-PC.[Id] As [CoachId], PC.[FamilyName] As [CoachFamilyName], PC.[FirstName] As [CoachFirstName], PC.[Patronymic] As [CoachPatronymic], PC.[PhoneNumber] As [CoachPhoneNumber], PC.[Email] As [CoachEmail], PC.[DateBirth] As [CoachDateBirth], PC.[Sex] As [CoachSex],
-W.[Id] As [WorkoutId], W.[Price], W.[Duration], W.[NumberPlaces], W.[IsGroup], W.[Comment],
+PCL.[Id], PCL.[FamilyName], PCL.[FirstName], PCL.[Patronymic], PCL.[PhoneNumber], PCL.[Email], PCL.[DateBirth], PCL.[Sex],
+PC.[Id], PC.[FamilyName], PC.[FirstName], PC.[Patronymic], PC.[PhoneNumber], PC.[Email], PC.[DateBirth], PC.[Sex],
+W.[Id], W.[Price], W.[Duration], W.[NumberPlaces], W.[IsGroup], W.[Comment],
 ST.[Id] As [SportTypeId], ST.[Name] As SportType,
 G.[Id] As [GymId], G.[Name] As [Gym] from dbo.[Timetables] as T
 Join dbo.[Clients_Timetables] As CT On T.[Id] = CT.[TimetableId]
