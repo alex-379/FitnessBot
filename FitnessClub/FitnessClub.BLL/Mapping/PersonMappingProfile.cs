@@ -11,7 +11,7 @@ namespace FitnessClub.BLL.Mapping
         {
             CreateMap<PersonDto, PersonOutputModel>();
 
-            CreateMap<PersonInputModel, PersonDto>();
+            CreateMap<ClientAndAdministratorInputModel, PersonDto>();
         }
     }
 }
