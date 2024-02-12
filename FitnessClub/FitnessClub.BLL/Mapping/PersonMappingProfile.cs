@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using FitnessClub.BLL.Models.PersonModels.InputModels;
 using FitnessClub.BLL.Models.PersonModels.OutputModels;
+using FitnessClub.BLL.Models.SportTypeModels;
 using FitnessClub.DAL.Dtos;
 
 namespace FitnessClub.BLL.Mapping
@@ -9,9 +10,12 @@ namespace FitnessClub.BLL.Mapping
     {
         public PersonMappingProfile()
         {
-            CreateMap<PersonDto, PersonOutputModel>();
+            CreateMap<PersonDto, ClientAndAdministratorOutputModel>();
 
             CreateMap<ClientAndAdministratorInputModel, PersonDto>();
+
+            CreateMap<PersonDto, CoachWithSportTypesOutputModel>()
+                .ForMember(d=>d.FullName, opt=>opt.MapFrom(s=> $"{s.FamilyName} {s.FirstName}"));
         }
     }
 }

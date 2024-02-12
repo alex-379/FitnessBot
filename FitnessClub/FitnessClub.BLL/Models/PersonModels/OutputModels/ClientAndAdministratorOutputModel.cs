@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace FitnessClub.BLL.Models.PersonModels.OutputModels
 {
-    public class PersonOutputModel
+    public class ClientAndAdministratorOutputModel
     {
         public int Id { get; set; }
 
