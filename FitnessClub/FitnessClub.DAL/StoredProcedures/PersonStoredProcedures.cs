@@ -1,6 +1,4 @@
-﻿using FitnessClub.DAL.Dtos;
-
-namespace FitnessClub.DAL.StoredProcedures
+﻿namespace FitnessClub.DAL.StoredProcedures
 {
     public class PersonStoredProcedures
     {

@@ -151,17 +151,15 @@ namespace FitnessClub.DAL
             {
                 const int roleId = 2;
 
-                Dictionary<int, PersonDto> coaches = new();
+                PersonDto crntCoach = null;
 
                 connection.Query<PersonDto, SportTypeDto, WorkoutTypeDto, PersonDto>(PersonStoredProcedures.GetCoachWithSportTypesWorkoutTypesById,
                         (coach, sportType, workoutType) =>
                         {
-                            if (!coaches.ContainsKey(coachId))
+                            if (crntCoach == null)
                             {
-                                coaches.Add(coachId, coach);
+                                crntCoach = coach;
                             }
-
-                            PersonDto crntCoach = coaches[coachId];
 
                             crntCoach.SportTypes.Add(sportType);
 
@@ -174,7 +172,7 @@ namespace FitnessClub.DAL
                         commandType: CommandType.StoredProcedure);
 
 
-                return coaches[coachId];
+                return crntCoach;
             }
         }
     }

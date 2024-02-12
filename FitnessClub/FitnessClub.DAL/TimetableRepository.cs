@@ -114,18 +114,16 @@ namespace FitnessClub.DAL
         {
             using (IDbConnection connection = new SqlConnection(Options.connectionString))
             {
-                Dictionary<int, TimetableDto> timetables = new Dictionary<int, TimetableDto>();
+                TimetableDto crntTimetable = null;
 
                 connection.Query<TimetableDto, ClientDto, CoachDto, WorkoutDto, SportTypeDto, GymDto, TimetableDto>
                    (TimetableStoredProcedures.GetTimetableWithCoachWorkoutsGymsClientsById,
                    (timetable, client, coach, workout, sportType, gym) =>
                    {
-                       if (!timetables.ContainsKey(id))
+                       if (crntTimetable == null)
                        {
-                           timetables.Add(id, timetable);
+                           crntTimetable = timetable;
                        }
-
-                       TimetableDto crntTimetable = timetables[id];
 
                        crntTimetable.Clients.Add(client);
                        crntTimetable.Coach = coach;
@@ -139,7 +137,7 @@ namespace FitnessClub.DAL
                    splitOn: "ClientId,CoachId,WorkoutId,SportTypeId,GymId",
                    commandType: CommandType.StoredProcedure);
 
-                return timetables[id];
+                return crntTimetable;
             }
         }
     }
