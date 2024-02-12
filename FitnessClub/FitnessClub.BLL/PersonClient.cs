@@ -20,6 +20,7 @@ namespace FitnessClub.BLL
             var config = new MapperConfiguration(cfg =>
             {
                 cfg.AddProfile(new PersonMappingProfile());
+                cfg.AddProfile(new SportTypeMappingProfile());
             });
 
             _mapper = new Mapper(config);
@@ -35,6 +36,13 @@ namespace FitnessClub.BLL
             List <PersonDto> personDTos = _personRepository.GetAllPersons();
 
             return _mapper.Map<List<ClientAndAdministratorOutputModel>>(personDTos);
+        }
+
+        public List<CoachWithSportTypesOutputModel> GetAllCoachesWithSportTypes()
+        {
+            List<PersonDto> personDTos = _personRepository.GetAllCoachesWithSportTypesWorkoutTypes();
+
+            return _mapper.Map<List<CoachWithSportTypesOutputModel>>(personDTos);
         }
 
     }
