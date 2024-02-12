@@ -7,7 +7,7 @@ using System.Data;
 
 namespace FitnessClub.DAL
 {
-    public class WorkoutRepositiry : IWorkoutRepositories
+    public class WorkoutRepository : IWorkoutRepositories
     {
         public int? AddWorkout(WorkoutDto workout)
         {
@@ -89,17 +89,15 @@ namespace FitnessClub.DAL
         {
             using (IDbConnection connection = new SqlConnection(Options.connectionString))
             {
-                Dictionary<int, WorkoutDto> workouts = new();
+                WorkoutDto crntWorkout = null;
 
                 connection.Query<WorkoutDto, SportTypeDto, WorkoutDto>(WorkoutStoredProcedures.GetWorkoutWithSportTypeById,
                         (workout, sportType) =>
                         {
-                            if (!workouts.ContainsKey(id))
+                            if (crntWorkout == null)
                             {
-                                workouts.Add(id, workout);
+                                crntWorkout = workout;
                             }
-
-                            WorkoutDto crntWorkout = workouts[id];
 
                             crntWorkout.SportType = sportType;
 
@@ -109,7 +107,7 @@ namespace FitnessClub.DAL
                         splitOn: "SportTypeId",
                         commandType: CommandType.StoredProcedure);
 
-                return workouts[id];
+                return crntWorkout;
             }
         }
 
