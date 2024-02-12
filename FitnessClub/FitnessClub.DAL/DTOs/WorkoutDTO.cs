@@ -16,8 +16,6 @@
 
         public string? Comment { get; set; }
 
-        public int? WorkoutId { get; set; }
-
         public SportTypeDto SportType { get; set; }
     }
 }
