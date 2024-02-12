@@ -25,10 +25,11 @@ namespace FitnessClub.BLL
             _mapper = new Mapper(config);
         }
 
-        public void AddPerson(PersonInputModel person)
+        public void AddPerson(ClientAndAdministratorInputModel person)
         {
 
         }
+
         public List<PersonOutputModel> GetAllPersons()
         {
             List <PersonDto> personDTos = _personRepository.GetAllPersons();
