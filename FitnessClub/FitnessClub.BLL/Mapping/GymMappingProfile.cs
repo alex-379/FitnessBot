@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using FitnessClub.BLL.Models.SportTypeModels;
+using FitnessClub.BLL.Models.GymModels;
 using FitnessClub.DAL.Dtos;
 using System;
 using System.Collections.Generic;
@@ -9,11 +9,11 @@ using System.Threading.Tasks;
 
 namespace FitnessClub.BLL.Mapping
 {
-    public class SportTypeMappingProfile: Profile
+    public class GymMappingProfile : Profile
     {
-        public SportTypeMappingProfile()
+        public GymMappingProfile()
         {
-            CreateMap<SportTypeDto, SportTypeOutputModel>();
+            CreateMap<GymDto, GymOutputModel>();
         }
     }
 }

@@ -6,7 +6,10 @@ using System.Threading.Tasks;
 
 namespace FitnessClub.BLL.Models.GymModels
 {
-    internal class GymOutputModel
+    public class GymOutputModel
     {
+        public int GymId { get; set; }
+
+        public string Gym { get; set; }
     }
 }

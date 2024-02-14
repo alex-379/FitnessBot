@@ -6,14 +6,10 @@ using System.Threading.Tasks;
 
 namespace FitnessClub.BLL.Models.PersonModels.OutputModels
 {
-    public class ClientAndAdministratorOutputModel
+    public class ClientForTimetableOutputModel
     {
         public int Id { get; set; }
 
-        public int RoleId { get; set; }
-
-        public string? FamilyName { get; set; }
-
-        public string? FirstName { get; set; }
+        public string FullName { get; set; }
     }
 }
