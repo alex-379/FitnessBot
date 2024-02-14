@@ -6,7 +6,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FitnessClub.DAL", "FitnessC
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FitnessClub.BLL", "FitnessClub.BLL\FitnessClub.BLL.csproj", "{F98D21A6-0765-4D4C-8370-1C25B841BADD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FitnessClub.TG", "FitnessClub.TG\FitnessClub.TG.csproj", "{53E96CA5-68FB-42DD-B248-1C4A3C281C74}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FitnessClub.TG", "FitnessClub.TG\FitnessClub.TG.csproj", "{53E96CA5-68FB-42DD-B248-1C4A3C281C74}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleApp4", "ConsoleApp4\ConsoleApp4.csproj", "{D7805C6E-629E-4776-A237-E5D28E506F71}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -26,6 +28,10 @@ Global
 		{53E96CA5-68FB-42DD-B248-1C4A3C281C74}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{53E96CA5-68FB-42DD-B248-1C4A3C281C74}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{53E96CA5-68FB-42DD-B248-1C4A3C281C74}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D7805C6E-629E-4776-A237-E5D28E506F71}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D7805C6E-629E-4776-A237-E5D28E506F71}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D7805C6E-629E-4776-A237-E5D28E506F71}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D7805C6E-629E-4776-A237-E5D28E506F71}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

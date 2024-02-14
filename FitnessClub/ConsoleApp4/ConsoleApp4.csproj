@@ -8,7 +8,9 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Telegram.Bot" Version="19.0.0" />
+    <ProjectReference Include="..\FitnessClub.BLL\FitnessClub.BLL.csproj" />
+    <ProjectReference Include="..\FitnessClub.DAL\FitnessClub.DAL.csproj" />
+    <ProjectReference Include="..\FitnessClub.TG\FitnessClub.TG.csproj" />
   </ItemGroup>
 
 </Project>
