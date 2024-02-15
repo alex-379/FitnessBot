@@ -1,4 +1,6 @@
-﻿namespace FitnessClub.TG
+using Telegram.Bot;
+
+namespace FitnessClub.TG
 {
     public class Options
     {
@@ -9,5 +11,7 @@
                 return Environment.GetEnvironmentVariable("FitnessClubMYPBot");
             }
         }
+
+        public static ITelegramBotClient client = new TelegramBotClient(Options.token);
     }
 }

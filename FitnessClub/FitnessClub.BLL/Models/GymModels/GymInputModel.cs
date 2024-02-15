@@ -1,12 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace FitnessClub.BLL.Models.GymModels
+﻿namespace FitnessClub.BLL.Models.GymModels
 {
-    internal class GymInputModel
+    public class GymInputModel
     {
+
     }
 }
