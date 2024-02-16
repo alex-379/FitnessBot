@@ -45,5 +45,12 @@ namespace FitnessClub.BLL
             return _mapper.Map<List<CoachWithSportTypesOutputModel>>(personDTos);
         }
 
+        public ClientAndAdministratorOutputModel GetPersonById(int id)
+        {
+            PersonDto personDTo = _personRepository.GetPersonById(id);
+
+            return _mapper.Map<ClientAndAdministratorOutputModel>(personDTo);
+        }
+
     }
 }
