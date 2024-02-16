@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Telegram.Bot.Types.Enums;
 using Telegram.Bot.Types;
 using Telegram.Bot;
+using FitnessClub.BLL;
 
 namespace FitnessClub.TG.States
 {
@@ -22,7 +23,19 @@ namespace FitnessClub.TG.States
 
         public override void SendMessage(long ChatId)
         {
-            SingletoneStorage.GetStorage().Client.SendTextMessageAsync(ChatId, $"Еще одно тестовое состояние");
+            string text = null;
+
+            TimetableClient timetableClient = new();
+
+            var timetables = timetableClient.GetAllTimetablesWithCoachWorkoutsGymsClients();
+
+            foreach (var i in timetables)
+            {
+                text = $"Тренировка: {i.SportType.SportType} ({i.Workout.Comment}) - {i.DateTime}, длительность {i.Workout.Duration} час, " +
+                    $"цена {i.Workout.Price} рублей, тренер {i.Coach.FullName} в зале номер {i.Gym.GymId}";
+            }
+
+            SingletoneStorage.GetStorage().Client.SendTextMessageAsync(ChatId, text);
         }
     }
 }
