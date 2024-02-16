@@ -10,6 +10,7 @@
   <ItemGroup>
     <ProjectReference Include="..\FitnessClub.BLL\FitnessClub.BLL.csproj" />
     <ProjectReference Include="..\FitnessClub.DAL\FitnessClub.DAL.csproj" />
+    <ProjectReference Include="..\FitnessClub.TG\FitnessClub.TG.csproj" />
   </ItemGroup>
 
 </Project>

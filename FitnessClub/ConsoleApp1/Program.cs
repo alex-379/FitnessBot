@@ -3,7 +3,7 @@ using FitnessClub.DAL;
 using FitnessClub.DAL.Dtos;
 using System.ComponentModel.DataAnnotations;
 
-PersonRepository personRepository = new();
+//PersonRepository personRepository = new();
 
 #region AddPerson
 //PersonDto personDto = new()
@@ -71,7 +71,7 @@ PersonRepository personRepository = new();
 #endregion
 
 
-TimetableRepository timetableRepository = new();
+//TimetableRepository timetableRepository = new();
 
 #region AddTimeTable
 //TimetableDto timetableDto = new()
@@ -130,7 +130,7 @@ TimetableRepository timetableRepository = new();
 #endregion
 
 
-WorkoutRepository workoutRepositiry = new();
+//WorkoutRepository workoutRepositiry = new();
 
 #region AddWorkout
 //WorkoutDto workoutDto = new()
@@ -186,7 +186,7 @@ WorkoutRepository workoutRepositiry = new();
 //workoutRepositiry.DeleteWorkoutOnId(i);
 #endregion
 
-PersonClient personClient = new();
+//PersonClient personClient = new();
 
 #region PersonInputModels
 
@@ -209,7 +209,14 @@ PersonClient personClient = new();
 TimetableClient timetableClient = new();
 
 #region TimetableOutputModels
-var timetables = timetableClient.GetAllTimetablesWithCoachWorkoutsGymsClients();
+//var timetables = timetableClient.GetAllTimetablesWithCoachWorkoutsGymsClients();
 
-Console.WriteLine();
+//Console.WriteLine();
 #endregion
+
+#region TG
+
+//string result = string.Join(",", timetableClient.GetAllTimetables);
+//Console.WriteLine(result);
+
+# endregion
