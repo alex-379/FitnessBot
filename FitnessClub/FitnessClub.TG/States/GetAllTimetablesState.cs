@@ -33,8 +33,7 @@ namespace FitnessClub.TG.States
 
             foreach (var i in timetables)
             {
-                string crntText = $"Тренировка номер {i.WorkoutId} {i.DateTime}, тренер {i.CoachId} в зале номер {i.GymId}";
-                text = crntText;
+                text = $"Тренировка номер {i.WorkoutId} {i.DateTime}, тренер {i.CoachId} в зале номер {i.GymId}";
             }
 
             SingletoneStorage.GetStorage().Client.SendTextMessageAsync(ChatId, text);
