@@ -10,7 +10,7 @@ using FitnessClub.BLL;
 
 namespace FitnessClub.TG.States
 {
-    public class TestState : AbstractState
+    public class GetFullTimetablesState : AbstractState
     {
         public override AbstractState ReceiveMessage(Update update)
         {
@@ -27,12 +27,11 @@ namespace FitnessClub.TG.States
 
             TimetableClient timetableClient = new();
 
-            var timetables = timetableClient.GetAllTimetablesWithCoachWorkoutsGymsClients();
+            var timetables = timetableClient.GetAllTimetables();
 
             foreach (var i in timetables)
             {
-                text = $"Тренировка: {i.SportType.SportType} ({i.Workout.Comment}) - {i.DateTime}, длительность {i.Workout.Duration} час, " +
-                    $"цена {i.Workout.Price} рублей, тренер {i.Coach.FullName} в зале номер {i.Gym.GymId}";
+                text = $"Тренировка номер {i.WorkoutId} {i.DateTime}, тренер {i.CoachId} в зале номер {i.GymId}";
             }
 
             SingletoneStorage.GetStorage().Client.SendTextMessageAsync(ChatId, text);

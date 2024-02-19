@@ -6,29 +6,33 @@ using System.Threading.Tasks;
 using Telegram.Bot;
 using Telegram.Bot.Types;
 using Telegram.Bot.Types.Enums;
+using Telegram.Bot.Types.ReplyMarkups;
 
 namespace FitnessClub.TG.States
 {
     public class StartState : AbstractState
     {
-        public string name;
+        public string _name;
         public StartState(string name)
         {
-            this.name = name;
+            this._name = name;
         }
 
         public override AbstractState ReceiveMessage(Update update)
         {
-            if (update.Type == UpdateType.Message)
+            if (update.Type == UpdateType.CallbackQuery)
             {
-                var message = update.Message.Text.ToLower();
-                if (message == "a")
+                var callbackQuery = update.CallbackQuery;
+                if (callbackQuery.Data == "GetFullTimetablesState")
                 {
-                    return new GetAllTimetablesState();
+                    //SingletoneStorage.GetStorage().Client.AnswerCallbackQueryAsync(callbackQuery.Id);
+                    return new GetFullTimetablesState();
                 }
-                else if (message == "b")
+
+                if (callbackQuery.Data == "Back")
                 {
-                    return new TestState();
+                    SingletoneStorage.GetStorage().Client.AnswerCallbackQueryAsync(callbackQuery.Id);
+                    return new StartState(callbackQuery.From.FirstName);
                 }
             }
             return this;
@@ -36,7 +40,21 @@ namespace FitnessClub.TG.States
 
         public override void SendMessage(long ChatId)
         {
-            SingletoneStorage.GetStorage().Client.SendTextMessageAsync(ChatId, $"Здравствуйте {name}, выберите a или b");
+
+            var inlineKeyboard = new InlineKeyboardMarkup(
+                new List<InlineKeyboardButton[]>()
+                {
+                    new InlineKeyboardButton[]
+                    { InlineKeyboardButton.WithCallbackData("Зарегистрироваться", "1"),},
+                    new InlineKeyboardButton[]
+                    { InlineKeyboardButton.WithCallbackData("Посмотреть расписание тренировок", "GetFullTimetablesState"),},
+                    new InlineKeyboardButton[]
+                    { InlineKeyboardButton.WithCallbackData("Еще", "2"),
+                      InlineKeyboardButton.WithCallbackData("Еще", "3"),
+                      InlineKeyboardButton.WithCallbackData("Еще", "4")},
+                });
+
+            SingletoneStorage.GetStorage().Client.SendTextMessageAsync(ChatId, $"Здравствуйте {_name}, добро пожаловать в наш фитнес клуб", replyMarkup: inlineKeyboard);
         }
     }
 }

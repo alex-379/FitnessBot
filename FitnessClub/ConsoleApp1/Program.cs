@@ -2,6 +2,9 @@
 using FitnessClub.DAL;
 using FitnessClub.DAL.Dtos;
 using System.ComponentModel.DataAnnotations;
+using Telegram.Bot.Types.ReplyMarkups;
+using Telegram.Bot.Types;
+using Telegram.Bot.Types.Enums;
 
 //PersonRepository personRepository = new();
 
@@ -214,9 +217,5 @@ TimetableClient timetableClient = new();
 //Console.WriteLine();
 #endregion
 
-#region TG
 
-//string result = string.Join(",", timetableClient.GetAllTimetables);
-//Console.WriteLine(result);
 
-# endregion

@@ -1,14 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Telegram.Bot.Types.Enums;
+﻿using Telegram.Bot;
 using Telegram.Bot.Types;
-using Telegram.Bot;
-using FitnessClub.BLL;
-using FitnessClub.BLL.Models.TimetableModels.OutputModels;
-using System.Collections;
+using Telegram.Bot.Types.Enums;
+using Telegram.Bot.Types.ReplyMarkups;
 
 namespace FitnessClub.TG.States
 {
@@ -16,27 +9,42 @@ namespace FitnessClub.TG.States
     {
         public override AbstractState ReceiveMessage(Update update)
         {
-            if (update.Type == UpdateType.Message)
+            if (update.Type == UpdateType.CallbackQuery)
             {
-                return new StartState(update.Message.Chat.FirstName);
+                var callbackQuery = update.CallbackQuery;
+                var user = callbackQuery.From;
+
+                Console.WriteLine($"{user.FirstName} ({user.Id}) нажал на кнопку: {callbackQuery.Data}");
+
+                if (callbackQuery.Data == "GetFullTimetablesState")
+                {
+                    //SingletoneStorage.GetStorage().Client.AnswerCallbackQueryAsync(callbackQuery.Id);
+                    return new GetFullTimetablesState();
+                }
+
+                if (callbackQuery.Data == "Back")
+                {
+                    SingletoneStorage.GetStorage().Client.AnswerCallbackQueryAsync(callbackQuery.Id);
+                    return new StartState(update.Message.Chat.FirstName);
+                }
             }
             return this;
         }
 
         public override void SendMessage(long ChatId)
         {
-            string text = null;
+            var inlineKeyboard = new InlineKeyboardMarkup(
+                new List<InlineKeyboardButton[]>()
+                { 
+                    new InlineKeyboardButton[]
+                    { InlineKeyboardButton.WithCallbackData("Расписание тренировок", "GetFullTimetablesState"),},
+                    new InlineKeyboardButton[]
+                    { InlineKeyboardButton.WithCallbackData("Список тренеров", "Coaches"),},
+                    new InlineKeyboardButton[]
+                    { InlineKeyboardButton.WithCallbackData("Назад", "Back"),},
+                });
 
-            TimetableClient timetableClient = new();
-
-            var timetables = timetableClient.GetAllTimetables();
-
-            foreach (var i in timetables)
-            {
-                text = $"Тренировка номер {i.WorkoutId} {i.DateTime}, тренер {i.CoachId} в зале номер {i.GymId}";
-            }
-
-            SingletoneStorage.GetStorage().Client.SendTextMessageAsync(ChatId, text);
+            SingletoneStorage.GetStorage().Client.SendTextMessageAsync(ChatId, $"Здравствуйте, добро пожаловать в наш фитнес клуб!", replyMarkup: inlineKeyboard);
         }
     }
 }
