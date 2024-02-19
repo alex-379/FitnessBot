@@ -23,7 +23,8 @@ Create table [Persons]
 	[Email] nvarchar (40),
 	[DateBirth] nvarchar (20),
 	[Sex] bit,
-	[IsDeleted] bit NOT NULL
+	[IsDeleted] bit NOT NULL,
+	[TelegramUserId] int NOT NULL
 )
 
 Go

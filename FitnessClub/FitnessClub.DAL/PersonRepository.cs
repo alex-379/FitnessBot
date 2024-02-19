@@ -9,12 +9,12 @@ namespace FitnessClub.DAL
 {
     public class PersonRepository : IPersonRepository
     {
-        public int? AddPerson(PersonDto person)
+        public int? AddEmployee(PersonDto person)
         {
             using (IDbConnection connection = new SqlConnection(Options.connectionString))
             {
-                return connection.QuerySingle<int>(PersonStoredProcedures.AddPerson,
-                    new { person.RoleId, person.FamilyName, person.FirstName, person.Patronymic, person.PhoneNumber, person.Email, person.DateBirth, person.Sex },
+                return connection.QuerySingle<int>(PersonStoredProcedures.AddEmployee,
+                    new { person.RoleId, person.FamilyName, person.FirstName, person.Patronymic, person.PhoneNumber, person.Email, person.DateBirth, person.Sex, person.TelegramUserId },
                     commandType: CommandType.StoredProcedure);
             }
         }

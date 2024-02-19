@@ -32,5 +32,7 @@
         public List<WorkoutTypeDto> WorkoutTypes { get; set; }
 
         public RoleDto Role { get; set; }
+
+        public int TelegramUserId { get; set; }
     }
 }
