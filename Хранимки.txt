@@ -1,3 +1,6 @@
 AddEmployee AddPerson
 BLL AddEmployeeByTelegramUserId
 BLL AddEmployeeByOneTimePassword
+
+GetAllTimetablesWithCoachWorkoutsGymsClientsBySportTypeId (int sportTypeId)
+GetAllTimetablesWithCoachWorkoutsGymsClientsByWorkoutTypeId (List<TimetableDTO>, workoutTypeId)

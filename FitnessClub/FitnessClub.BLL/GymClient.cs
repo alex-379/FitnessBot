@@ -26,8 +26,9 @@ namespace FitnessClub.BLL
 
         public List<SportTypeOutputModel> GetAllSportTypes()
         {
-            List<SportTypeDto> sportTypeDtos = _sportTypeRepository.GetAllSportTypes();
+            List<GymDto> gymDtos = _gymRepository.GetAllGyms();
 
-            return _mapper.Map<List<SportTypeOutputModel>>(sportTypeDtos);
+            return _mapper.Map<List<SportTypeOutputModel>>(gymDtos);
         }
+    }
 }

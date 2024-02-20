@@ -7,6 +7,7 @@ using Telegram.Bot.Types;
 using Telegram.Bot.Types.Enums;
 
 GymRepository gymRepository = new();
+
 #region GetGyms
 //var gyms = gymRepository.GetAllGyms();
 
@@ -213,6 +214,14 @@ WorkoutRepository workoutRepositiry = new();
 //workoutRepositiry.DeleteWorkoutOnId(i);
 #endregion
 
+SportTypeClient sportTypeClient = new();
+
+#region SportTypeOutputModels
+//var sportTypes = sportTypeClient.GetAllSportTypes();
+
+//Console.WriteLine();
+#endregion
+
 PersonClient personClient = new();
 
 #region PersonInputModels
@@ -235,8 +244,6 @@ PersonClient personClient = new();
 
 TimetableClient timetableClient = new();
 
-
-
 #region TimetableOutputModels
 //var timetables = timetableClient.GetAllTimetablesWithCoachWorkoutsGymsClients();
 
@@ -245,9 +252,3 @@ TimetableClient timetableClient = new();
 //Console.WriteLine();
 
 #endregion
-
-
-
-
-
-
