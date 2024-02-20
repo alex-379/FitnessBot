@@ -19,5 +19,7 @@
         public const string GetAllTimetablesWithCoachWorkoutsGymsClients = "GetAllTimetablesWithCoachWorkoutsGymsClients";
 
         public const string GetTimetableWithCoachWorkoutsGymsClientsById = "GetTimetableWithCoachWorkoutsGymsClientsById";
+
+
     }
 }

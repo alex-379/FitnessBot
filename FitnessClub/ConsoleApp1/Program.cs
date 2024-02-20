@@ -20,12 +20,12 @@ GymRepository gymRepository = new();
 SportTypeRepository SportTypeRepository = new();
 
 #region GetSportTypes
-var sportTypes = SportTypeRepository.GetAllSportTypes();
+//var sportTypes = SportTypeRepository.GetAllSportTypes();
 
-foreach (var i in sportTypes)
-{
-    Console.WriteLine($"{i.SportTypeId} {i.SportType}");
-}
+//foreach (var i in sportTypes)
+//{
+//    Console.WriteLine($"{i.SportTypeId} {i.SportType}");
+//}
 
 #endregion
 

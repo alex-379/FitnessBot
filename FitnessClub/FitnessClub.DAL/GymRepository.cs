@@ -1,12 +1,13 @@
 ﻿using Dapper;
 using FitnessClub.DAL.Dtos;
+using FitnessClub.DAL.IRepositories;
 using FitnessClub.DAL.StoredProcedures;
 using Microsoft.Data.SqlClient;
 using System.Data;
 
 namespace FitnessClub.DAL
 {
-    public class GymRepository
+    public class GymRepository:IGymRepository
     {
         public List<GymDto> GetAllGyms()
         {
