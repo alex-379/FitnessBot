@@ -24,7 +24,8 @@ Create table [Persons]
 	[DateBirth] nvarchar (20),
 	[Sex] bit,
 	[IsDeleted] bit NOT NULL,
-	[TelegramUserId] int NOT NULL
+	[TelegramUserId] bigint 
+	[OneTimePassword] int  
 )
 
 Go
@@ -49,7 +50,7 @@ Create table [Workouts]
 (
 	[Id] int NOT NULL PRIMARY KEY IDENTITY,
 	[SportTypeId] int NOT NULL,
-	[Price] decimal,
+	[Price] decimal (10, 2),
 	[Duration] int,
 	[NumberPlaces] int,
 	[IsGroup] bit,
@@ -70,7 +71,8 @@ Go
 Create table [Timetables]
 (
 	[Id] int NOT NULL PRIMARY KEY IDENTITY,
-	[DateTime] nvarchar (20) NOT NULL,
+	[Date] nvarchar (20) NOT NULL,
+	[StartTime]  nvarchar (20) NOT NULL,
 	[CoachId] int NOT NULL,
 	[WorkoutId] int NOT NULL,
 	[GymId] int NOT NULL,

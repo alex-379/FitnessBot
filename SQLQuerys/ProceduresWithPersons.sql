@@ -2,14 +2,13 @@ Use [FitnessClub]
 
 Go
 
-Create procedure AddEmployee
-@RoleId int, @FamilyName nvarchar(20) = null, @FirstName nvarchar(20) = null, @Patronymic nvarchar(20) = null, @PhoneNumber nvarchar(12) = null, 
-@Email nvarchar(40) =null, @DateBirth nvarchar(20) = null, @Sex bit = null, @TelegramUserId int
+Create procedure AddPerson
+@RoleId int, @FamilyName nvarchar(20) = null, @FirstName nvarchar(20) = null, @Patronymic nvarchar(20) = null, @PhoneNumber nvarchar(12) = null, @Email nvarchar(40) = null, @DateBirth nvarchar(20) = null, @Sex bit = null, @TelegramUserId bigint = null, @OneTimePassword int = null
 As
 Begin
 Insert dbo.[Persons] 
 Output Inserted.Id
-Values (@RoleId, @FamilyName, @FirstName, @Patronymic, @PhoneNumber, @Email, @DateBirth, @Sex, 0, @TelegramUserId)
+Values (@RoleId, @FamilyName, @FirstName, @Patronymic, @PhoneNumber, @Email, @DateBirth, @Sex, 0, @TelegramUserId, @OneTimePassword)
 End
 
 Go

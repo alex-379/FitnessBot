@@ -2,7 +2,7 @@
 {
     public class PersonStoredProcedures
     {
-        public const string AddEmployee = "AddEmployee";
+        public const string AddPerson = "AddPerson";
 
         public const string AddCoachSportType = "AddCoachSportType";
 

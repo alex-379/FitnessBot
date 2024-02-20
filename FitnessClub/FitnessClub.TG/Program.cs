@@ -33,32 +33,58 @@ namespace FitnessClub.TG
         }
 
         public static void HandleUpdate(ITelegramBotClient client, Update update, CancellationToken cancellationToken)
-        {
-            if (update.Type == UpdateType.Message)
-            {
-                var clients = SingletoneStorage.GetStorage().Clients;
-                long id = update.Message.Chat.Id;
-
-                if (!clients.ContainsKey(id))
-                {
-                    clients.Add(id, new StartState(update.Message.Chat.FirstName));
-                    clients[id].SendMessage(id);
-                }
-                else
-                {
-                    clients[id] = clients[id].ReceiveMessage(update);
-                    clients[id].SendMessage(id);
-                }
-            }
-            else if (update.Type == UpdateType.CallbackQuery)
-            {
-                var clients = SingletoneStorage.GetStorage().Clients;
-                long id = update.CallbackQuery.From.Id;
-                clients[id] = clients[id].ReceiveMessage(update);
-                clients[id].SendMessage(id);
-            }
-        }
-
+        {
+
+            if (update.Type == UpdateType.Message)
+
+            {
+
+                var clients = SingletoneStorage.GetStorage().Clients;
+
+                long id = update.Message.Chat.Id;
+
+
+
+                if (!clients.ContainsKey(id))
+
+                {
+
+                    clients.Add(id, new StartState(update.Message.Chat.FirstName));
+
+                    clients[id].SendMessage(id);
+
+                }
+
+                else
+
+                {
+
+                    clients[id] = clients[id].ReceiveMessage(update);
+
+                    clients[id].SendMessage(id);
+
+                }
+
+            }
+
+            else if (update.Type == UpdateType.CallbackQuery)
+
+            {
+
+                var clients = SingletoneStorage.GetStorage().Clients;
+
+                long id = update.CallbackQuery.From.Id;
+
+                clients[id] = clients[id].ReceiveMessage(update);
+
+                clients[id].SendMessage(id);
+
+            }
+
+        }
+
+
+
         public static void HandleError(ITelegramBotClient client, Exception exception, CancellationToken cancellationToken)
         {
 

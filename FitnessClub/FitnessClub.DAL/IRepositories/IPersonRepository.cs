@@ -4,7 +4,7 @@ namespace FitnessClub.DAL.IRepositories
 {
     public interface IPersonRepository
     {
-        public int? AddEmployee(PersonDto person);
+        public int? AddPerson(PersonDto person);
 
         public void AddCoachSportType(int coachId, int sportTypeId);
 

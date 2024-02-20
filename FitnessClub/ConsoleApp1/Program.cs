@@ -6,7 +6,31 @@ using Telegram.Bot.Types.ReplyMarkups;
 using Telegram.Bot.Types;
 using Telegram.Bot.Types.Enums;
 
-//PersonRepository personRepository = new();
+GymRepository gymRepository = new();
+#region GetGyms
+//var gyms = gymRepository.GetAllGyms();
+
+//foreach (var i in gyms)
+//{
+//    Console.WriteLine($"{i.GymId} {i.Gym}");
+//}
+
+#endregion
+
+SportTypeRepository SportTypeRepository = new();
+
+#region GetSportTypes
+var sportTypes = SportTypeRepository.GetAllSportTypes();
+
+foreach (var i in sportTypes)
+{
+    Console.WriteLine($"{i.SportTypeId} {i.SportType}");
+}
+
+#endregion
+
+
+PersonRepository personRepository = new();
 
 #region AddPerson
 //PersonDto personDto = new()
@@ -74,7 +98,7 @@ using Telegram.Bot.Types.Enums;
 #endregion
 
 
-//TimetableRepository timetableRepository = new();
+TimetableRepository timetableRepository = new();
 
 #region AddTimeTable
 //TimetableDto timetableDto = new()
@@ -133,7 +157,7 @@ using Telegram.Bot.Types.Enums;
 #endregion
 
 
-//WorkoutRepository workoutRepositiry = new();
+WorkoutRepository workoutRepositiry = new();
 
 #region AddWorkout
 //WorkoutDto workoutDto = new()
@@ -189,7 +213,7 @@ using Telegram.Bot.Types.Enums;
 //workoutRepositiry.DeleteWorkoutOnId(i);
 #endregion
 
-//PersonClient personClient = new();
+PersonClient personClient = new();
 
 #region PersonInputModels
 
@@ -209,13 +233,21 @@ using Telegram.Bot.Types.Enums;
 //Console.WriteLine();
 #endregion
 
-TimetableClient timetableClient = new();
-
+TimetableClient timetableClient = new();
+
+
+
 #region TimetableOutputModels
-//var timetables = timetableClient.GetAllTimetablesWithCoachWorkoutsGymsClients();
-
-//Console.WriteLine();
+//var timetables = timetableClient.GetAllTimetablesWithCoachWorkoutsGymsClients();
+
+
+
+//Console.WriteLine();
+
 #endregion
-
-
-
+
+
+
+
+
+
