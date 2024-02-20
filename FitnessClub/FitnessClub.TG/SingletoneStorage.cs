@@ -1,4 +1,4 @@
-﻿using FitnessClub.TG.States;
+using FitnessClub.TG.States;
 using Telegram.Bot;
 
 namespace FitnessClub.TG

@@ -1,9 +1,12 @@
-﻿using FitnessClub.BLL;
+using FitnessClub.BLL;
 using FitnessClub.DAL;
 using FitnessClub.DAL.Dtos;
 using System.ComponentModel.DataAnnotations;
+using Telegram.Bot.Types.ReplyMarkups;
+using Telegram.Bot.Types;
+using Telegram.Bot.Types.Enums;
 
-PersonRepository personRepository = new();
+//PersonRepository personRepository = new();
 
 #region AddPerson
 //PersonDto personDto = new()
@@ -15,11 +18,10 @@ PersonRepository personRepository = new();
 //    PhoneNumber = "",
 //    Email = "strelnikova@mail.ru",
 //    DateBirth = "12.10.1972",
-//    Sex = false,
-//    TelegramUserId = 111111111,
+//    Sex = false
 //};
 
-//Console.WriteLine(personRepository.AddEmployee(personDto));
+//Console.WriteLine(personRepository.AddPerson(personDto));
 
 //personRepository.AddCoachSportType(3, 4);
 
@@ -72,7 +74,7 @@ PersonRepository personRepository = new();
 #endregion
 
 
-TimetableRepository timetableRepository = new();
+//TimetableRepository timetableRepository = new();
 
 #region AddTimeTable
 //TimetableDto timetableDto = new()
@@ -131,7 +133,7 @@ TimetableRepository timetableRepository = new();
 #endregion
 
 
-WorkoutRepository workoutRepositiry = new();
+//WorkoutRepository workoutRepositiry = new();
 
 #region AddWorkout
 //WorkoutDto workoutDto = new()
@@ -187,7 +189,7 @@ WorkoutRepository workoutRepositiry = new();
 //workoutRepositiry.DeleteWorkoutOnId(i);
 #endregion
 
-PersonClient personClient = new();
+//PersonClient personClient = new();
 
 #region PersonInputModels
 
@@ -207,17 +209,13 @@ PersonClient personClient = new();
 //Console.WriteLine();
 #endregion
 
-TimetableClient timetableClient = new();
-
+TimetableClient timetableClient = new();
+
 #region TimetableOutputModels
-//var timetables = timetableClient.GetAllTimetablesWithCoachWorkoutsGymsClients();
-
-//Console.WriteLine();
+//var timetables = timetableClient.GetAllTimetablesWithCoachWorkoutsGymsClients();
+
+//Console.WriteLine();
 #endregion
-
-#region TG
-
-//string result = string.Join(",", timetableClient.GetAllTimetables);
-//Console.WriteLine(result);
-
-# endregion
+
+
+
