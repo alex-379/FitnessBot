@@ -248,9 +248,12 @@ PersonClient personClient = new();
 #endregion
 
 #region PersonOutputModels
-var persons = personClient.GetAllPersons();
+var persons = personClient.GetAllPersonsByRoleId(1);
 
 Console.WriteLine();
+//var persons = personClient.GetAllPersons();
+
+//Console.WriteLine();
 
 //var persons = personClient.GetAllCoachesWithSportTypes();
 
