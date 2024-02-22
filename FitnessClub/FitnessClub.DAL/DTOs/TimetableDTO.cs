@@ -28,5 +28,7 @@
         public GymDto Gym { get; set; }
 
         public SportTypeDto SportType { get; set; }
+
+        public WorkoutTypeDto WorkoutType {  get; set; }
     }
 }
