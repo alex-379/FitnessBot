@@ -1,4 +1,4 @@
-﻿using FitnessClub.BLL.Models.PersonModels.InputModels;
+using FitnessClub.BLL.Models.PersonModels.InputModels;
 using FitnessClub.BLL.Models.PersonModels.OutputModels;
 using FitnessClub.DAL;
 using FitnessClub.DAL.Dtos;
@@ -20,6 +20,7 @@ namespace FitnessClub.BLL
             var config = new MapperConfiguration(cfg =>
             {
                 cfg.AddProfile(new PersonMappingProfile());
+                cfg.AddProfile(new SportTypeMappingProfile());
             });
 
             _mapper = new Mapper(config);
@@ -30,11 +31,25 @@ namespace FitnessClub.BLL
 
         }
 
-        public List<PersonOutputModel> GetAllPersons()
+        public List<ClientAndAdministratorOutputModel> GetAllPersons()
         {
             List <PersonDto> personDTos = _personRepository.GetAllPersons();
 
-            return _mapper.Map<List<PersonOutputModel>>(personDTos);
+            return _mapper.Map<List<ClientAndAdministratorOutputModel>>(personDTos);
+        }
+
+        public List<CoachWithSportTypesOutputModel> GetAllCoachesWithSportTypes()
+        {
+            List<PersonDto> personDTos = _personRepository.GetAllCoachesWithSportTypesWorkoutTypes();
+
+            return _mapper.Map<List<CoachWithSportTypesOutputModel>>(personDTos);
+        }
+
+        public ClientAndAdministratorOutputModel GetPersonById(int id)
+        {
+            PersonDto personDTo = _personRepository.GetPersonById(id);
+
+            return _mapper.Map<ClientAndAdministratorOutputModel>(personDTo);
         }
 
     }
