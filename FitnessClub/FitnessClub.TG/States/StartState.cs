@@ -32,7 +32,7 @@ namespace FitnessClub.TG.States
 
                 if (callbackQuery.Data == "Back")
                 {
-                    SingletoneStorage.GetStorage().Client.AnswerCallbackQueryAsync(callbackQuery.Id);
+                    //SingletoneStorage.GetStorage().Client.AnswerCallbackQueryAsync(callbackQuery.Id);
                     return new StartState(callbackQuery.From.FirstName);
                 }
             }
@@ -59,16 +59,12 @@ namespace FitnessClub.TG.States
                 new List<InlineKeyboardButton[]>()
                 {
                     new InlineKeyboardButton[]
-                    { InlineKeyboardButton.WithCallbackData("Посмотреть информацию о тренировках", "InfoAbout"),},
-                    new InlineKeyboardButton[]
                     { InlineKeyboardButton.WithCallbackData("Посмотреть расписание тренировок", "GetFullTimetablesState"),},
                     new InlineKeyboardButton[]
-                    { InlineKeyboardButton.WithCallbackData("Еще", "2"),
-                      InlineKeyboardButton.WithCallbackData("Еще", "3"),
-                      InlineKeyboardButton.WithCallbackData("Еще", "4")},
+                    { InlineKeyboardButton.WithCallbackData("Посмотреть свои записи", "1"),},
                 });
 
-            SingletoneStorage.GetStorage().Client.SendTextMessageAsync(ChatId, $"Здравствуйте {_name}, добро пожаловать в наш фитнес клуб", replyMarkup: inlineKeyboard);
+            SingletoneStorage.GetStorage().Client.SendTextMessageAsync(ChatId, $"Здравствуйте {_name}, добро пожаловать в наш фитнес клуб!", replyMarkup: inlineKeyboard);
         }
     }
 }
