@@ -12,7 +12,7 @@ namespace FitnessClub.BLL
 {
     public class WorkoutClient
     {
-        private IWorkoutRepositories _workoutRepository;
+        private IWorkoutRepository _workoutRepository;
         private Mapper _mapper;
 
         public WorkoutClient()

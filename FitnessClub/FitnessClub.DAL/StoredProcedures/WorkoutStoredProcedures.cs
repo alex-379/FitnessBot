@@ -10,12 +10,14 @@
 
         public const string UpdateWorkoutOnId = "UpdateWorkoutOnId";
 
-        public const string DeleteWorkoutOnId = "DeleteWorkoutOnId";
+        public const string DeleteWorkoutById = "DeleteWorkoutById";
+
+        public const string UndeleteWorkoutById = "UndeleteWorkoutById";
 
         public const string GetAllWorkoutsWithSportType = "GetAllWorkoutsWithSportType";
 
         public const string GetWorkoutWithSportTypeById = "GetWorkoutWithSportTypeById";
 
-        public const string GetWorkoutsWithSportTypeBySportTypeId = "GetWorkoutsWithSportTypeBySportTypeId";
+        public const string GetAllWorkoutsWithSportTypeBySportTypeId = "GetAllWorkoutsWithSportTypeBySportTypeId";
     }
 }

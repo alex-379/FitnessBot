@@ -7,7 +7,7 @@ using System.Data;
 
 namespace FitnessClub.DAL
 {
-    public class WorkoutRepository : IWorkoutRepositories
+    public class WorkoutRepository : IWorkoutRepository
     {
         public int? AddWorkout(WorkoutDto workout)
         {
@@ -48,12 +48,22 @@ namespace FitnessClub.DAL
             }
         }
 
-        public void DeleteWorkoutOnId(WorkoutDto workout)
+        public void DeleteWorkoutById(int id)
         {
             using (IDbConnection connection = new SqlConnection(Options.connectionString))
             {
-                connection.Query(WorkoutStoredProcedures.DeleteWorkoutOnId,
-                    new { workout.Id },
+                connection.Query(WorkoutStoredProcedures.DeleteWorkoutById,
+                    new { id },
+                    commandType: CommandType.StoredProcedure);
+            }
+        }
+
+        public void UndeleteWorkoutById(int id)
+        {
+            using (IDbConnection connection = new SqlConnection(Options.connectionString))
+            {
+                connection.Query(WorkoutStoredProcedures.UndeleteWorkoutById,
+                    new { id },
                     commandType: CommandType.StoredProcedure);
             }
         }
@@ -111,13 +121,13 @@ namespace FitnessClub.DAL
             }
         }
 
-        public List<WorkoutDto> GetWorkoutsWithSportTypeBySportTypeId(int sportTypeId)
+        public List<WorkoutDto> GetAllWorkoutsWithSportTypeBySportTypeId(int sportTypeId)
         {
             using (IDbConnection connection = new SqlConnection(Options.connectionString))
             {
                 Dictionary<int, WorkoutDto> workouts = new();
 
-                connection.Query<WorkoutDto, SportTypeDto, WorkoutDto>(WorkoutStoredProcedures.GetWorkoutsWithSportTypeBySportTypeId,
+                connection.Query<WorkoutDto, SportTypeDto, WorkoutDto>(WorkoutStoredProcedures.GetAllWorkoutsWithSportTypeBySportTypeId,
                         (workout, sportType) =>
                         {
                             if (!workouts.ContainsKey((int)workout.Id))

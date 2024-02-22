@@ -1,11 +1,16 @@
-﻿using FitnessClub.BLL;
-using Telegram.Bot;
-using Telegram.Bot.Types;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using Telegram.Bot.Types.Enums;
+using Telegram.Bot.Types;
+using Telegram.Bot;
+using FitnessClub.BLL;
 
 namespace FitnessClub.TG.States
 {
-    public class GetFullTimetablesState : AbstractState
+    public class TestState : AbstractState
     {
         public override AbstractState ReceiveMessage(Update update)
         {
@@ -22,11 +27,12 @@ namespace FitnessClub.TG.States
 
             TimetableClient timetableClient = new();
 
-            var timetables = timetableClient.GetAllTimetables();
+            var timetables = timetableClient.GetAllTimetablesWithCoachWorkoutsGymsClients();
 
             foreach (var i in timetables)
             {
-                text = $"Тренировка номер {i.WorkoutId} {i.Date}, {i.StartTime} тренер {i.CoachId} в зале номер {i.GymId}";
+                text = $"Тренировка: {i.SportType.SportType} ({i.Workout.Comment}) - {i.Date}, {i.StartTime} длительность {i.Workout.Duration} час, " +
+                    $"цена {i.Workout.Price} рублей, тренер {i.Coach.FullName} в зале номер {i.Gym.Gym}";
             }
 
             SingletoneStorage.GetStorage().Client.SendTextMessageAsync(ChatId, text);

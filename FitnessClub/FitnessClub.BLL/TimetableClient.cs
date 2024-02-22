@@ -41,16 +41,16 @@ namespace FitnessClub.BLL
 
         }
 
-        public List<GetTimetablesOutputModel> GetAllTimetables()
+        public List<TimetableOutputModel> GetAllTimetables()
         {
             List<TimetableDto> timetableDtos = _timetableRepository.GetAllTimetables();
-            return _mapper.Map<List<GetTimetablesOutputModel>>(timetableDtos);
+            return _mapper.Map<List<TimetableOutputModel>>(timetableDtos);
 
         }
-        public GetTimetablesOutputModel GetTimetableById(int id)
+        public TimetableOutputModel GetTimetableById(int id)
         {
             TimetableDto timetableDtos = _timetableRepository.GetTimetableById(id);
-            return _mapper.Map<GetTimetablesOutputModel>(timetableDtos);
+            return _mapper.Map<TimetableOutputModel>(timetableDtos);
         }
 
         public List<GetAllTimetablesWithCoachWorkoutsGymsClientsOutputModel> GetAllTimetablesWithCoachWorkoutsGymsClients()

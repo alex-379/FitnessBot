@@ -8,11 +8,17 @@
 
         public const string GetAllTimetables = "GetAllTimetables";
 
+        public const string GetAllActiveTimetables = "GetAllActiveTimetables";
+
+        public const string GetAllArchiveTimetables = "GetAllArchiveTimetables";
+
         public const string GetTimetableById = "GetTimetableById";
 
         public const string UpdateTimetableOnId = "UpdateTimetableOnId";
 
-        public const string DeleteTimetableOnId = "DeleteTimetableOnId";
+        public const string DeleteTimetableById = "DeleteTimetableById";
+
+        public const string UndeleteTimetableById = "UndeleteTimetableById";
 
         public const string DeleteClientTimetable = "DeleteClientTimetable";
 

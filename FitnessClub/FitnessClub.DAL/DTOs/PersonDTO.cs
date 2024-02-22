@@ -27,6 +27,10 @@
 
         public bool? Sex { get; set; }
 
+        public long? TelegramUserId { get; set; }
+
+        public int? OneTimePassword { get; set; }
+
         public List<SportTypeDto> SportTypes { get; set; }
 
         public List<WorkoutTypeDto> WorkoutTypes { get; set; }

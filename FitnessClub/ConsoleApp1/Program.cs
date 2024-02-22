@@ -1,4 +1,4 @@
-﻿using FitnessClub.BLL;
+using FitnessClub.BLL;
 using FitnessClub.DAL;
 using FitnessClub.DAL.Dtos;
 using System.ComponentModel.DataAnnotations;
@@ -6,24 +6,51 @@ using Telegram.Bot.Types.ReplyMarkups;
 using Telegram.Bot.Types;
 using Telegram.Bot.Types.Enums;
 
-//PersonRepository personRepository = new();
+GymRepository gymRepository = new();
+
+#region GetGyms
+//var gyms = gymRepository.GetAllGyms();
+
+//foreach (var i in gyms)
+//{
+//    Console.WriteLine($"{i.GymId} {i.Gym}");
+//}
+
+#endregion
+
+SportTypeRepository SportTypeRepository = new();
+
+#region GetSportTypes
+//var sportTypes = SportTypeRepository.GetAllSportTypes();
+
+//foreach (var i in sportTypes)
+//{
+//    Console.WriteLine($"{i.SportTypeId} {i.SportType}");
+//}
+
+#endregion
+
+
+PersonRepository personRepository = new();
 
 #region AddPerson
 //PersonDto personDto = new()
 //{
-//    RoleId = 2,
-//    FamilyName = "Стрельникова",
-//    FirstName = "Мария",
-//    Patronymic = "",
-//    PhoneNumber = "",
-//    Email = "strelnikova@mail.ru",
-//    DateBirth = "12.10.1972",
-//    Sex = false
+//    RoleId = 1,
+//    FamilyName = "A",
+//    FirstName = "A",
+//    Patronymic = "A",
+//    PhoneNumber = "A",
+//    Email = "A",
+//    DateBirth = "A",
+//    Sex = false,
+//    TelegramUserId = 1,
+//    OneTimePassword = 111111
 //};
 
 //Console.WriteLine(personRepository.AddPerson(personDto));
 
-//personRepository.AddCoachSportType(3, 4);
+//personRepository.AddCoachSportType(2, 6);
 
 //personRepository.AddCoachWorkoutType(2, 2);
 #endregion
@@ -33,12 +60,12 @@ using Telegram.Bot.Types.Enums;
 
 //foreach (var i in persons)
 //{
-//    Console.WriteLine($"{i.Id} {i.RoleId} {i.FamilyName} {i.FirstName} {i.Patronymic} {i.PhoneNumber} {i.Email} {i.DateBirth} {i.Sex}");
+//    Console.WriteLine($"{i.Id} {i.RoleId} {i.FamilyName} {i.FirstName} {i.Patronymic} {i.PhoneNumber} {i.Email} {i.DateBirth} {i.Sex} {i.TelegramUserId} {i.OneTimePassword}");
 //}
 
-//var i = personRepository.GetPersonById(21);
+//var i = personRepository.GetPersonById(2);
 
-//Console.WriteLine($"{i.Id} {i.RoleId} {i.FamilyName} {i.FirstName} {i.Patronymic} {i.PhoneNumber} {i.Email} {i.DateBirth} {i.Sex}");
+//Console.WriteLine($"{i.Id} {i.RoleId} {i.FamilyName} {i.FirstName} {i.Patronymic} {i.PhoneNumber} {i.Email} {i.DateBirth} {i.Sex} {i.TelegramUserId} {i.OneTimePassword}");
 
 //var persons = personRepository.GetAllPersonsByRoleId(2);
 
@@ -48,46 +75,49 @@ using Telegram.Bot.Types.Enums;
 
 //Console.WriteLine();
 
-//var person = personRepository.GetCoachWithSportTypesWorkoutTypesById(12);
+//var person = personRepository.GetCoachWithSportTypesWorkoutTypesByCoachId(3);
 
 //Console.WriteLine();
 
 #endregion
 
 #region UpdatePerson
-//var i = personRepository.GetPersonById(11);
+//var i = personRepository.GetPersonById(2);
 
-//i.Patronymic = "Алексеевна";
-//i.PhoneNumber = "+77777777777";
+//i.Patronymic = "Алексеевич";
+//i.PhoneNumber = "9993334567";
 
 //personRepository.UpdatePersonOnId(i);
 #endregion
 
 #region DeletePerson
-//var i = personRepository.GetPersonById(20);
+//personRepository.DeletePersonById(2);
 
-//personRepository.DeletePersonOnId(i);
+//personRepository.UndeletePersonById(2);
 
-//personRepository.DeleteCoachSportType(6,6);
+//personRepository.DeleteOneTimePasswordByPersonId(1);
 
-//personRepository.DeleteCoachWorkoutType(5,1);
+//personRepository.DeleteCoachSportType(2,6);
+
+//personRepository.DeleteCoachWorkoutType(2,2);
 #endregion
 
 
-//TimetableRepository timetableRepository = new();
+TimetableRepository timetableRepository = new();
 
 #region AddTimeTable
 //TimetableDto timetableDto = new()
 //{
-//    DateTime = "21.03.24",
 //    CoachId = 3,
-//    WorkoutId = 1,
-//    GymId = 1
+//    WorkoutId = 2,
+//    GymId = 2,
+//    Date = "22.03.24",
+//    StartTime = "15:00"
 //};
 
 //Console.WriteLine(timetableRepository.AddTimetable(timetableDto));
 
-//timetableRepository.AddClientTimetable(17, 1);
+//timetableRepository.AddClientTimetable(5, 10);
 #endregion
 
 #region GetTimeTable
@@ -95,12 +125,26 @@ using Telegram.Bot.Types.Enums;
 
 //foreach (var i in timetables)
 //{
-//    Console.WriteLine($"{i.Id} {i.DateTime} {i.CoachId} {i.WorkoutId} {i.GymId}");
+//    Console.WriteLine($"{i.Id} {i.Date} {i.StartTime} {i.CoachId} {i.WorkoutId} {i.GymId}");
 //}
 
-//var i = timetableRepository.GetTimetableById(2);
+//var timetables = timetableRepository.GetAllActiveTimetables();
 
-//Console.WriteLine($"{i.Id} {i.DateTime} {i.CoachId} {i.WorkoutId} {i.GymId}");
+//foreach (var i in timetables)
+//{
+//    Console.WriteLine($"{i.Id} {i.Date} {i.StartTime} {i.CoachId} {i.WorkoutId} {i.GymId}");
+//}
+
+//var timetables = timetableRepository.GetAllArchiveTimetables();
+
+//foreach (var i in timetables)
+//{
+//    Console.WriteLine($"{i.Id} {i.Date} {i.StartTime} {i.CoachId} {i.WorkoutId} {i.GymId}");
+//}
+
+//var i = timetableRepository.GetTimetableById(9);
+
+//Console.WriteLine($"{i.Id} {i.Date} {i.StartTime} {i.CoachId} {i.WorkoutId} {i.GymId}");
 
 //var i = timetableRepository.GetTimetableWithWorkoutById(2);
 
@@ -116,24 +160,24 @@ using Telegram.Bot.Types.Enums;
 #endregion
 
 #region UpdateTimetable
-//var i = timetableRepository.GetTimetableById(2);
+//var i = timetableRepository.GetTimetableById(9);
 
-//i.CoachId = 3;
-//i.GymId = 1;
+//i.CoachId = 4;
+//i.GymId = 2;
 
 //timetableRepository.UpdateTimetableOnId(i);
 #endregion
 
 #region DeleteTimetable
-//var i = timetableRepository.GetTimetableById(1);
+//timetableRepository.DeleteTimetableById(9);
 
-//timetableRepository.DeleteTimetableOnId(i);
+//timetableRepository.UndeleteTimetableById(9);
 
-//timetableRepository.DeleteClientTimetable(7,1);
+//timetableRepository.DeleteClientTimetable(5,10);
 #endregion
 
 
-//WorkoutRepository workoutRepositiry = new();
+WorkoutRepository workoutRepository = new();
 
 #region AddWorkout
 //WorkoutDto workoutDto = new()
@@ -146,59 +190,67 @@ using Telegram.Bot.Types.Enums;
 //    Comment = ""
 //};
 
-//Console.WriteLine(workoutRepositiry.AddWorkout(workoutDto));
+//Console.WriteLine(workoutRepository.AddWorkout(workoutDto));
 #endregion
 
 #region GetWorkout
-//var workouts = workoutRepositiry.GetAllWorkouts();
+//var workouts = workoutRepository.GetAllWorkouts();
 
 //foreach (var i in workouts)
 //{
 //    Console.WriteLine($"{i.Id} {i.SportTypeId} {i.Price} {i.Duration} {i.NumberPlaces} {i.IsGroup} {i.Comment} ");
 //}
 
-//var i = workoutRepositiry.GetWorkoutById(1);
+//var i = workoutRepository.GetWorkoutById(1);
 
 //Console.WriteLine($"{i.Id} {i.SportTypeId} {i.Price} {i.Duration} {i.NumberPlaces} {i.IsGroup} {i.Comment}");
 
-//var i = workoutRepositiry.GetAllWorkoutsWithSportType();
+//var i = workoutRepository.GetAllWorkoutsWithSportType();
 
 //Console.WriteLine();
 
-//var i = workoutRepositiry.GetWorkoutWithSportTypeById(2);
+//var i = workoutRepository.GetWorkoutWithSportTypeById(2);
 
 //Console.WriteLine();
 
-//var i = workoutRepositiry.GetWorkoutsWithSportTypeBySportTypeId(1);
+//var i = workoutRepository.GetAllWorkoutsWithSportTypeBySportTypeId(6);
 
 //Console.WriteLine();
 #endregion
 
 #region UpdateWorkout
-//var i = workoutRepositiry.GetWorkoutById(2);
+//var i = workoutRepository.GetWorkoutById(2);
 
-//i.SportTypeId = 3;
-//i.Price = 1000;
+//i.SportTypeId = 4;
+//i.Price = 1500;
 
-//workoutRepositiry.UpdateWorkoutOnId(i);
+//workoutRepository.UpdateWorkoutOnId(i);
 #endregion
 
 #region DeleteWorkout
-//var i = workoutRepositiry.GetWorkoutById(3);
+//workoutRepository.DeleteWorkoutById(3);
 
-//workoutRepositiry.DeleteWorkoutOnId(i);
+//workoutRepository.UndeleteWorkoutById(3);
 #endregion
 
-//PersonClient personClient = new();
+SportTypeClient sportTypeClient = new();
+
+#region SportTypeOutputModels
+//var sportTypes = sportTypeClient.GetAllSportTypes();
+
+//Console.WriteLine();
+#endregion
+
+PersonClient personClient = new();
 
 #region PersonInputModels
 
 #endregion
 
 #region PersonOutputModels
-//var persons = personClient.GetAllPersons();
+var persons = personClient.GetAllPersons();
 
-//Console.WriteLine();
+Console.WriteLine();
 
 //var persons = personClient.GetAllCoachesWithSportTypes();
 
@@ -214,8 +266,8 @@ TimetableClient timetableClient = new();
 #region TimetableOutputModels
 //var timetables = timetableClient.GetAllTimetablesWithCoachWorkoutsGymsClients();
 
+
+
 //Console.WriteLine();
+
 #endregion
-
-
-

@@ -3,13 +3,12 @@ Use [FitnessClub]
 Go
 
 Create procedure AddPerson
-@RoleId int, @FamilyName nvarchar(20) = null, @FirstName nvarchar(20) = null, @Patronymic nvarchar(20) = null, @PhoneNumber nvarchar(12) = null, 
-@Email nvarchar(40) =null, @DateBirth nvarchar(20) = null, @Sex bit = null
+@RoleId int, @FamilyName nvarchar(20) = null, @FirstName nvarchar(20) = null, @Patronymic nvarchar(20) = null, @PhoneNumber nvarchar(12) = null, @Email nvarchar(40) = null, @DateBirth nvarchar(20) = null, @Sex bit = null, @TelegramUserId bigint = null, @OneTimePassword int = null
 As
 Begin
 Insert dbo.[Persons] 
 Output Inserted.Id
-Values (@RoleId, @FamilyName, @FirstName, @Patronymic, @PhoneNumber, @Email, @DateBirth, @Sex, 0)
+Values (@RoleId, @FamilyName, @FirstName, @Patronymic, @PhoneNumber, @Email, @DateBirth, @Sex, @TelegramUserId, @OneTimePassword, 0)
 End
 
 Go
@@ -36,7 +35,7 @@ Go
 
 Create procedure GetAllPersons As
 Begin
-Select [Id], [RoleId], [FamilyName], [FirstName], [Patronymic], [PhoneNumber], [Email], [DateBirth], [Sex] from dbo.[Persons]
+Select [Id], [RoleId], [FamilyName], [FirstName], [Patronymic], [PhoneNumber], [Email], [DateBirth], [Sex], [TelegramUserId], [OneTimePassword] from dbo.[Persons]
 Where [IsDeleted] = 0
 End
 
@@ -46,7 +45,7 @@ Create procedure GetPersonById
 @Id int
 As
 Begin
-Select [Id], [RoleId], [FamilyName], [FirstName], [Patronymic], [PhoneNumber], [Email], [DateBirth], [Sex] from dbo.[Persons]
+Select [Id], [RoleId], [FamilyName], [FirstName], [Patronymic], [PhoneNumber], [Email], [DateBirth], [Sex], [TelegramUserId], [OneTimePassword] from dbo.[Persons]
 Where [Id]=@Id and [IsDeleted] = 0
 End
 
@@ -65,12 +64,32 @@ End
 
 Go 
 
-Create procedure DeletePersonOnId
+Create procedure DeletePersonById
 @Id int
 As
 Begin
 Update dbo.[Persons]
 Set  [IsDeleted]=1
+Where [Id]=@Id
+End
+
+Create procedure UndeletePersonById
+@Id int
+As
+Begin
+Update dbo.[Persons]
+Set  [IsDeleted]=0
+Where [Id]=@Id
+End
+
+Go
+
+Create procedure DeleteOneTimePasswordByPersonId
+@Id int
+As
+Begin
+Update dbo.[Persons]
+Set  [OneTimePassword]="null"
 Where [Id]=@Id
 End
 
@@ -100,7 +119,7 @@ Create procedure GetAllPersonsByRoleId
 @RoleId int
 As
 Begin
-Select P.[Id], P.[FamilyName], P.[FirstName], P.[Patronymic], P.[PhoneNumber], P.[Email], P.[DateBirth], P.[Sex], R.[Id] As [RoleId], R.[Name] As [Role] From dbo.[Persons] As P
+Select P.[Id], P.[FamilyName], P.[FirstName], P.[Patronymic], P.[PhoneNumber], P.[Email], P.[DateBirth], P.[Sex], P.[TelegramUserId], P.[OneTimePassword], R.[Id] As [RoleId], R.[Name] As [Role] From dbo.[Persons] As P
 Join dbo.[Roles] As R On P.[RoleId] = R.[Id]
 Where P.[RoleId]=@RoleId and P.[IsDeleted]=0
 End
@@ -111,8 +130,7 @@ Create procedure GetAllCoachesWithSportTypesWorkoutTypes
 @RoleId int
 As
 Begin
-Select P.[Id], P.[FamilyName], P.[FirstName], P.[Patronymic], P.[PhoneNumber], P.[Email], P.[DateBirth], P.[Sex],
-	ST.[Id] As SportTypeId, ST.[Name] as [SportType], WT.[Id] As WorkoutTypeId, WT.[Name] As WorkoutType From dbo.[Persons] As P
+Select P.[Id], P.[FamilyName], P.[FirstName], P.[Patronymic], P.[PhoneNumber], P.[Email], P.[DateBirth], P.[Sex], P.[TelegramUserId],P.[OneTimePassword], ST.[Id] As SportTypeId, ST.[Name] as [SportType], WT.[Id] As WorkoutTypeId, WT.[Name] As WorkoutType From dbo.[Persons] As P
 join dbo.[Coaches_SportTypes] As CST On P.[Id] = CST.[CoachId]
 join dbo.[SportTypes] As ST On CST.[SportTypeId] = ST.[Id]
 join dbo.[Coaches_WorkoutTypes] As CWT On P.[Id] = CWT.[CoachId]
@@ -126,8 +144,7 @@ Create procedure GetCoachWithSportTypesWorkoutTypesById
 @RoleId int, @CoachId int
 As
 Begin
-Select P.[Id], P.[FamilyName], P.[FirstName], P.[Patronymic], P.[PhoneNumber], P.[Email], P.[DateBirth], P.[Sex], 
-	ST.[Id] As SportTypeId, ST.[Name] as [SportType], WT.[Id] As WorkoutTypeId, WT.[Name] As WorkoutType From dbo.[Persons] As P
+Select P.[Id], P.[FamilyName], P.[FirstName], P.[Patronymic], P.[PhoneNumber], P.[Email], P.[DateBirth], P.[Sex], P.[TelegramUserId], P.[OneTimePassword], ST.[Id] As SportTypeId, ST.[Name] as [SportType], WT.[Id] As WorkoutTypeId, WT.[Name] As WorkoutType From dbo.[Persons] As P
 join dbo.[Coaches_SportTypes] As CST On P.[Id] = CST.[CoachId]
 join dbo.[SportTypes] As ST On CST.[SportTypeId] = ST.[Id]
 join dbo.[Coaches_WorkoutTypes] As CWT On P.[Id] = CWT.[CoachId]

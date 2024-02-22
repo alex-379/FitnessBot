@@ -9,7 +9,7 @@ namespace FitnessClub.BLL.Mapping
     {
         public TimetableMappingProfile()
         {
-            CreateMap<TimetableDto, GetTimetablesOutputModel>();
+            CreateMap<TimetableDto, TimetableOutputModel>();
 
             CreateMap<AddClientTimetableInputModel, TimetableDto>();
 

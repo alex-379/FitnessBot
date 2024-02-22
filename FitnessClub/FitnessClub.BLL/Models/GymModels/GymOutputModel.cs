@@ -2,8 +2,6 @@
 {
     public class GymOutputModel
     {
-        public int GymId { get; set; }
-
         public string Gym { get; set; }
     }
 }

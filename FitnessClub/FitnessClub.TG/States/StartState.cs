@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -23,6 +23,7 @@ namespace FitnessClub.TG.States
             if (update.Type == UpdateType.CallbackQuery)
             {
                 var callbackQuery = update.CallbackQuery;
+
                 if (callbackQuery.Data == "GetFullTimetablesState")
                 {
                     //SingletoneStorage.GetStorage().Client.AnswerCallbackQueryAsync(callbackQuery.Id);
@@ -35,17 +36,30 @@ namespace FitnessClub.TG.States
                     return new StartState(callbackQuery.From.FirstName);
                 }
             }
+
+            if (update.Type == UpdateType.Message)
+            {
+                var message = update.Message.Text.ToLower();
+                if (message == "/login")
+                {
+                    return new RegistrationState();
+                }
+                else if (message == "b")
+                {
+                    return new TestState();
+                }
+            }
+
             return this;
         }
 
         public override void SendMessage(long ChatId)
         {
-
             var inlineKeyboard = new InlineKeyboardMarkup(
                 new List<InlineKeyboardButton[]>()
                 {
                     new InlineKeyboardButton[]
-                    { InlineKeyboardButton.WithCallbackData("Зарегистрироваться", "1"),},
+                    { InlineKeyboardButton.WithCallbackData("Посмотреть информацию о тренировках", "InfoAbout"),},
                     new InlineKeyboardButton[]
                     { InlineKeyboardButton.WithCallbackData("Посмотреть расписание тренировок", "GetFullTimetablesState"),},
                     new InlineKeyboardButton[]

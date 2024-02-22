@@ -3,7 +3,6 @@ using Telegram.Bot;
 using Telegram.Bot.Polling;
 using Telegram.Bot.Types;
 using Telegram.Bot.Types.Enums;
-using Telegram.Bot.Types.ReplyMarkups;
 
 namespace FitnessClub.TG
 {
@@ -26,7 +25,7 @@ namespace FitnessClub.TG
                 AllowedUpdates = [UpdateType.Message, UpdateType.CallbackQuery],
             };
 
-            Options.client.StartReceiving(HandleUpdate, HandleError, receiverOptions, cancellationToken);
+            client.StartReceiving(HandleUpdate, HandleError, receiverOptions, cancellationToken);
             string quit = "";
             do
                 quit = Console.ReadLine();
@@ -55,6 +54,7 @@ namespace FitnessClub.TG
             {
                 var clients = SingletoneStorage.GetStorage().Clients;
                 long id = update.CallbackQuery.From.Id;
+
                 clients[id] = clients[id].ReceiveMessage(update);
                 clients[id].SendMessage(id);
             }

@@ -14,7 +14,7 @@ namespace FitnessClub.DAL
             using (IDbConnection connection = new SqlConnection(Options.connectionString))
             {
                 return connection.QuerySingle<int>(PersonStoredProcedures.AddPerson,
-                    new { person.RoleId, person.FamilyName, person.FirstName, person.Patronymic, person.PhoneNumber, person.Email, person.DateBirth, person.Sex },
+                    new { person.RoleId, person.FamilyName, person.FirstName, person.Patronymic, person.PhoneNumber, person.Email, person.DateBirth, person.Sex, person.TelegramUserId, person.OneTimePassword },
                     commandType: CommandType.StoredProcedure);
             }
         }
@@ -68,16 +68,34 @@ namespace FitnessClub.DAL
             }
         }
 
-        public void DeletePersonOnId(PersonDto person)
+        public void DeletePersonById(int id)
         {
             using (IDbConnection connection = new SqlConnection(Options.connectionString))
             {
-                connection.Query<PersonDto>(PersonStoredProcedures.DeletePersonOnId,
-                    new { person.Id },
+                connection.Query<PersonDto>(PersonStoredProcedures.DeletePersonById,
+                    new { id },
                     commandType: CommandType.StoredProcedure);
             }
         }
 
+        public void UndeletePersonById(int id)
+        {
+            using (IDbConnection connection = new SqlConnection(Options.connectionString))
+            {
+                connection.Query<PersonDto>(PersonStoredProcedures.UndeletePersonById,
+                    new { id },
+                    commandType: CommandType.StoredProcedure);
+            }
+        }
+        public void DeleteOneTimePasswordByPersonId(int id)
+        {
+            using (IDbConnection connection = new SqlConnection(Options.connectionString))
+            {
+                connection.Query<PersonDto>(PersonStoredProcedures.DeleteOneTimePasswordByPersonId,
+                    new { id },
+                    commandType: CommandType.StoredProcedure);
+            }
+        }
         public void DeleteCoachSportType(int coachId, int sportTypeId)
         {
             using (IDbConnection connection = new SqlConnection(Options.connectionString))
@@ -145,7 +163,7 @@ namespace FitnessClub.DAL
             }
         }
 
-        public PersonDto GetCoachWithSportTypesWorkoutTypesById(int coachId)
+        public PersonDto GetCoachWithSportTypesWorkoutTypesByCoachId(int coachId)
         {
             using (IDbConnection connection = new SqlConnection(Options.connectionString))
             {
@@ -153,7 +171,7 @@ namespace FitnessClub.DAL
 
                 PersonDto crntCoach = null;
 
-                connection.Query<PersonDto, SportTypeDto, WorkoutTypeDto, PersonDto>(PersonStoredProcedures.GetCoachWithSportTypesWorkoutTypesById,
+                connection.Query<PersonDto, SportTypeDto, WorkoutTypeDto, PersonDto>(PersonStoredProcedures.GetCoachWithSportTypesWorkoutTypesByCoachId,
                         (coach, sportType, workoutType) =>
                         {
                             if (crntCoach == null)
