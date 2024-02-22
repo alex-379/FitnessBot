@@ -87,7 +87,7 @@ Go
 Create procedure GetAllTimetablesWithCoachWorkoutsGymsClients
 As
 Begin
-Select T.[Id], T.[Date], T.[StartTime] 
+Select T.[Id], T.[Date], T.[StartTime], 
 PCL.[Id], PCL.[FamilyName], PCL.[FirstName], PCL.[Patronymic], PCL.[PhoneNumber], PCL.[Email], PCL.[DateBirth], PCL.[Sex],
 PC.[Id], PC.[FamilyName], PC.[FirstName], PC.[Patronymic], PC.[PhoneNumber], PC.[Email], PC.[DateBirth], PC.[Sex],
 W.[Id], W.[Price], W.[Duration], W.[NumberPlaces], W.[IsGroup], W.[Comment],
@@ -108,7 +108,7 @@ Create procedure GetTimetableWithCoachWorkoutsGymsClientsById
 @Id int
 As
 Begin
-Select T.[Id], T.[Date], T.[StartTime]
+Select T.[Id], T.[Date], T.[StartTime],
 PCL.[Id], PCL.[FamilyName], PCL.[FirstName], PCL.[Patronymic], PCL.[PhoneNumber], PCL.[Email], PCL.[DateBirth], PCL.[Sex],
 PC.[Id], PC.[FamilyName], PC.[FirstName], PC.[Patronymic], PC.[PhoneNumber], PC.[Email], PC.[DateBirth], PC.[Sex],
 W.[Id], W.[Price], W.[Duration], W.[NumberPlaces], W.[IsGroup], W.[Comment],
