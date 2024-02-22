@@ -26,7 +26,7 @@ namespace FitnessClub.BLL
             _mapper = new Mapper(config);
         }
 
-        public void AddPerson(ClientAndAdministratorInputModel person)
+        public void AddPerson(RegistrationPersonInputModel person)
         {
 
         }

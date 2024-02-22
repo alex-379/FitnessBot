@@ -14,7 +14,7 @@ namespace FitnessClub.DAL
             using (IDbConnection connection = new SqlConnection(Options.connectionString))
             {
                 return connection.QuerySingle<int>(TimetableStoredProcedures.AddTimetable,
-                    new { timetable.DateTime, timetable.CoachId, timetable.WorkoutId, timetable.GymId },
+                    new { timetable.CoachId, timetable.WorkoutId, timetable.GymId, timetable.Date, timetable.StartTime },
                     commandType: CommandType.StoredProcedure);
             }
         }
@@ -38,6 +38,24 @@ namespace FitnessClub.DAL
             }
         }
 
+        public List<TimetableDto> GetAllActiveTimetables()
+        {
+            using (IDbConnection connection = new SqlConnection(Options.connectionString))
+            {
+                return connection.Query<TimetableDto>(TimetableStoredProcedures.GetAllActiveTimetables,
+                commandType: CommandType.StoredProcedure).ToList();
+            }
+        }
+
+        public List<TimetableDto> GetAllArchiveTimetables()
+        {
+            using (IDbConnection connection = new SqlConnection(Options.connectionString))
+            {
+                return connection.Query<TimetableDto>(TimetableStoredProcedures.GetAllArchiveTimetables,
+                commandType: CommandType.StoredProcedure).ToList();
+            }
+        }
+
         public TimetableDto GetTimetableById(int id)
         {
             using (IDbConnection connection = new SqlConnection(Options.connectionString))
@@ -53,17 +71,27 @@ namespace FitnessClub.DAL
             using (IDbConnection connection = new SqlConnection(Options.connectionString))
             {
                 connection.Query<TimetableDto>(TimetableStoredProcedures.UpdateTimetableOnId,
-                    new { timetable.Id, timetable.DateTime, timetable.CoachId, timetable.WorkoutId, timetable.GymId },
+                    new { timetable.Id, timetable.Date, timetable.StartTime, timetable.CoachId, timetable.WorkoutId, timetable.GymId },
                     commandType: CommandType.StoredProcedure);
             }
         }
 
-        public void DeleteTimetableOnId(TimetableDto timetable)
+        public void DeleteTimetableById(int id)
         {
             using (IDbConnection connection = new SqlConnection(Options.connectionString))
             {
-                connection.Query<TimetableDto>(TimetableStoredProcedures.DeleteTimetableOnId,
-                    new { timetable.Id },
+                connection.Query<TimetableDto>(TimetableStoredProcedures.DeleteTimetableById,
+                    new { id },
+                    commandType: CommandType.StoredProcedure);
+            }
+        }
+
+        public void UndeleteTimetableById(int id)
+        {
+            using (IDbConnection connection = new SqlConnection(Options.connectionString))
+            {
+                connection.Query<TimetableDto>(TimetableStoredProcedures.UndeleteTimetableById,
+                    new { id },
                     commandType: CommandType.StoredProcedure);
             }
         }

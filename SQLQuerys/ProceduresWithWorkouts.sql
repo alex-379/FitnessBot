@@ -4,11 +4,11 @@ Go
 
 Create procedure AddWorkout
 	@SportTypeId int,
-	@Price decimal NULL,
-	@Duration int NULL,
-	@NumberPlaces int NULL,
-	@IsGroup bit NULL,
-	@Comment nvarchar(250) NULL 
+	@Price decimal(10,2),
+	@Duration int,
+	@NumberPlaces int,
+	@IsGroup bit,
+	@Comment nvarchar(250) 
 As
 Begin
 	Insert dbo.[Workouts]
@@ -54,12 +54,21 @@ End
 
 Go
 
-Create procedure DeleteWorkoutOnId  
+Create procedure DeleteWorkoutById  
 	@Id int 
 As 
 Begin 
 	Update dbo.[Workouts] 
 	Set  [IsDeleted]=1 
+	Where [Id]=@Id 
+End
+
+Create procedure UndeleteWorkoutById  
+	@Id int 
+As 
+Begin 
+	Update dbo.[Workouts] 
+	Set  [IsDeleted]=0
 	Where [Id]=@Id 
 End
 
@@ -88,7 +97,7 @@ End
 
 Go
 
-Create procedure GetWorkoutWithSportTypeBySportTypeId
+Create procedure GetAllWorkoutsWithSportTypeById
 	@SportTypeId int
 As
 Begin

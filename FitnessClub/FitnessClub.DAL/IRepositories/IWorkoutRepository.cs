@@ -2,7 +2,7 @@
 
 namespace FitnessClub.DAL.IRepositories
 {
-    public interface IWorkoutRepositories
+    public interface IWorkoutRepository
     {
         public int? AddWorkout(WorkoutDto workout);
 
@@ -12,12 +12,14 @@ namespace FitnessClub.DAL.IRepositories
 
         public void UpdateWorkoutOnId(WorkoutDto workouts);
 
-        public void DeleteWorkoutOnId(WorkoutDto workout);
+        public void DeleteWorkoutById(int id);
+
+        public void UndeleteWorkoutById(int id);
 
         public List<WorkoutDto> GetAllWorkoutsWithSportType();
 
         public WorkoutDto GetWorkoutWithSportTypeById(int id);
 
-        public List<WorkoutDto> GetWorkoutsWithSportTypeBySportTypeId(int sportTypeId);
+        public List<WorkoutDto> GetAllWorkoutsWithSportTypeBySportTypeId(int sportTypeId);
     }
 }

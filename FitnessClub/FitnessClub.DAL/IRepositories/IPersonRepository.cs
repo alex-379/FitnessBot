@@ -16,7 +16,11 @@ namespace FitnessClub.DAL.IRepositories
 
         public void UpdatePersonOnId(PersonDto person);
 
-        public void DeletePersonOnId(PersonDto person);
+        public void DeletePersonById(int id);
+
+        public void UndeletePersonById(int id);
+
+        public void DeleteOneTimePasswordByPersonId(int id);
 
         public void DeleteCoachSportType(int coachId, int sportTypeId);
 
@@ -26,6 +30,6 @@ namespace FitnessClub.DAL.IRepositories
 
         public List<PersonDto> GetAllCoachesWithSportTypesWorkoutTypes();
 
-        public PersonDto GetCoachWithSportTypesWorkoutTypesById(int coachId);
+        public PersonDto GetCoachWithSportTypesWorkoutTypesByCoachId(int coachId);
     }
 }

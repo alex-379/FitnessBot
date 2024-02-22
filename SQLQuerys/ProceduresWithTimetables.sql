@@ -3,12 +3,12 @@ Use [FitnessClub]
 Go
 
 Create procedure AddTimetable
-@DateTime nvarchar(40), @CoachId int, @WorkoutId int, @GymId int
+@CoachId int, @WorkoutId int, @GymId int, @Date nvarchar(20), @StartTime nvarchar(20)
 As
 Begin
 Insert dbo.[Timetables]
 Output Inserted.Id
-Values (@DateTime, @CoachId, @WorkoutId, @GymId, 0)
+Values (@CoachId, @WorkoutId, @GymId, @Date, @StartTime)
 End
 
 Go
@@ -25,8 +25,8 @@ Go
 
 Create procedure GetAllTimetables As
 Begin
-Select [Id], [DateTime], [CoachId], [WorkoutId], [GymId] from dbo.[Timetables]
-Where [IsDeleted] = 0
+Select [Id], [Date], [StartTime], [CoachId], [WorkoutId], [GymId] from dbo.[Timetables]
+Where [IsCompleted] = 0
 End
 
 Go
@@ -35,29 +35,40 @@ Create procedure GetTimetableById
 @Id int
 As
 Begin
-Select [Id], [DateTime], [CoachId], [WorkoutId], [GymId] from dbo.[Timetables]
-Where [Id]=@Id and [IsDeleted] = 0
+Select [Id], [Date], [StartTime], [CoachId], [WorkoutId], [GymId] from dbo.[Timetables]
+Where [Id]=@Id and [IsCompleted] = 0
 End
 
 Go
 
 Create procedure UpdateTimetableOnId
-@Id int, @DateTime nvarchar(20), @CoachId int, @WorkoutId int, @GymId int
+@Id int, @CoachId int, @WorkoutId int, @GymId int, @Date nvarchar(20), @StartTime nvarchar(20)
 As
 Begin
 Update dbo.[Timetables]
-Set [DateTime]=@DateTime, [CoachId]=@CoachId, [WorkoutId]=@WorkoutId, [GymId]=@GymId
+Set [CoachId]=@CoachId, [WorkoutId]=@WorkoutId, [GymId]=@GymId, [Date]=@Date, [StartTime]=@StartTime
 Where [Id]=@Id
 End
 
 Go
 
-Create procedure DeleteTimetableOnId 
+Create procedure DeleteTimetableById 
 @Id int
 As
 Begin
 Update dbo.[Timetables]
-Set  [IsDeleted]=1
+Set [IsDeleted]=1
+Where [Id]=@Id
+End
+
+Go
+
+Create procedure UndeleteTimetableById 
+@Id int
+As
+Begin
+Update dbo.[Timetables]
+Set [IsDeleted]=0
 Where [Id]=@Id
 End
 
@@ -73,10 +84,10 @@ End
 
 Go
 
-Create procedure GetAllTimetablesWithCoachWorkoutsGymsClients
+Create procedure GetAllTimetablesWithCoachWorkoutsGymsClients +
 As
 Begin
-Select T.[Id], T.[DateTime], 
+Select T.[Id], T.[Date], T.[StartTime] 
 PCL.[Id], PCL.[FamilyName], PCL.[FirstName], PCL.[Patronymic], PCL.[PhoneNumber], PCL.[Email], PCL.[DateBirth], PCL.[Sex],
 PC.[Id], PC.[FamilyName], PC.[FirstName], PC.[Patronymic], PC.[PhoneNumber], PC.[Email], PC.[DateBirth], PC.[Sex],
 W.[Id], W.[Price], W.[Duration], W.[NumberPlaces], W.[IsGroup], W.[Comment],
@@ -93,11 +104,11 @@ End
 
 Go
 
-Create procedure GetTimetableWithCoachWorkoutsGymsClientsById
+Create procedure GetTimetableWithCoachWorkoutsGymsClientsById +
 @Id int
 As
 Begin
-Select T.[Id], T.[DateTime], 
+Select T.[Id], T.[Date], T.[StartTime]
 PCL.[Id], PCL.[FamilyName], PCL.[FirstName], PCL.[Patronymic], PCL.[PhoneNumber], PCL.[Email], PCL.[DateBirth], PCL.[Sex],
 PC.[Id], PC.[FamilyName], PC.[FirstName], PC.[Patronymic], PC.[PhoneNumber], PC.[Email], PC.[DateBirth], PC.[Sex],
 W.[Id], W.[Price], W.[Duration], W.[NumberPlaces], W.[IsGroup], W.[Comment],

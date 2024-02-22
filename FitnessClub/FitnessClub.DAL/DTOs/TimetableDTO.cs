@@ -9,13 +9,15 @@
 
         public int? Id { get; set; }
 
-        public string? DateTime { get; set; }
-
         public int? CoachId { get; set; }
 
         public int? WorkoutId { get; set; }
 
         public int? GymId { get; set; }
+
+        public string? Date { get; set; }
+
+        public string? StartTime { get; set; }
 
         public List<PersonDto> Clients { get; set; }
 

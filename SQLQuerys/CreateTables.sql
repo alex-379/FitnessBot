@@ -76,7 +76,7 @@ Create table [Timetables]
 	[CoachId] int NOT NULL,
 	[WorkoutId] int NOT NULL,
 	[GymId] int NOT NULL,
-	[IsDeleted] bit NOT NULL
+	[IsComleted] bit NOT NULL
 )
 
 Go

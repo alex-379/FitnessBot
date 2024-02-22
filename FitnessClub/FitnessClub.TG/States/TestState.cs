@@ -31,7 +31,7 @@ namespace FitnessClub.TG.States
 
             foreach (var i in timetables)
             {
-                text = $"Тренировка: {i.SportType.SportType} ({i.Workout.Comment}) - {i.DateTime}, длительность {i.Workout.Duration} час, " +
+                text = $"Тренировка: {i.SportType.SportType} ({i.Workout.Comment}) - {i.Date}, {i.StartTime} длительность {i.Workout.Duration} час, " +
                     $"цена {i.Workout.Price} рублей, тренер {i.Coach.FullName} в зале номер {i.Gym.Gym}";
             }
 

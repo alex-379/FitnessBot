@@ -1,12 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Telegram.Bot.Types.Enums;
-using Telegram.Bot.Types;
+﻿using FitnessClub.BLL;
 using Telegram.Bot;
-using FitnessClub.BLL;
+using Telegram.Bot.Types;
+using Telegram.Bot.Types.Enums;
 
 namespace FitnessClub.TG.States
 {
@@ -31,7 +26,7 @@ namespace FitnessClub.TG.States
 
             foreach (var i in timetables)
             {
-                text = $"Тренировка номер {i.WorkoutId} {i.DateTime}, тренер {i.CoachId} в зале номер {i.GymId}";
+                text = $"Тренировка номер {i.WorkoutId} {i.Date}, {i.StartTime} тренер {i.CoachId} в зале номер {i.GymId}";
             }
 
             SingletoneStorage.GetStorage().Client.SendTextMessageAsync(ChatId, text);
