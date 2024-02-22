@@ -84,7 +84,7 @@ End
 
 Go
 
-Create procedure GetAllTimetablesWithCoachWorkoutsGymsClients +
+Create procedure GetAllTimetablesWithCoachWorkoutsGymsClients
 As
 Begin
 Select T.[Id], T.[Date], T.[StartTime] 
@@ -104,7 +104,7 @@ End
 
 Go
 
-Create procedure GetTimetableWithCoachWorkoutsGymsClientsById +
+Create procedure GetTimetableWithCoachWorkoutsGymsClientsById
 @Id int
 As
 Begin

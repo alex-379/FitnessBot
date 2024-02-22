@@ -5,9 +5,8 @@ using Telegram.Bot.Types.ReplyMarkups;
 
 namespace FitnessClub.TG.States
 {
-    public class RegistrationState : AbstractState
+    public class CoachState : AbstractState
     {
-        
         public override AbstractState ReceiveMessage(Update update)
         {
             if (update.Type == UpdateType.Message)
@@ -34,7 +33,7 @@ namespace FitnessClub.TG.States
 
         public override void SendMessage(long ChatId)
         {
-            SingletoneStorage.GetStorage().Client.SendTextMessageAsync(ChatId, $"Добро пожаловать в меню администратора");
+            SingletoneStorage.GetStorage().Client.SendTextMessageAsync(ChatId, $"Добро пожаловать в меню тренера");
         }
     }
 }

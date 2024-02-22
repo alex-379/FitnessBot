@@ -1,3 +1,5 @@
+using FitnessClub.BLL;
+using FitnessClub.BLL.Models.PersonModels.OutputModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -39,14 +41,50 @@ namespace FitnessClub.TG.States
 
             if (update.Type == UpdateType.Message)
             {
+
                 var message = update.Message.Text.ToLower();
+
                 if (message == "/login")
                 {
-                    return new RegistrationState();
-                }
-                else if (message == "b")
-                {
-                    return new TestState();
+                    PersonClient personClient = new();
+
+                    var admins = personClient.GetAllPersonsByRoleId(1);
+
+                    var coaches = personClient.GetAllPersonsByRoleId(2);
+
+                    List <long> TelegramUserId = new();
+
+                    foreach (EmployeeModelForCheckOnAdminRightes i in admins)
+                        {
+                        TelegramUserId.Add(i.TelegramUserId);
+                    };
+
+                    List<long> TelegramUserId2 = new();
+
+                    foreach (EmployeeModelForCheckOnAdminRightes i in coaches)
+                    {
+                        TelegramUserId2.Add(i.TelegramUserId);
+                    };
+
+                    if (TelegramUserId.Contains(update.Message.Chat.Id))
+                    {
+                        return new RegistrationState();
+                    }
+
+                    else if (TelegramUserId2.Contains(update.Message.Chat.Id))
+                    {
+                        return new CoachState();
+                    }
+
+                    else
+                    {
+                        return new StartState(update.Message.Chat.FirstName);
+                    }
+                    //Console.WriteLine();
+                    ////long id = update.Message.Chat.Id
+
+                    ////if (admins.)
+                    //return new RegistrationState();
                 }
             }
 
@@ -62,10 +100,10 @@ namespace FitnessClub.TG.States
                     { InlineKeyboardButton.WithCallbackData("Посмотреть информацию о тренировках", "InfoAbout"),},
                     new InlineKeyboardButton[]
                     { InlineKeyboardButton.WithCallbackData("Посмотреть расписание тренировок", "GetFullTimetablesState"),},
-                    new InlineKeyboardButton[]
-                    { InlineKeyboardButton.WithCallbackData("Еще", "2"),
-                      InlineKeyboardButton.WithCallbackData("Еще", "3"),
-                      InlineKeyboardButton.WithCallbackData("Еще", "4")},
+                    //new InlineKeyboardButton[]
+                    //{ InlineKeyboardButton.WithCallbackData("Еще", "2"),
+                    //  InlineKeyboardButton.WithCallbackData("Еще", "3"),
+                    //  InlineKeyboardButton.WithCallbackData("Еще", "4")},
                 });
 
             SingletoneStorage.GetStorage().Client.SendTextMessageAsync(ChatId, $"Здравствуйте {_name}, добро пожаловать в наш фитнес клуб", replyMarkup: inlineKeyboard);
