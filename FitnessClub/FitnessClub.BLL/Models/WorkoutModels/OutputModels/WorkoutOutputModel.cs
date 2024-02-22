@@ -1,4 +1,4 @@
-﻿namespace FitnessClub.BLL.Models.WorkoutModels.OutputModels
+namespace FitnessClub.BLL.Models.WorkoutModels.OutputModels
 {
     public class WorkoutOutputModel
     {
