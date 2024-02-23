@@ -18,26 +18,6 @@ namespace FitnessClub.TG.States
 
         public override AbstractState ReceiveMessage(Update update)
         {
-            if (i == 0)
-            {
-                sportType = update.CallbackQuery.Data;
-            }
-
-            if (i == 1)
-            {
-                workoutType = Convert.ToInt32(update.CallbackQuery.Data);
-            }
-
-            if (i == 2)
-            {
-                date = update.CallbackQuery.Data;
-            }
-
-            if (update.Type == UpdateType.Message)
-            {
-                i = 0;
-            }
-
             if (update.Type == UpdateType.CallbackQuery)
             {
                 var callback = update.CallbackQuery.Data;
