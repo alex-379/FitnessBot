@@ -43,35 +43,17 @@ namespace FitnessClub.TG
             }
             else
             {
-                clients[id] = clients[id].ReceiveMessage(update);
+                var tmp = clients[id].ReceiveMenu(update);
+                if (tmp == clients[id])
+                {
+                    clients[id] = clients[id].ReceiveMessage(update);
+                }
+                else
+                {
+                    clients[id] = tmp;
+                }
             }
             clients[id].SendMessage(id);
-
-
-
-            //if (update.Type == UpdateType.Message)
-            //{
-            //    var clients = SingletoneStorage.GetStorage().Clients;
-            //    long id = update.Message.Chat.Id;
-
-            //    if (!clients.ContainsKey(id))
-            //    {
-            //        clients.Add(id, new StartState(update.Message.Chat.FirstName));
-            //    }
-            //    else
-            //    {
-            //        clients[id] = clients[id].ReceiveMessage(update);
-            //    }
-            //    clients[id].SendMessage(id);
-            //}
-            //else if (update.Type == UpdateType.CallbackQuery)
-            //{
-            //    var clients = SingletoneStorage.GetStorage().Clients;
-            //    long id = update.CallbackQuery.From.Id;
-
-            //    clients[id] = clients[id].ReceiveMessage(update);
-            //    clients[id].SendMessage(id);
-            //}
         }
 
         public static void HandleError(ITelegramBotClient client, Exception exception, CancellationToken cancellationToken)

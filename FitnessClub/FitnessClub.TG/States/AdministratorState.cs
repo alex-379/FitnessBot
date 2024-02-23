@@ -10,10 +10,10 @@ namespace FitnessClub.TG.States
     {
         public override AbstractState ReceiveMessage(Update update)
         {
-            if (update.Type == UpdateType.Message)
-            {
-                return this;
-            }
+            //if (update.Type == UpdateType.Message)
+            //{
+            //    return this;
+            //}
             if (update.Type == UpdateType.CallbackQuery)
             {
                 var callback = update.CallbackQuery.Data;
