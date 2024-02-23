@@ -28,6 +28,7 @@ namespace FitnessClub.BLL
                 cfg.AddProfile(new WorkoutMappingProfile());
                 cfg.AddProfile(new SportTypeMappingProfile());
                 cfg.AddProfile(new GymMappingProfile());
+                cfg.AddProfile(new WorkoutTypeMappingProfile());
             });
             _mapper = new Mapper(config);
         }
