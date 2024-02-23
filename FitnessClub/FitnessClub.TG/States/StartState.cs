@@ -68,7 +68,7 @@ namespace FitnessClub.TG.States
 
                     if (TelegramUserId.Contains(update.Message.Chat.Id))
                     {
-                        return new RegistrationState();
+                        return new AdministratorState();
                     }
 
                     else if (TelegramUserId2.Contains(update.Message.Chat.Id))
