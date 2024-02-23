@@ -1,12 +1,11 @@
-﻿using FitnessClub.TG;
-using Telegram.Bot;
+﻿using Telegram.Bot;
 using Telegram.Bot.Types;
 using Telegram.Bot.Types.Enums;
 using Telegram.Bot.Types.ReplyMarkups;
 
 namespace FitnessClub.TG.States
 {
-    public class AdministratorState : AbstractState
+    public class AdministratorPersonalRegistrationStateByTUID : AbstractState
     {
         public override AbstractState ReceiveMessage(Update update)
         {
@@ -14,9 +13,9 @@ namespace FitnessClub.TG.States
             {
                 var callback = update.CallbackQuery.Data;
 
-                if (callback == "AdministratorPersonalState")
+                if (callback == "AdministratorPersonalRegistrationState")
                 {
-                    return new AdministratorPersonalState();
+                    return new AdministratorPersonalRegistrationState();
                 }
                 if (callback == "AdministratorWorkoutsState")
                 {
@@ -28,7 +27,7 @@ namespace FitnessClub.TG.States
                 }
             }
 
-                return this;
+            return this;
         }
 
         public override void SendMessage(long ChatId)
@@ -37,14 +36,11 @@ namespace FitnessClub.TG.States
                 new List<InlineKeyboardButton[]>()
                 {
                     new InlineKeyboardButton[]
-                    { InlineKeyboardButton.WithCallbackData("Персонал", "AdministratorPersonalState"),},
-                    new InlineKeyboardButton[]
-                    { InlineKeyboardButton.WithCallbackData("Тренировки", "AdministratorWorkoutsState"),},
-                    new InlineKeyboardButton[]
-                    { InlineKeyboardButton.WithCallbackData("Расписание", "AdministratorTimetablesState"),},
+                    { InlineKeyboardButton.WithCallbackData("По TelegramUserID", "AdministratorPersonalRegistrationStateByTUID"),
+                    InlineKeyboardButton.WithCallbackData("По OTP", "AdministratorPersonalInfoStateByOTP")}
                 }
                 );
-            SingletoneStorage.GetStorage().Client.SendTextMessageAsync(ChatId, $"Добро пожаловать в меню администратора", replyMarkup: inlineKeyboard);
+            SingletoneStorage.GetStorage().Client.SendTextMessageAsync(ChatId, $"Администрирование персонала", replyMarkup: inlineKeyboard);
         }
     }
 }

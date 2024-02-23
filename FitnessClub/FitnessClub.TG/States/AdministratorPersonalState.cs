@@ -1,9 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Telegram.Bot;
 using Telegram.Bot.Types;
+using Telegram.Bot.Types.Enums;
+using Telegram.Bot.Types.ReplyMarkups;
 
 namespace FitnessClub.TG.States
 {
@@ -11,12 +9,41 @@ namespace FitnessClub.TG.States
     {
         public override AbstractState ReceiveMessage(Update update)
         {
-            throw new NotImplementedException();
+            if (update.Type == UpdateType.CallbackQuery)
+            {
+                var callback = update.CallbackQuery.Data;
+
+                if (callback == "AdministratorPersonalRegistrationState")
+                {
+                    return new AdministratorPersonalRegistrationState();
+                }
+                if (callback == "AdministratorWorkoutsState")
+                {
+                    return new AdministratorWorkoutsState();
+                }
+                if (callback == "AdministratorTimetablesState")
+                {
+                    return new AdministratorTimetablesState();
+                }
+            }
+
+            return this;
         }
 
         public override void SendMessage(long ChatId)
         {
-            throw new NotImplementedException();
+            var inlineKeyboard = new InlineKeyboardMarkup(
+                new List<InlineKeyboardButton[]>()
+                {
+                    new InlineKeyboardButton[]
+                    { InlineKeyboardButton.WithCallbackData("Регистрация нового сотрудника", "AdministratorPersonalRegistrationState"),
+                    InlineKeyboardButton.WithCallbackData("Просмотр информации", "AdministratorPersonalInfoState")},
+                    new InlineKeyboardButton[]
+                    { InlineKeyboardButton.WithCallbackData("Внесение изменений", "AdministratorPersonalChangeState"),
+                     InlineKeyboardButton.WithCallbackData("Удаление", "AdministratorPersonalChangeState")},
+                }
+                );
+            SingletoneStorage.GetStorage().Client.SendTextMessageAsync(ChatId, $"Администрирование персонала", replyMarkup: inlineKeyboard);
         }
     }
 }
