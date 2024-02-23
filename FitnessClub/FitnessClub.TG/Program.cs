@@ -17,7 +17,6 @@ namespace FitnessClub.TG
             ITelegramBotClient client = SingletoneStorage.GetStorage().Client;
 
             var cts = new CancellationTokenSource();
-
             var cancellationToken = cts.Token;
 
             var receiverOptions = new ReceiverOptions()
@@ -34,30 +33,27 @@ namespace FitnessClub.TG
 
         public static void HandleUpdate(ITelegramBotClient client, Update update, CancellationToken cancellationToken)
         {
-            if (update.Type == UpdateType.Message)
+            var clients = SingletoneStorage.GetStorage().Clients;
+            long id = update.Message != null ?
+                update.Message.Chat.Id
+                : update.CallbackQuery.From.Id;
+            if (!clients.ContainsKey(id))
             {
-                var clients = SingletoneStorage.GetStorage().Clients;
-                long id = update.Message.Chat.Id;
-
-                if (!clients.ContainsKey(id))
+                clients.Add(id, new StartState(update.Message.Chat.FirstName));
+            }
+            else
+            {
+                var tmp = clients[id].ReceiveMenu(update);
+                if (tmp == clients[id])
                 {
-                    clients.Add(id, new StartState(update.Message.Chat.FirstName));
-                    clients[id].SendMessage(id);
+                    clients[id] = clients[id].ReceiveMessage(update);
                 }
                 else
                 {
-                    clients[id] = clients[id].ReceiveMessage(update);
-                    clients[id].SendMessage(id);
+                    clients[id] = tmp;
                 }
             }
-            else if (update.Type == UpdateType.CallbackQuery)
-            {
-                var clients = SingletoneStorage.GetStorage().Clients;
-                long id = update.CallbackQuery.From.Id;
-
-                clients[id] = clients[id].ReceiveMessage(update);
-                clients[id].SendMessage(id);
-            }
+            clients[id].SendMessage(id);
         }
 
         public static void HandleError(ITelegramBotClient client, Exception exception, CancellationToken cancellationToken)

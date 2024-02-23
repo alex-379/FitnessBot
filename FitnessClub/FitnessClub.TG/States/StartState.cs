@@ -54,21 +54,21 @@ namespace FitnessClub.TG.States
 
                     List <long> TelegramUserId = new();
 
-                    foreach (EmployeeModelForCheckOnAdminRightes i in admins)
+                    foreach (EmployeeModelForCheckOnAdminRightesByTUID i in admins)
                         {
                         TelegramUserId.Add(i.TelegramUserId);
                     };
 
                     List<long> TelegramUserId2 = new();
 
-                    foreach (EmployeeModelForCheckOnAdminRightes i in coaches)
+                    foreach (EmployeeModelForCheckOnAdminRightesByTUID i in coaches)
                     {
                         TelegramUserId2.Add(i.TelegramUserId);
                     };
 
                     if (TelegramUserId.Contains(update.Message.Chat.Id))
                     {
-                        return new RegistrationState();
+                        return new AdministratorState();
                     }
 
                     else if (TelegramUserId2.Contains(update.Message.Chat.Id))

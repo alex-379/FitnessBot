@@ -2,7 +2,7 @@
 
 namespace FitnessClub.BLL.Models.PersonModels.OutputModels
 {
-    public class EmployeeModelForCheckOnAdminRightes
+    public class EmployeeModelForCheckOnAdminRightesByTUID
     {
         public long TelegramUserId { get; set; }
     }

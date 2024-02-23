@@ -14,18 +14,18 @@ namespace FitnessClub.TG.States
 
         public abstract AbstractState ReceiveMessage(Update update);
 
-        //public AbstractState ReceiveMenu(Update update)
-        //{
-        //    if (update.Type == UpdateType.Message)
-        //    {
-        //        var message = update.Message;
-        //        if (message == "/start") 
-        //        {
-        //            return new StartState;
-        //        }
-        //    }
+        public AbstractState ReceiveMenu(Update update)
+        {
+            if (update.Type == UpdateType.Message)
+            {
+                var message = update.Message.Text.ToLower();
+                if (message == "/start")
+                {
+                    return new StartState(update.Message.Chat.FirstName);
+                }
+            }
 
-        //    return this;
-        
+            return this;
+        }
     }
 }
