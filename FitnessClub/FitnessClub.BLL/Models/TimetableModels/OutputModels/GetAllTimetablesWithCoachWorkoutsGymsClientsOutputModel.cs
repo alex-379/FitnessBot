@@ -2,8 +2,7 @@
 using FitnessClub.BLL.Models.PersonModels.OutputModels;
 using FitnessClub.BLL.Models.SportTypeModels;
 using FitnessClub.BLL.Models.WorkoutModels.OutputModels;
-using FitnessClub.DAL;
-using FitnessClub.DAL.Dtos;
+using FitnessClub.BLL.Models.WorkoutTypeModels;
 
 namespace FitnessClub.BLL.Models.TimetableModels.OutputModels
 {
@@ -24,5 +23,7 @@ namespace FitnessClub.BLL.Models.TimetableModels.OutputModels
         public GymOutputModel Gym { get; set; }
 
         public SportTypeOutputModel SportType { get; set; }
+
+        public WorkoutTypeOutputModel WorkoutType { get; set; }
     }
 }

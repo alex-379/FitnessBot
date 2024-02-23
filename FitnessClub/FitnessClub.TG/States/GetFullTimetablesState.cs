@@ -1,4 +1,4 @@
-﻿using FitnessClub.BLL;
+using FitnessClub.BLL;
 using FitnessClub.BLL.Models.SportTypeModels;
 using FitnessClub.BLL.Models.TimetableModels.OutputModels;
 using Telegram.Bot;
@@ -14,6 +14,7 @@ namespace FitnessClub.TG.States
         string sportType;
         int workoutType;
         string date;
+        string timetableId;
 
         public override AbstractState ReceiveMessage(Update update)
         {
@@ -34,9 +35,35 @@ namespace FitnessClub.TG.States
 
             if (update.Type == UpdateType.Message)
             {
-                return new StartState(update.Message.Chat.FirstName);
+                i = 0;
             }
-            i++;
+
+            if (update.Type == UpdateType.CallbackQuery)
+            {
+                var callback = update.CallbackQuery.Data;
+
+                if (i == 0)
+                {
+                    sportType = callback;
+                }
+
+                if (i == 1)
+                {
+                    workoutType = Convert.ToInt32(callback);
+                }
+
+                if (i == 2)
+                {
+                    date = callback;
+                }
+
+                if (i == 3)
+                {
+                    timetableId = callback;
+                }
+                i++;
+            }
+    
             return this;
         }
 
@@ -48,6 +75,7 @@ namespace FitnessClub.TG.States
                 List<SportTypeNameOutputModel> sportTypes = sportTypeClient.GetAllSportTypesNames();
                 List<List<InlineKeyboardButton>> buttons = new List<List<InlineKeyboardButton>>();
                 int count = 0;
+
                 foreach (SportTypeNameOutputModel s in sportTypes)
                 {
                     if (count % 2 == 0)
@@ -64,25 +92,24 @@ namespace FitnessClub.TG.States
 
             if (i == 1)
             {
-                Console.WriteLine(sportType);
                 var inlineKeyboard = new InlineKeyboardMarkup(
                 new List<InlineKeyboardButton[]>()
                 {
                         new InlineKeyboardButton[]
-                        { InlineKeyboardButton.WithCallbackData("Индивидуальная", "1"),},
+                        { InlineKeyboardButton.WithCallbackData("Групповая", "1"),},
                         new InlineKeyboardButton[]
-                        { InlineKeyboardButton.WithCallbackData("Групповая", "2"),},
+                        { InlineKeyboardButton.WithCallbackData("Индивидуальная", "2"),},
                 });
                 SingletoneStorage.GetStorage().Client.SendTextMessageAsync(ChatId, "Выберите тип тренировки:", replyMarkup: inlineKeyboard);
             }
 
             if (i == 2)
             {
-                Console.WriteLine(workoutType);
                 TimetableClient timetableClient = new();
                 List<TimetableOutputModel> dates = timetableClient.GetTimetableDates();
                 List<List<InlineKeyboardButton>> buttons = new List<List<InlineKeyboardButton>>();
                 int count = 0;
+
                 foreach (TimetableOutputModel d in dates)
                 {
                     if (count % 3 == 0)
@@ -95,6 +122,31 @@ namespace FitnessClub.TG.States
 
                 InlineKeyboardMarkup inlineKeyboard = new InlineKeyboardMarkup(buttons);
                 SingletoneStorage.GetStorage().Client.SendTextMessageAsync(ChatId, "Выберите дату:", replyMarkup: inlineKeyboard);
+            }
+
+            if (i == 3)
+            {
+                TimetableClient timetableClient = new();
+                List<GetAllTimetablesWithCoachWorkoutsGymsClientsOutputModel> timetables = timetableClient.GetAllTimetablesWithCoachWorkoutsGymsClients();
+                var filteredResults = from GetAllTimetablesWithCoachWorkoutsGymsClientsOutputModel in timetables
+                                      where GetAllTimetablesWithCoachWorkoutsGymsClientsOutputModel.SportType.SportType == sportType &
+                                      GetAllTimetablesWithCoachWorkoutsGymsClientsOutputModel.Date == date &
+                                      GetAllTimetablesWithCoachWorkoutsGymsClientsOutputModel.WorkoutType.WorkoutTypeId == workoutType
+                                      select GetAllTimetablesWithCoachWorkoutsGymsClientsOutputModel;
+
+                List<List<InlineKeyboardButton>> buttons = new List<List<InlineKeyboardButton>>();
+                int count = 0;
+
+                foreach (GetAllTimetablesWithCoachWorkoutsGymsClientsOutputModel i in filteredResults)
+                {
+                    buttons.Add(new List<InlineKeyboardButton>());
+                    buttons[buttons.Count - 1].Add(new InlineKeyboardButton($"{i.StartTime} - {i.Workout.Duration} мин., {i.Workout.Price} руб., " +
+                        $"тренер {i.Coach.FullName}") { CallbackData = Convert.ToString(i.Id) });
+                    count++;
+                }
+
+                InlineKeyboardMarkup inlineKeyboard = new InlineKeyboardMarkup(buttons);
+                SingletoneStorage.GetStorage().Client.SendTextMessageAsync(ChatId, "Выберите тренировку:", replyMarkup: inlineKeyboard);
             }
         }
     }
