@@ -26,11 +26,18 @@ namespace FitnessClub.BLL
             _mapper = new Mapper(config);
         }
 
-        public List<EmployeeOutputModelForCheckOnAdminRightesByTUID> GetAllPersonsByRoleId(int roleId)
+        public List<EmployeeOutputModelForCheckOnAdminRightesByTuid> GetAllPersonsTelegramUserIdByRoleId(int roleId)
         {
             List<PersonDto> personDTos = _personRepository.GetAllPersonsByRoleId(roleId);
 
-            return _mapper.Map<List<EmployeeOutputModelForCheckOnAdminRightesByTUID>>(personDTos);
+            return _mapper.Map<List<EmployeeOutputModelForCheckOnAdminRightesByTuid>>(personDTos);
+        }
+
+        public List<EmployeeModelForCheckOnAdminRightesByOtp> GetAllPersonsOtpByRoleId(int roleId)
+        {
+            List<PersonDto> personDTos = _personRepository.GetAllPersonsByRoleId(roleId);
+
+            return _mapper.Map<List<EmployeeModelForCheckOnAdminRightesByOtp>>(personDTos);
         }
 
         public void AddPersonWithOtp(RegistrationEmployeeByOtpInputModel person)

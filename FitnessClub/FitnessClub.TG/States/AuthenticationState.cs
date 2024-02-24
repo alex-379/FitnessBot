@@ -1,4 +1,6 @@
-﻿using Telegram.Bot;
+﻿using FitnessClub.BLL;
+using FitnessClub.BLL.Models.PersonModels.OutputModels;
+using Telegram.Bot;
 using Telegram.Bot.Types;
 using Telegram.Bot.Types.Enums;
 
@@ -12,13 +14,26 @@ namespace FitnessClub.TG.States
             {
                 var message = update.Message.Text;
 
-                if (message == "123456")
+                PersonClient personClient = new();
+
+                var admins = personClient.GetAllPersonsOtpByRoleId(1);
+
+                var coaches = personClient.GetAllPersonsOtpByRoleId(2);
+
+                foreach (EmployeeModelForCheckOnAdminRightesByOtp i in admins)
                 {
-                    return new AdministratorState();
+                    if (update.Message.Text == $"{i.OneTimePassword}")
+                    {
+                        return new AdministratorState();
+                    }
                 }
-                else
+
+                foreach (EmployeeModelForCheckOnAdminRightesByOtp i in coaches)
                 {
-                    SingletoneStorage.GetStorage().Client.SendTextMessageAsync(update.Message.Chat.Id, $"Ошибка доступа");
+                    if (update.Message.Chat.Id == i.OneTimePassword)
+                    {
+                        return new CoachState();
+                    }
                 }
             }
 
