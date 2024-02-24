@@ -1,11 +1,11 @@
 using FitnessClub.BLL;
 using FitnessClub.BLL.Models.SportTypeModels;
 using FitnessClub.BLL.Models.TimetableModels.OutputModels;
+using FitnessClub.TG.Handlers.MessageHandlers;
 using Telegram.Bot;
 using Telegram.Bot.Types;
 using Telegram.Bot.Types.Enums;
 using Telegram.Bot.Types.ReplyMarkups;
-using static System.Net.Mime.MediaTypeNames;
 
 namespace FitnessClub.TG.States
 {
@@ -68,8 +68,8 @@ namespace FitnessClub.TG.States
         {
             if (i == 0)
             {
-                SportTypeClient sportTypeClient = new();
-                List<SportTypeNameOutputModel> sportTypes = sportTypeClient.GetAllSportTypesNames();
+                SportTypeHandler sportTypeHandler = new();
+                var sportTypes = sportTypeHandler.GetAllSportTypesNames();
                 List<List<InlineKeyboardButton>> buttons = new List<List<InlineKeyboardButton>>();
                 int count = 0;
 

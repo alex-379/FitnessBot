@@ -28,8 +28,8 @@ namespace FitnessClub.TG.States
             var inlineKeyboard = new InlineKeyboardMarkup(
             new List<InlineKeyboardButton[]>()
             {
-                        new InlineKeyboardButton[]
-                        { InlineKeyboardButton.WithCallbackData("Мои тренировки и записи", "CoachTimetableState"),},
+                new InlineKeyboardButton[]
+                { InlineKeyboardButton.WithCallbackData("Мои тренировки и записи", "CoachTimetableState"),},
             });
             SingletoneStorage.GetStorage().Client.SendTextMessageAsync(chatId, $"Добро пожаловать в меню тренера!", replyMarkup: inlineKeyboard);
         }

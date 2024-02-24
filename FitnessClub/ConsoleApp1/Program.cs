@@ -7,6 +7,9 @@ using Telegram.Bot.Types;
 using Telegram.Bot.Types.Enums;
 using FitnessClub.BLL.Models.TimetableModels.OutputModels;
 using static System.Runtime.InteropServices.JavaScript.JSType;
+using FitnessClub.BLL.Models.PersonModels.InputModels;
+using FitnessClub.DAL.IRepositories;
+using System;
 
 GymRepository gymRepository = new();
 
@@ -45,6 +48,12 @@ PersonRepository personRepository = new();
 //    DateBirth = "A",
 //    Sex = false,
 //    TelegramUserId = 1,
+//    OneTimePassword = 111111
+//};
+
+//PersonDto personDto = new()
+//{
+//    RoleId = 1,
 //    OneTimePassword = 111111
 //};
 
@@ -242,7 +251,13 @@ WorkoutRepository workoutRepository = new();
 PersonClient personClient = new();
 
 #region PersonInputModels
+RegistrationEmployeeByOtpInputModel person = new()
+{
+    RoleId = 1,
+    OneTimePassword = 932526
+};
 
+personClient.AddPersonWithOtp(person);
 #endregion
 
 #region PersonOutputModels
