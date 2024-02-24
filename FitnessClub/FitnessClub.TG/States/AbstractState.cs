@@ -5,7 +5,7 @@ namespace FitnessClub.TG.States
 {
     public abstract class AbstractState
     {
-        public abstract void SendMessage(long ChatId);
+        public abstract void SendMessage(long chatId);
 
         public abstract AbstractState ReceiveMessage(Update update);
 
