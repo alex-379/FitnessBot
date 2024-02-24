@@ -21,14 +21,14 @@ namespace FitnessClub.TG.States
             {
                 var callbackQuery = update.CallbackQuery;
 
-                if (callbackQuery.Data == "ClientTimetableState")
+                if (callbackQuery.Data == "ClientAllTimetableState")
                 {
-                    return new ClientTimetableState();
+                    return new ClientAllTimetableState();
                 }
 
-                if (callbackQuery.Data == "Back")
+                if (callbackQuery.Data == "ClientMyTimetableState")
                 {
-                    return new StartState(callbackQuery.From.FirstName);
+                    return new ClientMyTimetableState();
                 }
 
                 return this;
@@ -74,9 +74,9 @@ namespace FitnessClub.TG.States
                 new List<InlineKeyboardButton[]>()
                 {
                     new InlineKeyboardButton[]
-                    { InlineKeyboardButton.WithCallbackData("Посмотреть расписание тренировок", "ClientTimetableState"),},
+                    { InlineKeyboardButton.WithCallbackData("Посмотреть расписание тренировок", "ClientAllTimetableState"),},
                     new InlineKeyboardButton[]
-                    { InlineKeyboardButton.WithCallbackData("Посмотреть свои записи", "1"),},
+                    { InlineKeyboardButton.WithCallbackData("Посмотреть свои записи", "ClientMyTimetableState"),},
                 });
 
             SingletoneStorage.GetStorage().Client.SendTextMessageAsync(ChatId, $"Здравствуйте {_name}, добро пожаловать в наш фитнес клуб!", replyMarkup: inlineKeyboard);
