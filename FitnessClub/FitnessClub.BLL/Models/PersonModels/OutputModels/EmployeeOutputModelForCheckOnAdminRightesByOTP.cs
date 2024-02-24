@@ -2,7 +2,7 @@
 
 namespace FitnessClub.BLL.Models.PersonModels.OutputModels
 {
-    public class EmployeeModelForCheckOnAdminRightesByOtp
+    public class EmployeeOutputModelForCheckOnAdminRightesByOTP
     {
         public RoleDto Role { get; set; }
 

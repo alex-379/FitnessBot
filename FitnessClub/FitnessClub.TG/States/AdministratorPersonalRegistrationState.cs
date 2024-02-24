@@ -13,17 +13,13 @@ namespace FitnessClub.TG.States
             {
                 var callback = update.CallbackQuery.Data;
 
-                if (callback == "AdministratorPersonalRegistrationState")
+                if (callback == "AdministratorPersonalRegistrationStateByTUID")
                 {
-                    return new AdministratorPersonalRegistrationState();
+                    return new AdministratorPersonalRegistrationStateByTUID();
                 }
-                if (callback == "AdministratorWorkoutsState")
+                if (callback == "AdministratorPersonalRegistrationStateByOTP")
                 {
-                    return new AdministratorWorkoutsState();
-                }
-                if (callback == "AdministratorTimetablesState")
-                {
-                    return new AdministratorTimetablesState();
+                    return new AdministratorPersonalRegistrationStateByOTP();
                 }
             }
 
@@ -37,10 +33,10 @@ namespace FitnessClub.TG.States
                 {
                     new InlineKeyboardButton[]
                     { InlineKeyboardButton.WithCallbackData("По TelegramUserID", "AdministratorPersonalRegistrationStateByTUID"),
-                    InlineKeyboardButton.WithCallbackData("По OTP", "AdministratorPersonalInfoStateByOTP")}
+                    InlineKeyboardButton.WithCallbackData("По OTP", "AdministratorPersonalRegistrationStateByOTP")}
                 }
                 );
-            SingletoneStorage.GetStorage().Client.SendTextMessageAsync(chatId, $"Администрирование персонала", replyMarkup: inlineKeyboard);
+            SingletoneStorage.GetStorage().Client.SendTextMessageAsync(chatId, $"Регистрация персонала", replyMarkup: inlineKeyboard);
         }
     }
 }
