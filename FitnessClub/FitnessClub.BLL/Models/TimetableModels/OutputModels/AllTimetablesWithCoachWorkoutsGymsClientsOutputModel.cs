@@ -15,7 +15,7 @@ namespace FitnessClub.BLL.Models.TimetableModels.OutputModels
 
         public CoachForTimetableOutputModel Coach { get; set; }
 
-        public List<ClientForTimetableOutputModel> Clients { get; set; }
+        public ClientForTimetableOutputModel Client { get; set; }
 
         public WorkoutOutputModel Workout { get; set; }
 

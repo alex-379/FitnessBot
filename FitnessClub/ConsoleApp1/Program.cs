@@ -290,8 +290,8 @@ TimetableClient timetableClient = new();
 
 
 //TimetableClient timetableClient = new();
-//var timetables = timetableClient.GetAllTimetablesWithCoachWorkoutsGymsClients();
-//Console.WriteLine();
+var timetables = timetableClient.GetAllTimetablesWithCoachWorkoutsGymsClients();
+Console.WriteLine();
 //TimetableClient timetableClient = new();
 //List<GetAllTimetablesWithCoachWorkoutsGymsClientsOutputModel> dates = timetableClient.GetAllTimetablesWithCoachWorkoutsGymsClients();
 //var filteredResults = from GetAllTimetablesWithCoachWorkoutsGymsClientsOutputModel in dates
