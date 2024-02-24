@@ -42,9 +42,7 @@ namespace FitnessClub.BLL
 
         public void AddPersonWithOtp(RegistrationEmployeeByOtpInputModel person)
         {
-            PersonDto pers = new PersonDto();
-            pers = _mapper.Map<PersonDto>(person);
-            _personRepository.AddPerson(pers);
+            _personRepository.AddPerson(_mapper.Map<PersonDto>(person));
         }
 
         public void AddPerson(RegistrationPersonInputModel person)
