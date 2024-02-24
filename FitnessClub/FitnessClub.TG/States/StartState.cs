@@ -26,15 +26,13 @@ namespace FitnessClub.TG.States
             {
                 var callbackQuery = update.CallbackQuery;
 
-                if (callbackQuery.Data == "GetFullTimetablesState")
+                if (callbackQuery.Data == "ClientTimetableState")
                 {
-                    //SingletoneStorage.GetStorage().Client.AnswerCallbackQueryAsync(callbackQuery.Id);
-                    return new GetFullTimetablesState();
+                    return new ClientTimetableState();
                 }
 
                 if (callbackQuery.Data == "Back")
                 {
-                    //SingletoneStorage.GetStorage().Client.AnswerCallbackQueryAsync(callbackQuery.Id);
                     return new StartState(callbackQuery.From.FirstName);
                 }
             }
@@ -52,26 +50,26 @@ namespace FitnessClub.TG.States
 
                     var coaches = personClient.GetAllPersonsByRoleId(2);
 
-                    List <long> TelegramUserId = new();
+                    List <long> adminTelegramUserId = new();
 
                     foreach (EmployeeModelForCheckOnAdminRightesByTUID i in admins)
                         {
-                        TelegramUserId.Add(i.TelegramUserId);
+                        adminTelegramUserId.Add(i.TelegramUserId);
                     };
 
-                    List<long> TelegramUserId2 = new();
+                    List<long> coachTelegramUserId = new();
 
                     foreach (EmployeeModelForCheckOnAdminRightesByTUID i in coaches)
                     {
-                        TelegramUserId2.Add(i.TelegramUserId);
+                        coachTelegramUserId.Add(i.TelegramUserId);
                     };
 
-                    if (TelegramUserId.Contains(update.Message.Chat.Id))
+                    if (adminTelegramUserId.Contains(update.Message.Chat.Id))
                     {
                         return new AdministratorState();
                     }
 
-                    else if (TelegramUserId2.Contains(update.Message.Chat.Id))
+                    else if (coachTelegramUserId.Contains(update.Message.Chat.Id))
                     {
                         return new CoachState();
                     }
@@ -80,11 +78,6 @@ namespace FitnessClub.TG.States
                     {
                         return new StartState(update.Message.Chat.FirstName);
                     }
-                    //Console.WriteLine();
-                    ////long id = update.Message.Chat.Id
-
-                    ////if (admins.)
-                    //return new RegistrationState();
                 }
             }
 
@@ -97,7 +90,7 @@ namespace FitnessClub.TG.States
                 new List<InlineKeyboardButton[]>()
                 {
                     new InlineKeyboardButton[]
-                    { InlineKeyboardButton.WithCallbackData("Посмотреть расписание тренировок", "GetFullTimetablesState"),},
+                    { InlineKeyboardButton.WithCallbackData("Посмотреть расписание тренировок", "ClientTimetableState"),},
                     new InlineKeyboardButton[]
                     { InlineKeyboardButton.WithCallbackData("Посмотреть свои записи", "1"),},
                 });

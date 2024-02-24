@@ -112,9 +112,9 @@ namespace FitnessClub.DAL
             {
                 Dictionary<int, TimetableDto> timetables = new Dictionary<int, TimetableDto>();
 
-                connection.Query<TimetableDto, PersonDto, PersonDto, WorkoutDto, SportTypeDto, GymDto, WorkoutTypeDto, TimetableDto>
+                connection.Query<TimetableDto, PersonDto, PersonDto, WorkoutDto, SportTypeDto, GymDto, TimetableDto>
                    (TimetableStoredProcedures.GetAllTimetablesWithCoachWorkoutsGymsClients,
-                   (timetable, client, coach, workout, sportType, gym, workoutType) =>
+                   (timetable, client, coach, workout, sportType, gym) =>
                    {
                        if (!timetables.ContainsKey((int)timetable.Id))
                        {
@@ -128,11 +128,10 @@ namespace FitnessClub.DAL
                        crntTimetable.Workout = workout;
                        crntTimetable.SportType = sportType;
                        crntTimetable.Gym = gym;
-                       crntTimetable.WorkoutType = workoutType;
 
                        return crntTimetable;
                    },
-                   splitOn: "Id,SportTypeId,GymId,WorkoutTypeId",
+                   splitOn: "Id,SportTypeId,GymId",
                    commandType: CommandType.StoredProcedure);
 
                 return timetables.Values.ToList();

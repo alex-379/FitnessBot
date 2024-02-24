@@ -2,38 +2,37 @@
 using Telegram.Bot.Types;
 using Telegram.Bot.Types.Enums;
 using Telegram.Bot.Types.ReplyMarkups;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace FitnessClub.TG.States
 {
     public class CoachState : AbstractState
     {
+        int i = 0;
         public override AbstractState ReceiveMessage(Update update)
         {
-            if (update.Type == UpdateType.Message)
+            if (update.Type == UpdateType.CallbackQuery)
             {
-                var callbackQuery = update.CallbackQuery;
-                var user = callbackQuery.From;
+                var callback = update.CallbackQuery.Data;
 
-                Console.WriteLine($"{user.FirstName} ({user.Id}) нажал на кнопку: {callbackQuery.Data}");
-
-                if (callbackQuery.Data == "GetFullTimetablesState")
+                if (callback == "CoachTimetableState")
                 {
-                    //SingletoneStorage.GetStorage().Client.AnswerCallbackQueryAsync(callbackQuery.Id);
-                    return new GetFullTimetablesState();
-                }
-
-                if (callbackQuery.Data == "Back")
-                {
-                    SingletoneStorage.GetStorage().Client.AnswerCallbackQueryAsync(callbackQuery.Id);
-                    return new StartState(update.Message.Chat.FirstName);
+                    return new CoachTimetableState();
                 }
             }
+
             return this;
         }
 
         public override void SendMessage(long ChatId)
         {
-            SingletoneStorage.GetStorage().Client.SendTextMessageAsync(ChatId, $"Добро пожаловать в меню тренера");
+            var inlineKeyboard = new InlineKeyboardMarkup(
+            new List<InlineKeyboardButton[]>()
+            {
+                        new InlineKeyboardButton[]
+                        { InlineKeyboardButton.WithCallbackData("Мои тренировки и записи", "CoachTimetableState"),},
+            });
+            SingletoneStorage.GetStorage().Client.SendTextMessageAsync(ChatId, $"Добро пожаловать в меню тренера!", replyMarkup: inlineKeyboard);
         }
     }
 }

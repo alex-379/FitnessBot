@@ -26,11 +26,11 @@ namespace FitnessClub.BLL
             _mapper = new Mapper(config);
         }
 
-        public List<EmployeeModelForCheckOnAdminRightes> GetAllPersonsByRoleId(int roleId)
+        public List<EmployeeModelForCheckOnAdminRightesByTUID> GetAllPersonsByRoleId(int roleId)
         {
             List<PersonDto> personDTos = _personRepository.GetAllPersonsByRoleId(roleId);
 
-            return _mapper.Map<List<EmployeeModelForCheckOnAdminRightes>>(personDTos);
+            return _mapper.Map<List<EmployeeModelForCheckOnAdminRightesByTUID>>(personDTos);
         }
 
         public void AddPerson(RegistrationPersonInputModel person)
@@ -57,6 +57,13 @@ namespace FitnessClub.BLL
             PersonDto personDTo = _personRepository.GetPersonById(id);
 
             return _mapper.Map<ClientAndAdministratorOutputModel>(personDTo);
+        }
+
+        public List<CoachWithTgId> GetCoachesWithTgIdByRoleId(int roleId)
+        {
+            List<PersonDto> personDTos = _personRepository.GetAllPersonsByRoleId(roleId);
+
+            return _mapper.Map<List<CoachWithTgId>>(personDTos);
         }
 
     }

@@ -15,6 +15,8 @@ namespace FitnessClub.BLL.Mapping
 
             CreateMap<PersonDto, ClientAndAdministratorOutputModel>();
 
+            CreateMap<PersonDto, CoachWithTgId>();
+
             CreateMap<RegistrationPersonInputModel, PersonDto>();
 
             CreateMap<PersonDto, CoachWithSportTypesOutputModel>()

@@ -92,16 +92,13 @@ PCL.[Id], PCL.[FamilyName], PCL.[FirstName], PCL.[Patronymic], PCL.[PhoneNumber]
 PC.[Id], PC.[FamilyName], PC.[FirstName], PC.[Patronymic], PC.[PhoneNumber], PC.[Email], PC.[DateBirth], PC.[Sex],
 W.[Id], W.[Price], W.[Duration], W.[NumberPlaces], W.[IsGroup], W.[Comment],
 ST.[Id] As [SportTypeId], ST.[Name] As SportType,
-G.[Id] As [GymId], G.[Name] As [Gym],
-WT.[Id] as WorkoutTypeId, WT.[Name] as WorkoutType from dbo.[Timetables] as T
+G.[Id] As [GymId], G.[Name] As [Gym] from dbo.[Timetables] as T
 Join dbo.[Clients_Timetables] As CT On T.[Id] = CT.[TimetableId]
 Join dbo.[Persons] as PCL on CT.[ClientId]= PCL.[Id]
 Join dbo.[Persons] as PC on T.[CoachId]=PC.[Id]
 Join dbo.[Workouts] as W on T.[WorkoutId]=W.[Id]
 Join dbo.[SportTypes] as ST on W.[SportTypeId]=ST.[Id]
 Join dbo.[Gyms] as G on T.[GymId]=G.[Id]
-Join dbo.[Coaches_WorkoutTypes] As CW On PC.[Id]=CW.[CoachId]
-Join dbo.[WorkoutTypes] as WT on CW.[WorkoutTypeId]= WT.[Id]
 Where T.[IsDeleted]=0
 End
 

@@ -105,7 +105,7 @@ using static System.Runtime.InteropServices.JavaScript.JSType;
 //#endregion
 
 
-TimetableRepository timetableRepository = new();
+//TimetableRepository timetableRepository = new();
 
 //#region AddTimeTable
 ////TimetableDto timetableDto = new()
@@ -152,9 +152,9 @@ TimetableRepository timetableRepository = new();
 
 ////Console.WriteLine();
 
-var i = timetableRepository.GetAllTimetablesWithCoachWorkoutsGymsClients();
+//var i = timetableRepository.GetAllTimetablesWithCoachWorkoutsGymsClients();
 
-Console.WriteLine();
+//Console.WriteLine();
 
 ////var i = timetableRepository.GetTimetableWithCoachWorkoutsGymsClientsById(1);
 
@@ -269,8 +269,9 @@ Console.WriteLine();
 ////var timetables = timetableClient.GetAllTimetablesWithCoachWorkoutsGymsClients();
 
 
-
-////Console.WriteLine();
+PersonClient personClient = new();
+var coaches = personClient.GetCoachesWithTgIdByRoleId(2);
+Console.WriteLine();
 
 //#endregion
 //string sportType = "Волейбол";
@@ -279,13 +280,11 @@ Console.WriteLine();
 
 
 //TimetableClient timetableClient = new();
-//List<GetAllTimetablesWithCoachWorkoutsGymsClientsOutputModel> timetables = timetableClient.GetAllTimetablesWithCoachWorkoutsGymsClients();
-//var filteredResults = from GetAllTimetablesWithCoachWorkoutsGymsClientsOutputModel in timetables
+//var timetables = timetableClient.GetAllTimetablesWithCoachWorkoutsGymsClients();
+//Console.WriteLine();
+//TimetableClient timetableClient = new();
+//List<GetAllTimetablesWithCoachWorkoutsGymsClientsOutputModel> dates = timetableClient.GetAllTimetablesWithCoachWorkoutsGymsClients();
+//var filteredResults = from GetAllTimetablesWithCoachWorkoutsGymsClientsOutputModel in dates
 //                      where GetAllTimetablesWithCoachWorkoutsGymsClientsOutputModel.SportType.SportType == sportType &
-//                      GetAllTimetablesWithCoachWorkoutsGymsClientsOutputModel.Date == date
+//                      GetAllTimetablesWithCoachWorkoutsGymsClientsOutputModel.Workout.IsGroup == workoutType
 //                      select GetAllTimetablesWithCoachWorkoutsGymsClientsOutputModel;
-
-//foreach (var result in filteredResults)
-//{
-//    Console.WriteLine(result);
-//}
