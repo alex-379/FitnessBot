@@ -1,5 +1,5 @@
-﻿using FitnessClub.BLL.Models.PersonModels.OutputModels;
-using FitnessClub.TG.Handlers.MessageHandlers;
+﻿using FitnessClub.BLL;
+using FitnessClub.BLL.Models.PersonModels.OutputModels;
 using Telegram.Bot;
 using Telegram.Bot.Types;
 using Telegram.Bot.Types.Enums;
@@ -8,19 +8,24 @@ namespace FitnessClub.TG.States
 {
     public class AuthenticationState : AbstractState
     {
+        private PersonClient _personClient;
+
+        public AuthenticationState()
+        {
+            _personClient = new();
+        }
+
         public override AbstractState ReceiveMessage(Update update)
         {
             if (update.Type == UpdateType.Message)
             {
                 var message = update.Message.Text;
 
-                PersonHandler personHandler = new();
+                var admins = _personClient.GetAllPersonsOtpByRoleId(1);
 
-                var admins = personHandler.GetAllPersonsOtpByRoleId(1);
+                var coaches = _personClient.GetAllPersonsOtpByRoleId(2);
 
-                var coaches = personHandler.GetAllPersonsOtpByRoleId(2);
-
-                foreach (EmployeeModelForCheckOnAdminRightesByOtp i in admins)
+                foreach (EmployeeOutputModelForCheckOnAdminRightesByOTP i in admins)
                 {
                     if (update.Message.Text == $"{i.OneTimePassword}")
                     {
@@ -28,9 +33,9 @@ namespace FitnessClub.TG.States
                     }
                 }
 
-                foreach (EmployeeModelForCheckOnAdminRightesByOtp i in coaches)
+                foreach (EmployeeOutputModelForCheckOnAdminRightesByOTP i in coaches)
                 {
-                    if (update.Message.Chat.Id == i.OneTimePassword)
+                    if (update.Message.Text == $"{i.OneTimePassword}")
                     {
                         return new CoachState();
                     }

@@ -1,5 +1,5 @@
+using FitnessClub.BLL;
 using FitnessClub.BLL.Models.PersonModels.OutputModels;
-using FitnessClub.TG.Handlers.MessageHandlers;
 using Telegram.Bot;
 using Telegram.Bot.Types;
 using Telegram.Bot.Types.Enums;
@@ -9,10 +9,13 @@ namespace FitnessClub.TG.States
 {
     public class StartState : AbstractState
     {
-        public string _name;
+        private string _name;
+        private PersonClient _personClient;
+
         public StartState(string name)
         {
             this._name = name;
+            _personClient = new();
         }
 
         public override AbstractState ReceiveMessage(Update update)
@@ -41,11 +44,9 @@ namespace FitnessClub.TG.States
 
                 if (message == "/login")
                 {
-                    PersonHandler personHandler = new();
+                    var admins = _personClient.GetAllPersonsTelegramUserIdByRoleId(1);
 
-                    var admins = personHandler.GetAllPersonsTelegramUserIdByRoleId(1);
-
-                    var coaches = personHandler.GetAllPersonsTelegramUserIdByRoleId(2);
+                    var coaches = _personClient.GetAllPersonsTelegramUserIdByRoleId(2);
 
                     foreach (EmployeeOutputModelForCheckOnAdminRightesByTuid i in admins)
                     {
