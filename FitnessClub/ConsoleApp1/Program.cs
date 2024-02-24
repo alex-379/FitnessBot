@@ -251,11 +251,11 @@ WorkoutRepository workoutRepository = new();
 PersonClient personClient = new();
 
 #region PersonInputModels
-RegistrationEmployeeByOtpInputModel person = new()
-{
-    RoleId = 1,
-    OneTimePassword = 423432
-};
+//RegistrationEmployeeByOtpInputModel person = new()
+//{
+//    RoleId = 1,
+//    OneTimePassword = 423432
+//};
 
 //PersonDto person2 = new PersonDto()
 //{
