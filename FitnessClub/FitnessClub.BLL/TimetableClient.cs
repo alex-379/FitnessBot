@@ -26,6 +26,7 @@ namespace FitnessClub.BLL
             });
             _mapper = new Mapper(config);
         }
+
         public void AddTimetable(AddTimetableInputModel timetable)
         {
 
@@ -42,6 +43,7 @@ namespace FitnessClub.BLL
             return _mapper.Map<List<TimetableOutputModel>>(timetableDtos);
 
         }
+
         public TimetableOutputModel GetTimetableById(int id)
         {
             TimetableDto timetableDtos = _timetableRepository.GetTimetableById(id);
@@ -54,13 +56,5 @@ namespace FitnessClub.BLL
             return _mapper.Map<List<AllTimetablesWithCoachWorkoutsGymsClientsOutputModel>>(timetableDtos);
 
         }
-
-        public List<TimetableOutputModel> GetTimetableDates()
-        {
-            List<TimetableDto> timetableDtos = _timetableRepository.GetAllTimetables();
-            return _mapper.Map<List<TimetableOutputModel>>(timetableDtos);
-
-        }
-
     }
 }

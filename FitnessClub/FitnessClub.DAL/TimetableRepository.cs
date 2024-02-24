@@ -123,7 +123,7 @@ namespace FitnessClub.DAL
 
                        TimetableDto crntTimetable = timetables[(int)timetable.Id];
 
-                       crntTimetable.Clients.Add(client);
+                       crntTimetable.Client = client;
                        crntTimetable.Coach = coach;
                        crntTimetable.Workout = workout;
                        crntTimetable.SportType = sportType;
@@ -153,7 +153,7 @@ namespace FitnessClub.DAL
                            crntTimetable = timetable;
                        }
 
-                       crntTimetable.Clients.Add(client);
+                       crntTimetable.Client = client;
                        crntTimetable.Coach = coach;
                        crntTimetable.Workout = workout;
                        crntTimetable.SportType = sportType;
