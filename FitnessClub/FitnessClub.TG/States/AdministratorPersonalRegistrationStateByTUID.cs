@@ -38,12 +38,6 @@ namespace FitnessClub.TG.States
                         _personModel.RoleId = 2;
                     }
                 }
-
-                if (i == 2)
-                {
-                    _personClient.AddPersonWithTuid(_personModel);
-                    SingletoneStorage.GetStorage().Client.SendTextMessageAsync(update.Message.Chat.Id, "Внесена новая запись");
-                }
             }
 
             if (update.Type == UpdateType.Message)
@@ -52,17 +46,10 @@ namespace FitnessClub.TG.States
 
                 if (i == 1)
                 {
-                    _personModel.TelegramUserId = Convert.ToInt32(message);
-                }
-            }
-            if (update.Type == UpdateType.Message)
-            {
-                var message = update.Message.Text;
-
-                if (i == 2)
-                {
+                    _personModel.TelegramUserId = Convert.ToInt64(message);
                     _personClient.AddPersonWithTuid(_personModel);
                     SingletoneStorage.GetStorage().Client.SendTextMessageAsync(update.Message.Chat.Id, "Внесена новая запись");
+                    return new AdministratorState();
                 }
             }
             i++;
@@ -89,18 +76,6 @@ namespace FitnessClub.TG.States
                 if (i == 1)
                 {
                     SingletoneStorage.GetStorage().Client.SendTextMessageAsync(chatId, "Введите Telegram User ID");
-                }
-
-                if (i == 2)
-                {
-                    var inlineKeyboard = new InlineKeyboardMarkup(
-                        new List<InlineKeyboardButton[]>()
-                        {
-                        new InlineKeyboardButton[]
-                        { InlineKeyboardButton.WithCallbackData("Добавить", "AddPersonal"),}
-                        }
-                        );
-                    SingletoneStorage.GetStorage().Client.SendTextMessageAsync(chatId, "Внесена новая запись");
                 }
             }
         }
