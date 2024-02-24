@@ -1,5 +1,4 @@
-﻿using FitnessClub.TG;
-using Telegram.Bot;
+﻿using Telegram.Bot;
 using Telegram.Bot.Types;
 using Telegram.Bot.Types.Enums;
 using Telegram.Bot.Types.ReplyMarkups;
@@ -28,10 +27,10 @@ namespace FitnessClub.TG.States
                 }
             }
 
-                return this;
+            return this;
         }
 
-        public override void SendMessage(long ChatId)
+        public override void SendMessage(long chatId)
         {
             var inlineKeyboard = new InlineKeyboardMarkup(
                 new List<InlineKeyboardButton[]>()
@@ -44,7 +43,7 @@ namespace FitnessClub.TG.States
                     { InlineKeyboardButton.WithCallbackData("Расписание", "AdministratorTimetablesState"),},
                 }
                 );
-            SingletoneStorage.GetStorage().Client.SendTextMessageAsync(ChatId, $"Добро пожаловать в меню администратора", replyMarkup: inlineKeyboard);
+            SingletoneStorage.GetStorage().Client.SendTextMessageAsync(chatId, $"Добро пожаловать в меню администратора", replyMarkup: inlineKeyboard);
         }
     }
 }

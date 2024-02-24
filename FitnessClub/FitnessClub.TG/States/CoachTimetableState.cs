@@ -1,17 +1,10 @@
-﻿using FitnessClub.BLL.Models.SportTypeModels;
+﻿using FitnessClub.BLL;
+using FitnessClub.BLL.Models.PersonModels.OutputModels;
 using FitnessClub.BLL.Models.TimetableModels.OutputModels;
-using FitnessClub.BLL;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Telegram.Bot;
+using Telegram.Bot.Types;
 using Telegram.Bot.Types.Enums;
 using Telegram.Bot.Types.ReplyMarkups;
-using Telegram.Bot.Types;
-using Telegram.Bot;
-using FitnessClub.BLL.Models.PersonModels.OutputModels;
-using System.Security.Cryptography;
 
 namespace FitnessClub.TG.States
 {
@@ -42,14 +35,14 @@ namespace FitnessClub.TG.States
             return this;
         }
 
-        public override void SendMessage(long ChatId)
+        public override void SendMessage(long chatId)
         {
             if (i == 0)
             {
                 PersonClient personClient = new();
                 List<CoachWithTgId> coachWithTgIds = personClient.GetCoachesWithTgIdByRoleId(2);
                 var filteredCoaches = from CoachWithTgId in coachWithTgIds
-                                      where CoachWithTgId.TelegramUserId == ChatId
+                                      where CoachWithTgId.TelegramUserId == chatId
                                       select CoachWithTgId;
                 foreach (var i in filteredCoaches)
                 {
@@ -74,7 +67,7 @@ namespace FitnessClub.TG.States
                 }
 
                 InlineKeyboardMarkup inlineKeyboard = new InlineKeyboardMarkup(buttons);
-                SingletoneStorage.GetStorage().Client.SendTextMessageAsync(ChatId, "Выберите тренировку:", replyMarkup: inlineKeyboard);
+                SingletoneStorage.GetStorage().Client.SendTextMessageAsync(chatId, "Выберите тренировку:", replyMarkup: inlineKeyboard);
             }
 
             if (i == 1)
@@ -107,7 +100,7 @@ namespace FitnessClub.TG.States
 
                 }
                 InlineKeyboardMarkup inlineKeyboard = new InlineKeyboardMarkup(buttons);
-                SingletoneStorage.GetStorage().Client.SendTextMessageAsync(ChatId, text, replyMarkup: inlineKeyboard); ;
+                SingletoneStorage.GetStorage().Client.SendTextMessageAsync(chatId, text, replyMarkup: inlineKeyboard); ;
             }
         }
     }

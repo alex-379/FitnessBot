@@ -22,6 +22,7 @@ namespace FitnessClub.TG
             var receiverOptions = new ReceiverOptions()
             {
                 AllowedUpdates = [UpdateType.Message, UpdateType.CallbackQuery],
+                ThrowPendingUpdates = true
             };
 
             client.StartReceiving(HandleUpdate, HandleError, receiverOptions, cancellationToken);
@@ -37,9 +38,14 @@ namespace FitnessClub.TG
             long id = update.Message != null ?
                 update.Message.Chat.Id
                 : update.CallbackQuery.From.Id;
-            if (!clients.ContainsKey(id))
+
+            if (update.Message != null && !clients.ContainsKey(id))
             {
                 clients.Add(id, new StartState(update.Message.Chat.FirstName));
+            }
+            else if (update.Message == null && !clients.ContainsKey(id))
+            {
+                clients.Add(id, new StartState(update.CallbackQuery.From.FirstName));
             }
             else
             {

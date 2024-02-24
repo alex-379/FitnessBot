@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Telegram.Bot.Types;
+﻿using Telegram.Bot.Types;
 
 namespace FitnessClub.TG.States
 {
@@ -14,7 +9,7 @@ namespace FitnessClub.TG.States
             throw new NotImplementedException();
         }
 
-        public override void SendMessage(long ChatId)
+        public override void SendMessage(long chatId)
         {
             throw new NotImplementedException();
         }

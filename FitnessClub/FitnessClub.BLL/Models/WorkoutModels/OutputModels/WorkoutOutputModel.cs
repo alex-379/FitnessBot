@@ -13,6 +13,5 @@ namespace FitnessClub.BLL.Models.WorkoutModels.OutputModels
         public bool IsGroup { get; set; }
 
         public string? Comment { get; set; }
-
     }
 }

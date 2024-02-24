@@ -2,7 +2,6 @@
 {
     public class GymsStoredProcedures
     {
-
         public const string GetAllGyms = "GetAllGyms";
     }
 }
