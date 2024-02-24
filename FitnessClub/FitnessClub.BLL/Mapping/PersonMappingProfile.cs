@@ -11,9 +11,9 @@ namespace FitnessClub.BLL.Mapping
         {
             CreateMap<RegistrationEmployeeByIdInputModel, PersonDto>();
 
-            CreateMap<PersonDto, EmployeeOutputModelForCheckOnAdminRightesByTUID>();
+            CreateMap<PersonDto, EmployeeOutputModelForCheckOnAdminRightesByTuid>();
 
-            CreateMap<PersonDto, EmployeeModelForCheckOnAdminRightesByOTP>();
+            CreateMap<PersonDto, EmployeeModelForCheckOnAdminRightesByOtp>();
 
             CreateMap<PersonDto, ClientAndAdministratorOutputModel>();
 
