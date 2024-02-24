@@ -9,7 +9,7 @@ using static System.Net.Mime.MediaTypeNames;
 
 namespace FitnessClub.TG.States
 {
-    public class ClientTimetableState : AbstractState
+    public class ClientAllTimetableState : AbstractState
     {
         int i = 0;
         string sportType;
