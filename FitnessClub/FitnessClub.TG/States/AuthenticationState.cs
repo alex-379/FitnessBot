@@ -3,6 +3,7 @@ using FitnessClub.BLL.Models.PersonModels.OutputModels;
 using Telegram.Bot;
 using Telegram.Bot.Types;
 using Telegram.Bot.Types.Enums;
+using FitnessClub.TG.Handlers.MessageHandlers;
 
 namespace FitnessClub.TG.States
 {
@@ -14,11 +15,11 @@ namespace FitnessClub.TG.States
             {
                 var message = update.Message.Text;
 
-                PersonClient personClient = new();
+                PersonHandler personHandler = new ();
 
-                var admins = personClient.GetAllPersonsOtpByRoleId(1);
+                var admins = personHandler.GetAllPersonsOtpByRoleId(1);
 
-                var coaches = personClient.GetAllPersonsOtpByRoleId(2);
+                var coaches = personHandler.GetAllPersonsOtpByRoleId(2);
 
                 foreach (EmployeeModelForCheckOnAdminRightesByOtp i in admins)
                 {
