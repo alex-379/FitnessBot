@@ -50,7 +50,7 @@ namespace FitnessClub.TG.States
                 }
 
                 TimetableClient timetableClient = new();
-                List<GetAllTimetablesWithCoachWorkoutsGymsClientsOutputModel> timetablesCoach = timetableClient.GetAllTimetablesWithCoachWorkoutsGymsClients();
+                List<AllTimetablesWithCoachWorkoutsGymsClientsOutputModel> timetablesCoach = timetableClient.GetAllTimetablesWithCoachWorkoutsGymsClients();
                 var filteredTimetables = from GetAllTimetablesWithCoachWorkoutsGymsClientsOutputModel in timetablesCoach
                                          where GetAllTimetablesWithCoachWorkoutsGymsClientsOutputModel.Coach.Id == coachId
                                          select GetAllTimetablesWithCoachWorkoutsGymsClientsOutputModel;
@@ -58,7 +58,7 @@ namespace FitnessClub.TG.States
                 List<List<InlineKeyboardButton>> buttons = new List<List<InlineKeyboardButton>>();
                 int count = 0;
 
-                foreach (GetAllTimetablesWithCoachWorkoutsGymsClientsOutputModel i in filteredTimetables)
+                foreach (AllTimetablesWithCoachWorkoutsGymsClientsOutputModel i in filteredTimetables)
                 {
                     buttons.Add(new List<InlineKeyboardButton>());
                     buttons[buttons.Count - 1].Add(new InlineKeyboardButton($"{i.Date} - {i.StartTime} {i.Workout.Comment}")
@@ -74,7 +74,7 @@ namespace FitnessClub.TG.States
             {
                 string text = null;
                 TimetableClient timetableClient = new();
-                List<GetAllTimetablesWithCoachWorkoutsGymsClientsOutputModel> timetablesCoach = timetableClient.GetAllTimetablesWithCoachWorkoutsGymsClients();
+                List<AllTimetablesWithCoachWorkoutsGymsClientsOutputModel> timetablesCoach = timetableClient.GetAllTimetablesWithCoachWorkoutsGymsClients();
                 var filteredTimetables = from GetAllTimetablesWithCoachWorkoutsGymsClientsOutputModel in timetablesCoach
                                          where GetAllTimetablesWithCoachWorkoutsGymsClientsOutputModel.Coach.Id == coachId &
                                          GetAllTimetablesWithCoachWorkoutsGymsClientsOutputModel.Id == timetableId
@@ -83,7 +83,7 @@ namespace FitnessClub.TG.States
                 List<List<InlineKeyboardButton>> buttons = new List<List<InlineKeyboardButton>>();
                 int count = 0;
 
-                foreach (GetAllTimetablesWithCoachWorkoutsGymsClientsOutputModel i in filteredTimetables)
+                foreach (AllTimetablesWithCoachWorkoutsGymsClientsOutputModel i in filteredTimetables)
                 {
                     text = $"{i.Date} в {i.StartTime}, {i.Workout.Comment}, продолжительность {i.Workout.Duration} минут, " +
                         $"стоимость {i.Workout.Price} руб. с человека в {i.Gym.Gym}. Список клиентов:";

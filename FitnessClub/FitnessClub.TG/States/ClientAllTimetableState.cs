@@ -104,7 +104,7 @@ namespace FitnessClub.TG.States
             {
                 string text = "Выберите дату:";
                 TimetableClient timetableClient = new();
-                List<GetAllTimetablesWithCoachWorkoutsGymsClientsOutputModel> dates = timetableClient.GetAllTimetablesWithCoachWorkoutsGymsClients();
+                List<AllTimetablesWithCoachWorkoutsGymsClientsOutputModel> dates = timetableClient.GetAllTimetablesWithCoachWorkoutsGymsClients();
                 var filteredResults = from GetAllTimetablesWithCoachWorkoutsGymsClientsOutputModel in dates
                                       where GetAllTimetablesWithCoachWorkoutsGymsClientsOutputModel.SportType.SportType == sportType &
                                       GetAllTimetablesWithCoachWorkoutsGymsClientsOutputModel.Workout.IsGroup == workoutType
@@ -113,7 +113,7 @@ namespace FitnessClub.TG.States
                 List<List<InlineKeyboardButton>> buttons = new List<List<InlineKeyboardButton>>();
                 int count = 0;
 
-                foreach (GetAllTimetablesWithCoachWorkoutsGymsClientsOutputModel i in filteredResults)
+                foreach (AllTimetablesWithCoachWorkoutsGymsClientsOutputModel i in filteredResults)
                 {
                     if (count % 2 == 0)
                     {
@@ -138,7 +138,7 @@ namespace FitnessClub.TG.States
             if (i == 3)
             {
                 TimetableClient timetableClient = new();
-                List<GetAllTimetablesWithCoachWorkoutsGymsClientsOutputModel> timetables = timetableClient.GetAllTimetablesWithCoachWorkoutsGymsClients();
+                List<AllTimetablesWithCoachWorkoutsGymsClientsOutputModel> timetables = timetableClient.GetAllTimetablesWithCoachWorkoutsGymsClients();
                 var filteredResults = from GetAllTimetablesWithCoachWorkoutsGymsClientsOutputModel in timetables
                                       where GetAllTimetablesWithCoachWorkoutsGymsClientsOutputModel.SportType.SportType == sportType &
                                       GetAllTimetablesWithCoachWorkoutsGymsClientsOutputModel.Date == date &
@@ -148,7 +148,7 @@ namespace FitnessClub.TG.States
                 List<List<InlineKeyboardButton>> buttons = new List<List<InlineKeyboardButton>>();
                 int count = 0;
 
-                foreach (GetAllTimetablesWithCoachWorkoutsGymsClientsOutputModel i in filteredResults)
+                foreach (AllTimetablesWithCoachWorkoutsGymsClientsOutputModel i in filteredResults)
                 {
                     buttons.Add(new List<InlineKeyboardButton>());
                     buttons[buttons.Count - 1].Add(new InlineKeyboardButton($"{i.StartTime} - {i.Workout.Duration} мин., {i.Workout.Price} руб., " +

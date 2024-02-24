@@ -15,9 +15,9 @@ namespace FitnessClub.BLL.Mapping
 
             CreateMap<AddTimetableInputModel, TimetableDto>();
 
-            CreateMap<TimetableDto, GetAllTimetablesWithCoachWorkoutsGymsClientsOutputModel>();
+            CreateMap<TimetableDto, AllTimetablesWithCoachWorkoutsGymsClientsOutputModel>();
 
-            CreateMap<TimetableDto, GetTimetableDates>();
+            CreateMap<TimetableDto, TimetableDatesOutputModel>();
         }
     }
 }

@@ -5,7 +5,7 @@ using FitnessClub.BLL.Models.WorkoutModels.OutputModels;
 
 namespace FitnessClub.BLL.Models.TimetableModels.OutputModels
 {
-    public class GetAllTimetablesWithCoachWorkoutsGymsClientsOutputModel
+    public class AllTimetablesWithCoachWorkoutsGymsClientsOutputModel
     {
         public int Id { get; set; }
 
