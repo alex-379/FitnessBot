@@ -5,6 +5,7 @@ using Telegram.Bot;
 using Telegram.Bot.Types;
 using Telegram.Bot.Types.Enums;
 using Telegram.Bot.Types.ReplyMarkups;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace FitnessClub.TG.States
 {
@@ -42,7 +43,15 @@ namespace FitnessClub.TG.States
 
                 if (i == 2)
                 {
-                    date = callback;
+                    if (callback == "GetToBeginning")
+                    {
+                        i = -1;
+                    }
+
+                    else
+                    {
+                        date = callback;
+                    }
                 }
 
                 if (i == 3)
@@ -93,6 +102,7 @@ namespace FitnessClub.TG.States
 
             if (i == 2)
             {
+                string text = "Выберите дату:";
                 TimetableClient timetableClient = new();
                 List<GetAllTimetablesWithCoachWorkoutsGymsClientsOutputModel> dates = timetableClient.GetAllTimetablesWithCoachWorkoutsGymsClients();
                 var filteredResults = from GetAllTimetablesWithCoachWorkoutsGymsClientsOutputModel in dates
@@ -112,8 +122,17 @@ namespace FitnessClub.TG.States
                     buttons[buttons.Count - 1].Add(new InlineKeyboardButton(i.Date) { CallbackData = (i.Date) });
                     count++;
                 }
+
+                if (buttons.Count == 0)
+                {
+                    text = "Извините, таких тренировок нет. Выберите другой вид спорта или тип тренировки.";
+                    buttons.Add(new List<InlineKeyboardButton>());
+                    buttons[buttons.Count - 1].Add(new InlineKeyboardButton("Расписание тренировок")
+                    { CallbackData = "GetToBeginning" });
+                    count++;
+                }
                 InlineKeyboardMarkup inlineKeyboard = new InlineKeyboardMarkup(buttons);
-                SingletoneStorage.GetStorage().Client.SendTextMessageAsync(chatId, "Выберите дату:", replyMarkup: inlineKeyboard);
+                SingletoneStorage.GetStorage().Client.SendTextMessageAsync(chatId, text, replyMarkup: inlineKeyboard);
             }
 
             if (i == 3)
