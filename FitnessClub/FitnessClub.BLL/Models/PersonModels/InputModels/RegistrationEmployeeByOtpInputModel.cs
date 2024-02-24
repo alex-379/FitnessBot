@@ -6,6 +6,6 @@ namespace FitnessClub.BLL.Models.PersonModels.InputModels
     {
         public int RoleId { get; set; }
 
-        public long OneTimePassword { get; set; }
+        public int OneTimePassword { get; set; }
         }
 }
