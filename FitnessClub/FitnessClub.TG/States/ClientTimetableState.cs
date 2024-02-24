@@ -1,7 +1,6 @@
 using FitnessClub.BLL;
 using FitnessClub.BLL.Models.SportTypeModels;
 using FitnessClub.BLL.Models.TimetableModels.OutputModels;
-using System.Security.Cryptography;
 using Telegram.Bot;
 using Telegram.Bot.Types;
 using Telegram.Bot.Types.Enums;
@@ -56,7 +55,7 @@ namespace FitnessClub.TG.States
             return this;
         }
 
-        public override void SendMessage(long ChatId)
+        public override void SendMessage(long chatId)
         {
             if (i == 0)
             {
@@ -76,7 +75,7 @@ namespace FitnessClub.TG.States
                 }
 
                 InlineKeyboardMarkup inlineKeyboard = new InlineKeyboardMarkup(buttons);
-                SingletoneStorage.GetStorage().Client.SendTextMessageAsync(ChatId, "Выберите вид спорта:", replyMarkup: inlineKeyboard);
+                SingletoneStorage.GetStorage().Client.SendTextMessageAsync(chatId, "Выберите вид спорта:", replyMarkup: inlineKeyboard);
             }
 
             if (i == 1)
@@ -89,7 +88,7 @@ namespace FitnessClub.TG.States
                         new InlineKeyboardButton[]
                         { InlineKeyboardButton.WithCallbackData("Индивидуальная", "2"),},
                 });
-                SingletoneStorage.GetStorage().Client.SendTextMessageAsync(ChatId, "Выберите тип тренировки:", replyMarkup: inlineKeyboard);
+                SingletoneStorage.GetStorage().Client.SendTextMessageAsync(chatId, "Выберите тип тренировки:", replyMarkup: inlineKeyboard);
             }
 
             if (i == 2)
@@ -114,7 +113,7 @@ namespace FitnessClub.TG.States
                     count++;
                 }
                 InlineKeyboardMarkup inlineKeyboard = new InlineKeyboardMarkup(buttons);
-                SingletoneStorage.GetStorage().Client.SendTextMessageAsync(ChatId, "Выберите дату:", replyMarkup: inlineKeyboard);
+                SingletoneStorage.GetStorage().Client.SendTextMessageAsync(chatId, "Выберите дату:", replyMarkup: inlineKeyboard);
             }
 
             if (i == 3)
@@ -140,9 +139,8 @@ namespace FitnessClub.TG.States
                 }
 
                 InlineKeyboardMarkup inlineKeyboard = new InlineKeyboardMarkup(buttons);
-                SingletoneStorage.GetStorage().Client.SendTextMessageAsync(ChatId, "Выберите тренировку:", replyMarkup: inlineKeyboard);
+                SingletoneStorage.GetStorage().Client.SendTextMessageAsync(chatId, "Выберите тренировку:", replyMarkup: inlineKeyboard);
             }
         }
     }
 }
-

@@ -30,7 +30,7 @@ namespace FitnessClub.TG.States
             return this;
         }
 
-        public override void SendMessage(long ChatId)
+        public override void SendMessage(long chatId)
         {
             var inlineKeyboard = new InlineKeyboardMarkup(
                 new List<InlineKeyboardButton[]>()
@@ -40,7 +40,7 @@ namespace FitnessClub.TG.States
                     InlineKeyboardButton.WithCallbackData("По OTP", "AdministratorPersonalInfoStateByOTP")}
                 }
                 );
-            SingletoneStorage.GetStorage().Client.SendTextMessageAsync(ChatId, $"Администрирование персонала", replyMarkup: inlineKeyboard);
+            SingletoneStorage.GetStorage().Client.SendTextMessageAsync(chatId, $"Администрирование персонала", replyMarkup: inlineKeyboard);
         }
     }
 }

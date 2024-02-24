@@ -1,10 +1,5 @@
 using FitnessClub.BLL;
 using FitnessClub.BLL.Models.PersonModels.OutputModels;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Telegram.Bot;
 using Telegram.Bot.Types;
 using Telegram.Bot.Types.Enums;
@@ -35,6 +30,8 @@ namespace FitnessClub.TG.States
                 {
                     return new StartState(callbackQuery.From.FirstName);
                 }
+
+                return this;
             }
 
             if (update.Type == UpdateType.Message)
@@ -50,34 +47,79 @@ namespace FitnessClub.TG.States
 
                     var coaches = personClient.GetAllPersonsByRoleId(2);
 
-                    List <long> adminTelegramUserId = new();
-
-                    foreach (EmployeeModelForCheckOnAdminRightesByTUID i in admins)
-                        {
-                        adminTelegramUserId.Add(i.TelegramUserId);
-                    };
+                    List<long> adminTelegramUserId = new();
 
                     List<long> coachTelegramUserId = new();
 
-                    foreach (EmployeeModelForCheckOnAdminRightesByTUID i in coaches)
-                    {
-                        coachTelegramUserId.Add(i.TelegramUserId);
-                    };
-
                     if (adminTelegramUserId.Contains(update.Message.Chat.Id))
                     {
-                        return new AdministratorState();
+                        foreach (long i in adminTelegramUserId)
+                        {
+                            if (update.Message.Chat.Id == i)
+                            {
+                                return new AdministratorState();
+                            }
+                            else
+                            {
+                                return new AuthenticationState();
+                            }
+                        }
+
                     }
 
-                    else if (coachTelegramUserId.Contains(update.Message.Chat.Id))
+                    if (coachTelegramUserId.Contains(update.Message.Chat.Id))
                     {
-                        return new CoachState();
+                        foreach (long i in coachTelegramUserId)
+                        {
+                            if (update.Message.Chat.Id == i)
+                            {
+                                return new CoachState();
+                            }
+                            else
+                            {
+                                return new AuthenticationState();
+                            }
+                        }
+
                     }
 
-                    else
-                    {
-                        return new StartState(update.Message.Chat.FirstName);
-                    }
+
+
+                    //foreach (EmployeeOutputModelForCheckOnAdminRightesByTUID i in admins)
+                    //{
+                    //    if (update.Message.Chat.Id == i.TelegramUserId)
+                    //    {
+                    //        return new AdministratorState();
+                    //    }
+
+                    //    else
+                    //    {
+                    //        return new AuthenticationState();
+                    //    }
+                    //};
+
+
+
+
+
+                    //        List<long> coachTelegramUserId = new();
+
+
+
+                    //        if (adminTelegramUserId.Contains(update.Message.Chat.Id))
+                    //        {
+                    //            return new AdministratorState();
+                    //        }
+
+                    //        else if (coachTelegramUserId.Contains(update.Message.Chat.Id))
+                    //        {
+                    //            return new CoachState();
+                    //        }
+
+                    //        else
+                    //        {
+                    //            return new StartState(update.Message.Chat.FirstName);
+                    //        }
                 }
             }
 

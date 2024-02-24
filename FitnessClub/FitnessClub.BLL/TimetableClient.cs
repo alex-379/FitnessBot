@@ -1,15 +1,10 @@
 using AutoMapper;
+using FitnessClub.BLL.Mapping;
 using FitnessClub.BLL.Models.TimetableModels.InputModels;
 using FitnessClub.BLL.Models.TimetableModels.OutputModels;
+using FitnessClub.DAL;
 using FitnessClub.DAL.Dtos;
 using FitnessClub.DAL.IRepositories;
-using FitnessClub.DAL;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using FitnessClub.BLL.Mapping;
 
 namespace FitnessClub.BLL
 {

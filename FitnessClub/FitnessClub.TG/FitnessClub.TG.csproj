@@ -15,4 +15,8 @@
     <ProjectReference Include="..\FitnessClub.BLL\FitnessClub.BLL.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Models\TimetableModels\InputModels\" />
+  </ItemGroup>
+
 </Project>

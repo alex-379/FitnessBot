@@ -2,8 +2,8 @@
 {
     public class AddClientTimetableInputModel
     {
-        public int clientId { get; set; }
-        public int timetableId { get; set; }
+        public int СlientId { get; set; }
 
+        public int TimetableId { get; set; }
     }
 }

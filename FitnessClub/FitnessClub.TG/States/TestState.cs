@@ -1,12 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Telegram.Bot.Types.Enums;
-using Telegram.Bot.Types;
+﻿using FitnessClub.BLL;
 using Telegram.Bot;
-using FitnessClub.BLL;
+using Telegram.Bot.Types;
+using Telegram.Bot.Types.Enums;
 
 namespace FitnessClub.TG.States
 {

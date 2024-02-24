@@ -3,6 +3,5 @@
     public class SportTypesStoredProcedures
     {
         public const string GetAllSportTypes = "GetAllSportTypes";
-
     }
 }

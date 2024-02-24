@@ -9,6 +9,7 @@ namespace FitnessClub.BLL.Mapping
         public SportTypeMappingProfile()
         {
             CreateMap<SportTypeDto, SportTypeOutputModel>();
+
             CreateMap<SportTypeDto, SportTypeNameOutputModel>();
         }
     }

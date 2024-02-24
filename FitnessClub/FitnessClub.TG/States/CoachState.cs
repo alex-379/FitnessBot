@@ -2,7 +2,6 @@
 using Telegram.Bot.Types;
 using Telegram.Bot.Types.Enums;
 using Telegram.Bot.Types.ReplyMarkups;
-using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace FitnessClub.TG.States
 {
@@ -24,7 +23,7 @@ namespace FitnessClub.TG.States
             return this;
         }
 
-        public override void SendMessage(long ChatId)
+        public override void SendMessage(long chatId)
         {
             var inlineKeyboard = new InlineKeyboardMarkup(
             new List<InlineKeyboardButton[]>()
@@ -32,7 +31,7 @@ namespace FitnessClub.TG.States
                         new InlineKeyboardButton[]
                         { InlineKeyboardButton.WithCallbackData("Мои тренировки и записи", "CoachTimetableState"),},
             });
-            SingletoneStorage.GetStorage().Client.SendTextMessageAsync(ChatId, $"Добро пожаловать в меню тренера!", replyMarkup: inlineKeyboard);
+            SingletoneStorage.GetStorage().Client.SendTextMessageAsync(chatId, $"Добро пожаловать в меню тренера!", replyMarkup: inlineKeyboard);
         }
     }
 }
