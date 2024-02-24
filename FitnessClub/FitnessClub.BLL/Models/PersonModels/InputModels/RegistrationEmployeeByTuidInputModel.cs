@@ -1,6 +1,6 @@
 ﻿namespace FitnessClub.BLL.Models.PersonModels.InputModels
 {
-    public class RegistrationEmployeeByIdInputModel
+    public class RegistrationEmployeeByTuidInputModel
     {
         public int RoleId { get; set; }
 

@@ -9,19 +9,19 @@ namespace FitnessClub.BLL.Mapping
     {
         public PersonMappingProfile()
         {
-            CreateMap<RegistrationEmployeeByIdInputModel, PersonDto>();
+            CreateMap<RegistrationEmployeeByTuidInputModel, PersonDto>();
 
             CreateMap<RegistrationEmployeeByOtpInputModel, PersonDto>();
+
+            CreateMap<RegistrationPersonInputModel, PersonDto>();
 
             CreateMap<PersonDto, EmployeeOutputModelForCheckOnAdminRightesByTuid>();
 
             CreateMap<PersonDto, EmployeeModelForCheckOnAdminRightesByOtp>();
-
+            
             CreateMap<PersonDto, ClientAndAdministratorOutputModel>();
 
             CreateMap<PersonDto, CoachWithTgId>();
-
-            CreateMap<RegistrationPersonInputModel, PersonDto>();
 
             CreateMap<PersonDto, CoachWithSportTypesOutputModel>()
                 .ForMember(d => d.FullName, opt => opt.MapFrom(s => $"{s.FamilyName} {s.FirstName}"));

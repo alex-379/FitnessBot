@@ -251,38 +251,13 @@ WorkoutRepository workoutRepository = new();
 PersonClient personClient = new();
 
 #region PersonInputModels
-RegistrationEmployeeByOtpInputModel person = new()
-{
-    RoleId = 1,
-    OneTimePassword = 423432
-};
-
-//PersonDto person2 = new PersonDto()
-//{
-//    RoleId = person.RoleId,
-//    OneTimePassword = person.OneTimePassword
-//};
-
-//Console.WriteLine(personRepository.AddPerson(person2));
-
-personClient.AddPersonWithOtp(person);
-
-
-
-
 //RegistrationEmployeeByOtpInputModel person = new()
 //{
 //    RoleId = 1,
-//    OneTimePassword = 932526
+//    OneTimePassword = 423432
 //};
 
-//PersonDto person2 = new PersonDto()
-//{
-//    RoleId = person.RoleId,
-//    OneTimePassword = person.OneTimePassword
-//};
-
-
+//personClient.AddPersonWithOtp(person);
 #endregion
 
 #region PersonOutputModels

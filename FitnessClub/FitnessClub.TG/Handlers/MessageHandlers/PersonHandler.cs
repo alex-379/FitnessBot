@@ -10,6 +10,13 @@ namespace FitnessClub.TG.Handlers.MessageHandlers
     {
         PersonClient personClient = new();
 
+        public List<EmployeeOutputModelForCheckOnAdminRightesByTuid> GetAllPersonsTelegramUserIdByRoleId(int roleId)
+        {
+            List<EmployeeOutputModelForCheckOnAdminRightesByTuid> persons = personClient.GetAllPersonsTelegramUserIdByRoleId(roleId);
+
+            return persons;
+        }
+
         public List<EmployeeModelForCheckOnAdminRightesByOtp> GetAllPersonsOtpByRoleId(int roleId)
         {
             List<EmployeeModelForCheckOnAdminRightesByOtp> persons = personClient.GetAllPersonsOtpByRoleId(roleId);

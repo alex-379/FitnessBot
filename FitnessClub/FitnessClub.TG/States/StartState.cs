@@ -1,5 +1,5 @@
-using FitnessClub.BLL;
 using FitnessClub.BLL.Models.PersonModels.OutputModels;
+using FitnessClub.TG.Handlers.MessageHandlers;
 using Telegram.Bot;
 using Telegram.Bot.Types;
 using Telegram.Bot.Types.Enums;
@@ -41,11 +41,11 @@ namespace FitnessClub.TG.States
 
                 if (message == "/login")
                 {
-                    PersonClient personClient = new();
+                    PersonHandler personHandler = new();
 
-                    var admins = personClient.GetAllPersonsTelegramUserIdByRoleId(1);
+                    var admins = personHandler.GetAllPersonsTelegramUserIdByRoleId(1);
 
-                    var coaches = personClient.GetAllPersonsTelegramUserIdByRoleId(2);
+                    var coaches = personHandler.GetAllPersonsTelegramUserIdByRoleId(2);
 
                     foreach (EmployeeOutputModelForCheckOnAdminRightesByTuid i in admins)
                     {

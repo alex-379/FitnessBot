@@ -1,9 +1,8 @@
-﻿using FitnessClub.BLL;
-using FitnessClub.BLL.Models.PersonModels.OutputModels;
+﻿using FitnessClub.BLL.Models.PersonModels.OutputModels;
+using FitnessClub.TG.Handlers.MessageHandlers;
 using Telegram.Bot;
 using Telegram.Bot.Types;
 using Telegram.Bot.Types.Enums;
-using FitnessClub.TG.Handlers.MessageHandlers;
 
 namespace FitnessClub.TG.States
 {
@@ -15,7 +14,7 @@ namespace FitnessClub.TG.States
             {
                 var message = update.Message.Text;
 
-                PersonHandler personHandler = new ();
+                PersonHandler personHandler = new();
 
                 var admins = personHandler.GetAllPersonsOtpByRoleId(1);
 
