@@ -269,8 +269,9 @@ using static System.Runtime.InteropServices.JavaScript.JSType;
 ////var timetables = timetableClient.GetAllTimetablesWithCoachWorkoutsGymsClients();
 
 
-
-////Console.WriteLine();
+PersonClient personClient = new();
+var coaches = personClient.GetCoachesWithTgIdByRoleId(2);
+Console.WriteLine();
 
 //#endregion
 //string sportType = "Волейбол";

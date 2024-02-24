@@ -26,15 +26,13 @@ namespace FitnessClub.TG.States
             {
                 var callbackQuery = update.CallbackQuery;
 
-                if (callbackQuery.Data == "GetFullTimetablesState")
+                if (callbackQuery.Data == "ClientTimetableState")
                 {
-                    //SingletoneStorage.GetStorage().Client.AnswerCallbackQueryAsync(callbackQuery.Id);
-                    return new GetFullTimetablesState();
+                    return new ClientTimetableState();
                 }
 
                 if (callbackQuery.Data == "Back")
                 {
-                    //SingletoneStorage.GetStorage().Client.AnswerCallbackQueryAsync(callbackQuery.Id);
                     return new StartState(callbackQuery.From.FirstName);
                 }
             }
@@ -92,7 +90,7 @@ namespace FitnessClub.TG.States
                 new List<InlineKeyboardButton[]>()
                 {
                     new InlineKeyboardButton[]
-                    { InlineKeyboardButton.WithCallbackData("Посмотреть расписание тренировок", "GetFullTimetablesState"),},
+                    { InlineKeyboardButton.WithCallbackData("Посмотреть расписание тренировок", "ClientTimetableState"),},
                     new InlineKeyboardButton[]
                     { InlineKeyboardButton.WithCallbackData("Посмотреть свои записи", "1"),},
                 });

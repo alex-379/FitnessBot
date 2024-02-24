@@ -9,13 +9,13 @@ using Telegram.Bot.Types.ReplyMarkups;
 
 namespace FitnessClub.TG.States
 {
-    public class GetFullTimetablesState : AbstractState
+    public class ClientTimetableState : AbstractState
     {
         int i = 0;
         string sportType;
         bool workoutType;
         string date;
-        string timetableId;
+        int timetableId;
 
         public override AbstractState ReceiveMessage(Update update)
         {
@@ -48,7 +48,7 @@ namespace FitnessClub.TG.States
 
                 if (i == 3)
                 {
-                    timetableId = callback;
+                    timetableId = Convert.ToInt32(callback);
                 }
                 i++;
             }
