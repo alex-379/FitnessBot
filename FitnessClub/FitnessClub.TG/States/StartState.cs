@@ -24,7 +24,7 @@ namespace FitnessClub.TG.States
             {
                 var callbackQuery = update.CallbackQuery;
 
-                if (callbackQuery.Data == "ClientAllTimetableState")
+                if (callbackQuery.Data == "Registration")
                 {
                     return new ClientRegistrationState();
                 }

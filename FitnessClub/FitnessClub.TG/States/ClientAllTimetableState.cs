@@ -84,7 +84,7 @@ namespace FitnessClub.TG.States
 
         public override void SendMessage(long chatId)
         {
-            long crntTelegramUserId = 1;
+            long crntTelegramUserId = 00000;
             if (i == 0)
             {
                 PersonClient personClient = new();
