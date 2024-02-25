@@ -67,7 +67,7 @@ namespace FitnessClub.TG.States
 
         public override void SendMessage(long chatId)
         {
-            long crntTelegramUserId = 1;
+            long crntTelegramUserId = 00000;
             if (i == 0)
             {
                 PersonClient personClient = new();
@@ -90,7 +90,7 @@ namespace FitnessClub.TG.States
                         { InlineKeyboardButton.WithCallbackData("Посмотреть расписание тренировок", "ClientAllTimetableState"),},}
                         );
 
-                    SingletoneStorage.GetStorage().Client.SendTextMessageAsync(chatId, "Вы уже зарегистрированы", replyMarkup: inlineKeyboard);
+                    SingletoneStorage.GetStorage().Client.SendTextMessageAsync(chatId, "Вход в личный кабинет выполнен.", replyMarkup: inlineKeyboard);
                 }
 
                 else
@@ -119,7 +119,7 @@ namespace FitnessClub.TG.States
                     { InlineKeyboardButton.WithCallbackData("Посмотреть расписание тренировок", "ClientAllTimetableState"),},
                });
 
-                SingletoneStorage.GetStorage().Client.SendTextMessageAsync(chatId, "Поздравляем, Вы успешно зарегистрированы", replyMarkup: inlineKeyboard);
+                SingletoneStorage.GetStorage().Client.SendTextMessageAsync(chatId, "Поздравляем, Вы успешно зарегистрированы!", replyMarkup: inlineKeyboard);
             }
         }
     }
