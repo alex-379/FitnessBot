@@ -13,6 +13,7 @@ End
 
 Go
 
+
 Create procedure AddCoachSportType
 @CoachId int, @SportTypeId int
 As

@@ -22,7 +22,15 @@ namespace FitnessClub.TG.States
 
                 if (i == 0)
                 {
-                    timetableId = Convert.ToInt32(callback);
+                    if (callback == "Registration")
+                    {
+                        return new ClientRegistrationState();
+                    }
+
+                    else
+                    {
+                        timetableId = Convert.ToInt32(callback);
+                    }
                 }
 
                 if (i == 1)
@@ -44,38 +52,64 @@ namespace FitnessClub.TG.States
 
         public override void SendMessage(long chatId)
         {
+            long crntTelegramUserId = 1;
+
             if (i == 0)
             {
                 PersonClient personClient = new();
-                List<CoachWithTgId> clientWithTgIds = personClient.GetCoachesWithTgIdByRoleId(3);
-                var filteredClients = from CoachWithTgId in clientWithTgIds
-                                      where CoachWithTgId.TelegramUserId == chatId
-                                      select CoachWithTgId;
+                List<ClientAndAdministratorOutputModel> persons = personClient.GetAllPersons();
 
-                foreach (var i in filteredClients)
+                foreach (var a in persons)
                 {
-                    clientId = i.Id;
+                    if (a.TelegramUserId == chatId)
+                    {
+                        crntTelegramUserId = (long)a.TelegramUserId;
+                    }
                 }
 
-                TimetableClient timetableClient = new();
-                List<AllTimetablesWithCoachWorkoutsGymsClientsOutputModel> timetablesClient = timetableClient.GetAllTimetablesWithCoachWorkoutsGymsClients();
-                var filteredTimetables = from GetAllTimetablesWithCoachWorkoutsGymsClientsOutputModel in timetablesClient
-                                         where GetAllTimetablesWithCoachWorkoutsGymsClientsOutputModel.Client.Id == clientId
-                                         select GetAllTimetablesWithCoachWorkoutsGymsClientsOutputModel;
-
-                List<List<InlineKeyboardButton>> buttons = new List<List<InlineKeyboardButton>>();
-                int count = 0;
-
-                foreach (AllTimetablesWithCoachWorkoutsGymsClientsOutputModel i in filteredTimetables)
+                if (crntTelegramUserId == chatId)
                 {
-                    buttons.Add(new List<InlineKeyboardButton>());
-                    buttons[buttons.Count - 1].Add(new InlineKeyboardButton($"{i.Date} - {i.StartTime} {i.Workout.Comment}")
-                    { CallbackData = Convert.ToString(i.Id) });
-                    count++;
+                    List<CoachWithTgId> clientWithTgIds = personClient.GetCoachesWithTgIdByRoleId(3);
+                    var filteredClients = from CoachWithTgId in clientWithTgIds
+                                          where CoachWithTgId.TelegramUserId == chatId
+                                          select CoachWithTgId;
+
+                    foreach (var i in filteredClients)
+                    {
+                        clientId = i.Id;
+                    }
+
+                    TimetableClient timetableClient = new();
+                    List<AllTimetablesWithCoachWorkoutsGymsClientsOutputModel> timetablesClient = timetableClient.GetAllTimetablesWithCoachWorkoutsGymsClients();
+                    var filteredTimetables = from GetAllTimetablesWithCoachWorkoutsGymsClientsOutputModel in timetablesClient
+                                             where GetAllTimetablesWithCoachWorkoutsGymsClientsOutputModel.Client.Id == clientId
+                                             select GetAllTimetablesWithCoachWorkoutsGymsClientsOutputModel;
+
+                    List<List<InlineKeyboardButton>> buttons = new List<List<InlineKeyboardButton>>();
+                    int count = 0;
+
+                    foreach (AllTimetablesWithCoachWorkoutsGymsClientsOutputModel i in filteredTimetables)
+                    {
+                        buttons.Add(new List<InlineKeyboardButton>());
+                        buttons[buttons.Count - 1].Add(new InlineKeyboardButton($"{i.Date} - {i.StartTime} {i.Workout.Comment}")
+                        { CallbackData = Convert.ToString(i.Id) });
+                        count++;
+                    }
+
+                    InlineKeyboardMarkup inlineKeyboard = new InlineKeyboardMarkup(buttons);
+                    SingletoneStorage.GetStorage().Client.SendTextMessageAsync(chatId, "Ваши тренировки:", replyMarkup: inlineKeyboard);
                 }
 
-                InlineKeyboardMarkup inlineKeyboard = new InlineKeyboardMarkup(buttons);
-                SingletoneStorage.GetStorage().Client.SendTextMessageAsync(chatId, "Ваши тренировки:", replyMarkup: inlineKeyboard);
+                else
+                {
+                    var inlineKeyboard = new InlineKeyboardMarkup(
+                new List<InlineKeyboardButton[]>()
+                {
+                        new InlineKeyboardButton[]
+                        { InlineKeyboardButton.WithCallbackData("Пожалуйста, зарегистрируйтесь.", "Registration"),},
+                });
+                    SingletoneStorage.GetStorage().Client.SendTextMessageAsync(chatId, " ", replyMarkup: inlineKeyboard);
+                }
             }
 
             if (i == 1)

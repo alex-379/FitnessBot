@@ -272,6 +272,10 @@ PersonClient personClient = new();
 //var person = personClient.GetPersonById(2);
 
 //Console.WriteLine();
+
+//var person = personClient.GetPersonByTUId(285340370);
+
+//Console.WriteLine();
 #endregion
 
 TimetableClient timetableClient = new();
@@ -290,8 +294,8 @@ TimetableClient timetableClient = new();
 
 
 //TimetableClient timetableClient = new();
-var timetables = timetableClient.GetAllTimetablesWithCoachWorkoutsGymsClients();
-Console.WriteLine();
+//var timetables = timetableClient.GetAllTimetablesWithCoachWorkoutsGymsClients();
+//Console.WriteLine();
 //TimetableClient timetableClient = new();
 //List<GetAllTimetablesWithCoachWorkoutsGymsClientsOutputModel> dates = timetableClient.GetAllTimetablesWithCoachWorkoutsGymsClients();
 //var filteredResults = from GetAllTimetablesWithCoachWorkoutsGymsClientsOutputModel in dates

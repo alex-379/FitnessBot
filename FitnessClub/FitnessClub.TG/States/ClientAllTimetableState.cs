@@ -1,4 +1,5 @@
 using FitnessClub.BLL;
+using FitnessClub.BLL.Models.PersonModels.OutputModels;
 using FitnessClub.BLL.Models.SportTypeModels;
 using FitnessClub.BLL.Models.TimetableModels.OutputModels;
 using FitnessClub.TG.Models.TimetableModels.InputModels;
@@ -34,7 +35,15 @@ namespace FitnessClub.TG.States
 
                 if (i == 0)
                 {
-                    _clientTimetable.SportType = callback;
+                    if (callback == "Registration")
+                    {
+                        return new ClientRegistrationState();
+                    }
+
+                    else 
+                    {
+                        _clientTimetable.SportType = callback;
+                    }
                 }
 
                 if (i == 1)
@@ -75,23 +84,49 @@ namespace FitnessClub.TG.States
 
         public override void SendMessage(long chatId)
         {
+            long crntTelegramUserId = 1;
             if (i == 0)
             {
-                var sportTypes = _sportTypeClient.GetAllSportTypesNames();
-                List<List<InlineKeyboardButton>> buttons = new List<List<InlineKeyboardButton>>();
+                PersonClient personClient = new();
+                List<ClientAndAdministratorOutputModel> persons = personClient.GetAllPersons();
 
-                foreach (SportTypeNameOutputModel s in sportTypes)
+                foreach (var a in persons)
                 {
-                    if (count % 2 == 0)
+                    if (a.TelegramUserId == chatId)
                     {
-                        buttons.Add(new List<InlineKeyboardButton>());
+                        crntTelegramUserId = (long)a.TelegramUserId;
                     }
-                    buttons[buttons.Count - 1].Add(new InlineKeyboardButton(s.SportType) { CallbackData = (s.SportType) });
-                    count++;
                 }
 
-                InlineKeyboardMarkup inlineKeyboard = new InlineKeyboardMarkup(buttons);
-                SingletoneStorage.GetStorage().Client.SendTextMessageAsync(chatId, "Выберите вид спорта:", replyMarkup: inlineKeyboard);
+                if (crntTelegramUserId == chatId)
+                {
+                    var sportTypes = _sportTypeClient.GetAllSportTypesNames();
+                    List<List<InlineKeyboardButton>> buttons = new List<List<InlineKeyboardButton>>();
+
+                    foreach (SportTypeNameOutputModel s in sportTypes)
+                    {
+                        if (count % 2 == 0)
+                        {
+                            buttons.Add(new List<InlineKeyboardButton>());
+                        }
+                        buttons[buttons.Count - 1].Add(new InlineKeyboardButton(s.SportType) { CallbackData = (s.SportType) });
+                        count++;
+                    }
+
+                    InlineKeyboardMarkup inlineKeyboard = new InlineKeyboardMarkup(buttons);
+                    SingletoneStorage.GetStorage().Client.SendTextMessageAsync(chatId, "Выберите вид спорта:", replyMarkup: inlineKeyboard);
+                }
+
+                else
+                {
+                    var inlineKeyboard = new InlineKeyboardMarkup(
+                new List<InlineKeyboardButton[]>()
+                {
+                        new InlineKeyboardButton[]
+                        { InlineKeyboardButton.WithCallbackData("Пожалуйста, зарегистрируйтесь.", "Registration"),},
+                });
+                    SingletoneStorage.GetStorage().Client.SendTextMessageAsync(chatId, " ", replyMarkup: inlineKeyboard);
+                }
             }
 
             if (i == 1)

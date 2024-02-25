@@ -26,15 +26,13 @@ namespace FitnessClub.TG.States
 
                 if (callbackQuery.Data == "ClientAllTimetableState")
                 {
-                    return new ClientAllTimetableState();
+                    return new ClientRegistrationState();
                 }
 
                 if (callbackQuery.Data == "ClientMyTimetableState")
                 {
                     return new ClientMyTimetableState();
                 }
-
-                return this;
             }
 
             if (update.Type == UpdateType.Message)
@@ -69,18 +67,18 @@ namespace FitnessClub.TG.States
             return new AuthenticationState();
         }
 
-        public override void SendMessage(long ChatId)
+        public override void SendMessage(long chatId)
         {
             var inlineKeyboard = new InlineKeyboardMarkup(
                 new List<InlineKeyboardButton[]>()
                 {
                     new InlineKeyboardButton[]
-                    { InlineKeyboardButton.WithCallbackData("Посмотреть расписание тренировок", "ClientAllTimetableState"),},
+                    { InlineKeyboardButton.WithCallbackData("Посмотреть расписание тренировок", "Registration"),},
                     new InlineKeyboardButton[]
                     { InlineKeyboardButton.WithCallbackData("Посмотреть свои записи", "ClientMyTimetableState"),},
                 });
 
-            SingletoneStorage.GetStorage().Client.SendTextMessageAsync(ChatId, $"Здравствуйте {_name}, добро пожаловать в наш фитнес клуб!", replyMarkup: inlineKeyboard);
+            SingletoneStorage.GetStorage().Client.SendTextMessageAsync(chatId, $"Здравствуйте {_name}, добро пожаловать в наш фитнес клуб!", replyMarkup: inlineKeyboard);
         }
     }
 }
