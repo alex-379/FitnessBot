@@ -1,6 +1,5 @@
 ﻿using FitnessClub.BLL;
 using FitnessClub.BLL.Models.PersonModels.InputModels;
-using FitnessClub.BLL.Models.SportTypeModels;
 using Telegram.Bot;
 using Telegram.Bot.Types;
 using Telegram.Bot.Types.Enums;
@@ -8,13 +7,13 @@ using Telegram.Bot.Types.ReplyMarkups;
 
 namespace FitnessClub.TG.States
 {
-    public class AdministratorPersonalRegistrationStateByTUID : AbstractState
+    public class AdministratorPersonalRegistrationStateByTuid : AbstractState
     {
         private int i = 0;
         private RegistrationEmployeeByTuidInputModel _personModel;
         private PersonClient _personClient;
 
-        public AdministratorPersonalRegistrationStateByTUID()
+        public AdministratorPersonalRegistrationStateByTuid()
         {
             _personModel = new();
             _personClient = new();
@@ -67,203 +66,6 @@ namespace FitnessClub.TG.States
                         new InlineKeyboardButton[]
                         { InlineKeyboardButton.WithCallbackData("Администратор", "1"),},
                         new InlineKeyboardButton[]
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
                         { InlineKeyboardButton.WithCallbackData("Тренер", "2"),},
                     }
                     );

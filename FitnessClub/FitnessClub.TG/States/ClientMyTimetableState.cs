@@ -57,7 +57,7 @@ namespace FitnessClub.TG.States
             if (i == 0)
             {
                 PersonClient personClient = new();
-                List<ClientAndAdministratorOutputModel> persons = personClient.GetAllPersons();
+                List<PersonOutputModel> persons = personClient.GetAllPersons();
 
                 foreach (var a in persons)
                 {

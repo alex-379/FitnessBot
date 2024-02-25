@@ -11,7 +11,7 @@ namespace FitnessClub.BLL
     public class PersonClient
     {
         private IPersonRepository _personRepository;
-        private Mapper _mapper; 
+        private Mapper _mapper;
 
         public PersonClient()
         {
@@ -55,11 +55,11 @@ namespace FitnessClub.BLL
             _personRepository.AddPerson(_mapper.Map<PersonDto>(person));
         }
 
-        public List<ClientAndAdministratorOutputModel> GetAllPersons()
+        public List<PersonOutputModel> GetAllPersons()
         {
-            List <PersonDto> personDTos = _personRepository.GetAllPersons();
+            List<PersonDto> personDTos = _personRepository.GetAllPersons();
 
-            return _mapper.Map<List<ClientAndAdministratorOutputModel>>(personDTos);
+            return _mapper.Map<List<PersonOutputModel>>(personDTos);
         }
 
         public List<CoachWithSportTypesOutputModel> GetAllCoachesWithSportTypes()
@@ -69,13 +69,13 @@ namespace FitnessClub.BLL
             return _mapper.Map<List<CoachWithSportTypesOutputModel>>(personDTos);
         }
 
-        public ClientAndAdministratorOutputModel GetPersonById(int id)
+        public PersonOutputModel GetPersonById(int id)
         {
             PersonDto personDTo = _personRepository.GetPersonById(id);
 
-            return _mapper.Map<ClientAndAdministratorOutputModel>(personDTo);
+            return _mapper.Map<PersonOutputModel>(personDTo);
         }
-       
+
         public List<CoachWithTgId> GetCoachesWithTgIdByRoleId(int roleId)
         {
             List<PersonDto> personDTos = _personRepository.GetAllPersonsByRoleId(roleId);
@@ -83,5 +83,30 @@ namespace FitnessClub.BLL
             return _mapper.Map<List<CoachWithTgId>>(personDTos);
         }
 
+        public int GetPassword()
+        {
+            return new Random().Next(999999);
+        }
+
+        public List<AdministratorOutputModel> GetAllAdministrators()
+        {
+            List<PersonDto> personDTos = _personRepository.GetAllPersonsByRoleId(Constants.AdministratorRoleId);
+
+            return _mapper.Map<List<AdministratorOutputModel>>(personDTos);
+        }
+
+        public List<CoachOutputModel> GetAllCoaches()
+        {
+            List<PersonDto> personDTos = _personRepository.GetAllPersonsByRoleId(2);
+
+            return _mapper.Map<List<CoachOutputModel>>(personDTos);
+        }
+
+        public List<CoachOutputModel> GetAllClients()
+        {
+            List<PersonDto> personDTos = _personRepository.GetAllPersonsByRoleId(3);
+
+            return _mapper.Map<List<CoachOutputModel>>(personDTos);
+        }
     }
 }

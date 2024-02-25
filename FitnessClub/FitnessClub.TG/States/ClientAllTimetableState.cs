@@ -14,10 +14,6 @@ namespace FitnessClub.TG.States
     {
         private int i = 0;
         private int count = 0;
-        //private string _sportType;
-        //private bool _workoutType;
-        //private string _date;
-        //private int _timetableId;
         private SportTypeClient _sportTypeClient;
         private ClientAllTimetableInputModel _clientTimetable;
 
@@ -88,7 +84,7 @@ namespace FitnessClub.TG.States
             if (i == 0)
             {
                 PersonClient personClient = new();
-                List<ClientAndAdministratorOutputModel> persons = personClient.GetAllPersons();
+                List<PersonOutputModel> persons = personClient.GetAllPersons();
 
                 foreach (var a in persons)
                 {

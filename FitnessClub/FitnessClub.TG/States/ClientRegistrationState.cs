@@ -1,15 +1,9 @@
-﻿using FitnessClub.BLL.Models.PersonModels.OutputModels;
-using FitnessClub.BLL;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Telegram.Bot.Types;
-using Telegram.Bot;
-using Telegram.Bot.Types.Enums;
-using System.ComponentModel.DataAnnotations;
+﻿using FitnessClub.BLL;
 using FitnessClub.BLL.Models.PersonModels.InputModels;
+using FitnessClub.BLL.Models.PersonModels.OutputModels;
+using Telegram.Bot;
+using Telegram.Bot.Types;
+using Telegram.Bot.Types.Enums;
 using Telegram.Bot.Types.ReplyMarkups;
 
 namespace FitnessClub.TG.States
@@ -71,7 +65,7 @@ namespace FitnessClub.TG.States
             if (i == 0)
             {
                 PersonClient personClient = new();
-                List<ClientAndAdministratorOutputModel> persons = personClient.GetAllPersons();
+                List<PersonOutputModel> persons = personClient.GetAllPersons();
 
                 foreach (var a in persons)
                 {

@@ -19,7 +19,13 @@ namespace FitnessClub.BLL.Mapping
 
             CreateMap<PersonDto, EmployeeOutputModelForCheckOnAdminRightesByOTP>();
             
-            CreateMap<PersonDto, ClientAndAdministratorOutputModel>();
+            CreateMap<PersonDto, PersonOutputModel>();
+
+            CreateMap<PersonDto, AdministratorOutputModel>();
+
+            CreateMap<PersonDto, ClientOutputModel>();
+
+            CreateMap<PersonDto, CoachOutputModel>();
 
             CreateMap<PersonDto, CoachWithTgId>();
 

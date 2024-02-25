@@ -17,13 +17,13 @@ namespace FitnessClub.TG.States
                 {
                     return new AdministratorPersonalRegistrationState();
                 }
-                if (callback == "AdministratorWorkoutsState")
+                if (callback == "AdministratorPersonalInfoState")
                 {
-                    return new AdministratorWorkoutsState();
+                    return new AdministratorPersonalInfoState();
                 }
-                if (callback == "AdministratorTimetablesState")
+                if (callback == "AdministratorPersonalChangeState")
                 {
-                    return new AdministratorTimetablesState();
+                    return new AdministratorPersonalChangeState();
                 }
             }
 
