@@ -2,11 +2,6 @@
 {
     public class TimetableDto
     {
-        public TimetableDto()
-        {
-            Clients = new List<PersonDto>();
-        }
-
         public int? Id { get; set; }
 
         public int? CoachId { get; set; }
@@ -19,7 +14,7 @@
 
         public string? StartTime { get; set; }
 
-        public List<PersonDto> Clients { get; set; }
+        public PersonDto Client { get; set; }
 
         public PersonDto Coach { get; set; }
 

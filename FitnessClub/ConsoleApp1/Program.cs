@@ -272,6 +272,10 @@ PersonClient personClient = new();
 //var person = personClient.GetPersonById(2);
 
 //Console.WriteLine();
+
+//var person = personClient.GetPersonByTUId(285340370);
+
+//Console.WriteLine();
 #endregion
 
 TimetableClient timetableClient = new();

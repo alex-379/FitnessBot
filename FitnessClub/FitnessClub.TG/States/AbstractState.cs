@@ -5,6 +5,19 @@ namespace FitnessClub.TG.States
 {
     public abstract class AbstractState
     {
+
+        public int Id { get; set; }
+
+        public int RoleId { get; set; }
+
+        public string? FamilyName { get; set; }
+
+        public string? FirstName { get; set; }
+
+        public long? TelegramUserId { get; set; }
+
+        public string? PhoneNumber { get; set; }
+
         public abstract void SendMessage(long chatId);
 
         public abstract AbstractState ReceiveMessage(Update update);

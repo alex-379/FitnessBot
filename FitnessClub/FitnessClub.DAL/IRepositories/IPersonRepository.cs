@@ -13,7 +13,7 @@ namespace FitnessClub.DAL.IRepositories
         public List<PersonDto> GetAllPersons();
 
         public PersonDto GetPersonById(int id);
-
+        
         public void UpdatePersonOnId(PersonDto person);
 
         public void DeletePersonById(int id);

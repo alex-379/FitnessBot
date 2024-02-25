@@ -87,14 +87,14 @@ namespace FitnessClub.TG.States
                 {
                     text = $"{i.Date} в {i.StartTime}, {i.Workout.Comment}, продолжительность {i.Workout.Duration} минут, " +
                         $"стоимость {i.Workout.Price} руб. с человека в {i.Gym.Gym}. Список клиентов:";
-                    List<ClientForTimetableOutputModel> clients = i.Clients;
-                    foreach (ClientForTimetableOutputModel a in clients)
+                    //List<ClientForTimetableOutputModel> clients = i.Client.Id;
+                    foreach (AllTimetablesWithCoachWorkoutsGymsClientsOutputModel a in filteredTimetables)
                     {
                         if (count % 2 == 0)
                         {
                             buttons.Add(new List<InlineKeyboardButton>());
                         }
-                        buttons[buttons.Count - 1].Add(new InlineKeyboardButton(a.FullName) { CallbackData = (a.FullName) });
+                        buttons[buttons.Count - 1].Add(new InlineKeyboardButton(a.Client.FullName) { CallbackData = Convert.ToString(a.Client.Id) });
                         count++;
                     }
 
