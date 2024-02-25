@@ -5,6 +5,7 @@ using Telegram.Bot;
 using Telegram.Bot.Types;
 using Telegram.Bot.Types.Enums;
 using Telegram.Bot.Types.ReplyMarkups;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace FitnessClub.TG.States
 {
@@ -25,6 +26,11 @@ namespace FitnessClub.TG.States
                     if (callback == "Registration")
                     {
                         return new ClientRegistrationState();
+                    }
+
+                    if (callback == "ClientAllTimetableState")
+                    {
+                        return new ClientAllTimetableState();
                     }
 
                     else
@@ -87,6 +93,7 @@ namespace FitnessClub.TG.States
 
                     List<List<InlineKeyboardButton>> buttons = new List<List<InlineKeyboardButton>>();
                     int count = 0;
+                    string text = "Ваши тренировки:";
 
                     foreach (AllTimetablesWithCoachWorkoutsGymsClientsOutputModel i in filteredTimetables)
                     {
@@ -95,9 +102,16 @@ namespace FitnessClub.TG.States
                         { CallbackData = Convert.ToString(i.Id) });
                         count++;
                     }
-
+                    if (buttons.Count == 0)
+                    {
+                        text = "Пока что Вы не записаны ни на одну тренировку";
+                        buttons.Add(new List<InlineKeyboardButton>());
+                        buttons[buttons.Count - 1].Add(new InlineKeyboardButton("Посмотреть расписание тренировок")
+                        { CallbackData = "ClientAllTimetableState" });
+                        count++;
+                    }
                     InlineKeyboardMarkup inlineKeyboard = new InlineKeyboardMarkup(buttons);
-                    SingletoneStorage.GetStorage().Client.SendTextMessageAsync(chatId, "Ваши тренировки:", replyMarkup: inlineKeyboard);
+                    SingletoneStorage.GetStorage().Client.SendTextMessageAsync(chatId, text, replyMarkup: inlineKeyboard);
                 }
 
                 else

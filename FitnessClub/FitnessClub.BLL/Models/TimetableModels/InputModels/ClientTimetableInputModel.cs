@@ -1,6 +1,6 @@
 ﻿namespace FitnessClub.BLL.Models.TimetableModels.InputModels
 {
-    public class AddClientTimetableInputModel
+    public class ClientTimetableInputModel
     {
         public int СlientId { get; set; }
 

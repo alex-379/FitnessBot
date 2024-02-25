@@ -4,6 +4,7 @@ using FitnessClub.BLL.Models.TimetableModels.InputModels;
 using FitnessClub.BLL.Models.TimetableModels.OutputModels;
 using FitnessClub.DAL;
 using FitnessClub.DAL.Dtos;
+using FitnessClub.DAL.DTOs;
 using FitnessClub.DAL.IRepositories;
 
 namespace FitnessClub.BLL
@@ -32,9 +33,14 @@ namespace FitnessClub.BLL
 
         }
 
-        public void AddClientTimetable(AddClientTimetableInputModel clientTimetable)
+        public void AddClientTimetable(ClientTimetableInputModel clientTimetable)
         {
+            _timetableRepository.AddClientTimetable(_mapper.Map<ClientTimetableDTO>(clientTimetable));
+        }
 
+        public void DeleteClientTimetable(ClientTimetableInputModel clientTimetable)
+        {
+            _timetableRepository.DeleteClientTimetable(_mapper.Map<ClientTimetableDTO>(clientTimetable));
         }
 
         public List<TimetableOutputModel> GetAllTimetables()
