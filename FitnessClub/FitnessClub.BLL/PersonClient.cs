@@ -75,14 +75,7 @@ namespace FitnessClub.BLL
 
             return _mapper.Map<ClientAndAdministratorOutputModel>(personDTo);
         }
-
-        public ClientAndAdministratorOutputModel GetPersonByTUId(long telegramUserId)
-        {
-            PersonDto personDTo = _personRepository.GetPersonByTUId(telegramUserId);
-
-            return _mapper.Map<ClientAndAdministratorOutputModel>(personDTo);
-        }
-
+       
         public List<CoachWithTgId> GetCoachesWithTgIdByRoleId(int roleId)
         {
             List<PersonDto> personDTos = _personRepository.GetAllPersonsByRoleId(roleId);
