@@ -40,7 +40,7 @@ namespace FitnessClub.TG.States
             if (i == 0)
             {
                 PersonClient personClient = new();
-                List<CoachWithTgId> coachWithTgIds = personClient.GetCoachesWithTgIdByRoleId(2);
+                List<CoachWithTgIdOutputModel> coachWithTgIds = personClient.GetCoachesWithTgIdByRoleId(2);
                 var filteredCoaches = from CoachWithTgId in coachWithTgIds
                                       where CoachWithTgId.TelegramUserId == chatId
                                       select CoachWithTgId;

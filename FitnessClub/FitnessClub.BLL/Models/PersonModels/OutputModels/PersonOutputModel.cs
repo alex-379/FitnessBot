@@ -9,5 +9,9 @@
         public string? FamilyName { get; set; }
 
         public string? FirstName { get; set; }
+
+        public long? TelegramUserId { get; set; }
+
+        public string? PhoneNumber { get; set; }
     }
 }

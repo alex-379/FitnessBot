@@ -77,7 +77,7 @@ namespace FitnessClub.TG.States
             if (i == 0)
             {
                 PersonClient personClient = new();
-                List<ClientAndAdministratorOutputModel> persons = personClient.GetAllPersons();
+                List<PersonOutputModel> persons = personClient.GetAllPersons();
 
                 foreach (var a in persons)
                 {
@@ -89,7 +89,7 @@ namespace FitnessClub.TG.States
 
                 if (crntTelegramUserId == chatId)
                 {
-                    List<CoachWithTgId> clientWithTgIds = personClient.GetCoachesWithTgIdByRoleId(3);
+                    List<CoachWithTgIdOutputModel> clientWithTgIds = personClient.GetCoachesWithTgIdByRoleId(3);
                     var filteredClients = from CoachWithTgId in clientWithTgIds
                                           where CoachWithTgId.TelegramUserId == chatId
                                           select CoachWithTgId;
