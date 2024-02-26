@@ -1,10 +1,12 @@
 using FitnessClub.BLL;
 using FitnessClub.BLL.Models.PersonModels.OutputModels;
+using FitnessClub.BLL.Models.TimetableModels.InputModels;
 using FitnessClub.BLL.Models.TimetableModels.OutputModels;
 using Telegram.Bot;
 using Telegram.Bot.Types;
 using Telegram.Bot.Types.Enums;
 using Telegram.Bot.Types.ReplyMarkups;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace FitnessClub.TG.States
 {
@@ -27,6 +29,11 @@ namespace FitnessClub.TG.States
                         return new ClientRegistrationState();
                     }
 
+                    if (callback == "ClientAllTimetableState")
+                    {
+                        return new ClientAllTimetableState();
+                    }
+
                     else
                     {
                         timetableId = Convert.ToInt32(callback);
@@ -42,7 +49,20 @@ namespace FitnessClub.TG.States
 
                     else
                     {
+                        timetableId = Convert.ToInt32(callback);
+                    }
+                }
 
+                if (i == 2)
+                {
+                    if (callback == "ClientMyTimetableState")
+                    {
+                        return new ClientMyTimetableState();
+                    }
+
+                    if (callback == "ClientAllTimetableState")
+                    {
+                        return new ClientAllTimetableState();
                     }
                 }
                 i++;
@@ -87,6 +107,7 @@ namespace FitnessClub.TG.States
 
                     List<List<InlineKeyboardButton>> buttons = new List<List<InlineKeyboardButton>>();
                     int count = 0;
+                    string text = "Ваши тренировки:";
 
                     foreach (AllTimetablesWithCoachWorkoutsGymsClientsOutputModel i in filteredTimetables)
                     {
@@ -95,9 +116,16 @@ namespace FitnessClub.TG.States
                         { CallbackData = Convert.ToString(i.Id) });
                         count++;
                     }
-
+                    if (buttons.Count == 0)
+                    {
+                        text = "Пока что Вы не записаны ни на одну тренировку";
+                        buttons.Add(new List<InlineKeyboardButton>());
+                        buttons[buttons.Count - 1].Add(new InlineKeyboardButton("Посмотреть расписание тренировок")
+                        { CallbackData = "ClientAllTimetableState" });
+                        count++;
+                    }
                     InlineKeyboardMarkup inlineKeyboard = new InlineKeyboardMarkup(buttons);
-                    SingletoneStorage.GetStorage().Client.SendTextMessageAsync(chatId, "Ваши тренировки:", replyMarkup: inlineKeyboard);
+                    SingletoneStorage.GetStorage().Client.SendTextMessageAsync(chatId, text, replyMarkup: inlineKeyboard);
                 }
 
                 else
@@ -141,6 +169,28 @@ namespace FitnessClub.TG.States
 
                 InlineKeyboardMarkup inlineKeyboard = new InlineKeyboardMarkup(buttons);
                 SingletoneStorage.GetStorage().Client.SendTextMessageAsync(chatId, text, replyMarkup: inlineKeyboard);
+            }
+
+
+            if (i == 2)
+            {
+                ClientTimetableInputModel clientTimetable = new ClientTimetableInputModel
+                {
+                    ClientId = clientId,
+                    TimetableId = timetableId
+                };
+                TimetableClient timetableClient = new();
+                timetableClient.DeleteClientTimetable(clientTimetable);
+
+                var inlineKeyboard = new InlineKeyboardMarkup(
+                new List<InlineKeyboardButton[]>()
+                {
+                        new InlineKeyboardButton[]
+                        { InlineKeyboardButton.WithCallbackData("Посмотреть мои записи", "ClientMyTimetableState"),},
+                        new InlineKeyboardButton[]
+                        { InlineKeyboardButton.WithCallbackData("Записаться на другие тренировки", "ClientAllTimetableState"),},
+                });
+                SingletoneStorage.GetStorage().Client.SendTextMessageAsync(chatId, "Вы отменили запись на тренировку!", replyMarkup: inlineKeyboard);
             }
         }
     }

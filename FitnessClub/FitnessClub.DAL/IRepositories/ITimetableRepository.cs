@@ -1,4 +1,5 @@
 ﻿using FitnessClub.DAL.Dtos;
+using FitnessClub.DAL.DTOs;
 
 namespace FitnessClub.DAL.IRepositories
 {
@@ -6,7 +7,7 @@ namespace FitnessClub.DAL.IRepositories
     {
         public int? AddTimetable(TimetableDto timetable);
 
-        public void AddClientTimetable(int clientId, int timetableId);
+        public void AddClientTimetable(ClientTimetableDTO clientTimetable);
 
         public List<TimetableDto> GetAllTimetables();
 
@@ -22,7 +23,7 @@ namespace FitnessClub.DAL.IRepositories
 
         public void UndeleteTimetableById(int id);
 
-        public void DeleteClientTimetable(int clientId, int timetableId);
+        public void DeleteClientTimetable(ClientTimetableDTO clientTimetable);
 
         public List<TimetableDto> GetAllTimetablesWithCoachWorkoutsGymsClients ();
 
