@@ -12,8 +12,8 @@ namespace FitnessClub.TG.States
 {
     public class ClientAllTimetableState : AbstractState
     {
-        private int i = 0;
-        private int count = 0;
+        int i = 0;
+        int count = 0;
         private SportTypeClient _sportTypeClient;
         private ClientAllTimetableInputModel _clientTimetable;
 

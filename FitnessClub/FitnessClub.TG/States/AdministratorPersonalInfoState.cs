@@ -1,5 +1,4 @@
-﻿using FitnessClub.BLL;
-using Telegram.Bot;
+﻿using Telegram.Bot;
 using Telegram.Bot.Types;
 using Telegram.Bot.Types.Enums;
 using Telegram.Bot.Types.ReplyMarkups;
@@ -8,31 +7,23 @@ namespace FitnessClub.TG.States
 {
     public class AdministratorPersonalInfoState : AbstractState
     {
-        private PersonClient _personClient;
-
-        public AdministratorPersonalInfoState()
-        {
-            _personClient = new();
-        }
-
         public override AbstractState ReceiveMessage(Update update)
         {
             if (update.Type == UpdateType.CallbackQuery)
             {
                 var callback = update.CallbackQuery.Data;
 
+                if (callback == "AdministratorPersonalInfoStateAdministrators")
+                {
+                    return new AdministratorPersonalInfoStateAdministrators();
+                }
                 if (callback == "AdministratorPersonalInfoStateClients")
                 {
-                    _personClient.GetAllAdministrators();
-
+                    return new AdministratorPersonalInfoStateClients();
                 }
                 if (callback == "AdministratorPersonalInfoStateCoaches")
                 {
-
-                }
-                if (callback == "AdministratorPersonalInfoStateAdministrators")
-                {
-
+                    return new AdministratorPersonalInfoStateCoaches();
                 }
             }
 
@@ -45,14 +36,14 @@ namespace FitnessClub.TG.States
                 new List<InlineKeyboardButton[]>()
                 {
                     new InlineKeyboardButton[]
+                    { InlineKeyboardButton.WithCallbackData("Администраторы", "AdministratorPersonalInfoStateAdministrators"),},
+                    new InlineKeyboardButton[]
                     { InlineKeyboardButton.WithCallbackData("Клиенты", "AdministratorPersonalInfoStateClients"),},
                     new InlineKeyboardButton[]
-                    { InlineKeyboardButton.WithCallbackData("Тренеры", "AdministratorPersonalInfoStateCoaches"),},
-                    new InlineKeyboardButton[]
-                    { InlineKeyboardButton.WithCallbackData("Администраторы", "AdministratorPersonalInfoStateAdministrators"),},
+                    { InlineKeyboardButton.WithCallbackData("Тренировки", "AdministratorPersonalInfoStateCoaches"),},
                 }
                 );
-            SingletoneStorage.GetStorage().Client.SendTextMessageAsync(chatId, $"Просмотр персонала", replyMarkup: inlineKeyboard);
+            SingletoneStorage.GetStorage().Client.SendTextMessageAsync(chatId, "Просмотр персонала", replyMarkup: inlineKeyboard);
         }
     }
 }

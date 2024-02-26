@@ -23,7 +23,7 @@ namespace FitnessClub.TG.States
                 }
                 if (callback == "AdministratorPersonalChangeState")
                 {
-                    return new AdministratorPersonalChangeState();
+                    return new AdministratorPersonalInfoState();
                 }
             }
 

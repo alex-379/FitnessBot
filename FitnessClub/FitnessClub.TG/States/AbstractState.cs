@@ -1,10 +1,18 @@
-﻿using Telegram.Bot.Types;
+﻿using FitnessClub.BLL;
+using Telegram.Bot.Types;
 using Telegram.Bot.Types.Enums;
 
 namespace FitnessClub.TG.States
 {
     public abstract class AbstractState
     {
+        public PersonClient _personClient;
+
+        public AbstractState()
+        {
+            _personClient = new();
+        }
+
 
         public int Id { get; set; }
 
