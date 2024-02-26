@@ -6,7 +6,6 @@ using Telegram.Bot;
 using Telegram.Bot.Types;
 using Telegram.Bot.Types.Enums;
 using Telegram.Bot.Types.ReplyMarkups;
-using static System.Net.Mime.MediaTypeNames;
 
 namespace FitnessClub.TG.States
 {
@@ -101,11 +100,23 @@ namespace FitnessClub.TG.States
 
                     TimetableClient timetableClient = new();
                     List<AllTimetablesWithCoachWorkoutsGymsClientsOutputModel> timetablesClient = timetableClient.GetAllTimetablesWithCoachWorkoutsGymsClients();
-                    var filteredTimetables = from GetAllTimetablesWithCoachWorkoutsGymsClientsOutputModel in timetablesClient
-                                             where GetAllTimetablesWithCoachWorkoutsGymsClientsOutputModel.Client.Id == clientId
-                                             select GetAllTimetablesWithCoachWorkoutsGymsClientsOutputModel;
+                    //var filteredTimetables = from GetAllTimetablesWithCoachWorkoutsGymsClientsOutputModel in timetablesClient
+                    //                         where GetAllTimetablesWithCoachWorkoutsGymsClientsOutputModel.Client.Id == clientId
+                    //                         select GetAllTimetablesWithCoachWorkoutsGymsClientsOutputModel;
 
-                    List<List<InlineKeyboardButton>> buttons = new List<List<InlineKeyboardButton>>();
+                    List<AllTimetablesWithCoachWorkoutsGymsClientsOutputModel> filteredTimetables = new();
+
+
+                    foreach (AllTimetablesWithCoachWorkoutsGymsClientsOutputModel t in timetablesClient)
+                    {
+                        ClientForTimetableOutputModel client = t.Client;
+                        if (client.Id == clientId)
+                        {
+                            filteredTimetables.Add(t);
+                        }
+                    }
+
+                    List <List<InlineKeyboardButton>> buttons = new List<List<InlineKeyboardButton>>();
                     int count = 0;
                     string text = "Ваши тренировки:";
 
