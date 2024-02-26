@@ -1,6 +1,6 @@
 ﻿namespace FitnessClub.BLL.Models.PersonModels.OutputModels
 {
-    public class CoachWithTgIdOutputModel
+    public class PersonWithTgIdOutputModel
     {
         public int Id { get; set; }
 

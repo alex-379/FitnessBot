@@ -27,7 +27,7 @@ namespace FitnessClub.BLL.Mapping
 
             CreateMap<PersonDto, CoachOutputModel>();
 
-            CreateMap<PersonDto, CoachWithTgIdOutputModel>();
+            CreateMap<PersonDto, PersonWithTgIdOutputModel>();
 
             CreateMap<PersonDto, CoachWithSportTypesOutputModel>()
                 .ForMember(d => d.FullName, opt => opt.MapFrom(s => $"{s.FamilyName} {s.FirstName}"));

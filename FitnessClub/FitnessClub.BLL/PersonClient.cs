@@ -76,11 +76,11 @@ namespace FitnessClub.BLL
             return _mapper.Map<PersonOutputModel>(personDTo);
         }
 
-        public List<CoachWithTgIdOutputModel> GetCoachesWithTgIdByRoleId(int roleId)
+        public List<PersonWithTgIdOutputModel> GetPersonsWithTgIdByRoleId(int roleId)
         {
             List<PersonDto> personDTos = _personRepository.GetAllPersonsByRoleId(roleId);
 
-            return _mapper.Map<List<CoachWithTgIdOutputModel>>(personDTos);
+            return _mapper.Map<List<PersonWithTgIdOutputModel>>(personDTos);
         }
 
         public int GetPassword()

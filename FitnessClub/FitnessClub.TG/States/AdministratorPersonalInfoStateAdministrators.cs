@@ -1,7 +1,5 @@
 ﻿using FitnessClub.BLL;
 using FitnessClub.BLL.Models.PersonModels.OutputModels;
-using FitnessClub.BLL.Models.SportTypeModels;
-using FitnessClub.TG.Models.TimetableModels.InputModels;
 using Telegram.Bot;
 using Telegram.Bot.Types;
 using Telegram.Bot.Types.ReplyMarkups;

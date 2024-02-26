@@ -88,10 +88,21 @@ namespace FitnessClub.TG.States
 
                 if (crntTelegramUserId == chatId)
                 {
-                    List<CoachWithTgIdOutputModel> clientWithTgIds = personClient.GetCoachesWithTgIdByRoleId(3);
-                    var filteredClients = from CoachWithTgId in clientWithTgIds
-                                          where CoachWithTgId.TelegramUserId == chatId
-                                          select CoachWithTgId;
+                    PersonClient personClient1 = new();
+                    List<PersonWithTgIdOutputModel> clientWithTgIds = personClient.GetPersonsWithTgIdByRoleId(3);
+                    //var filteredClients = from ClientWithTgId in clientWithTgIds
+                    //                      where ClientWithTgId.TelegramUserId == chatId
+                    //                      select ClientWithTgId;
+
+                    List<PersonWithTgIdOutputModel> filteredClients = new();
+
+                    foreach (PersonWithTgIdOutputModel c in clientWithTgIds)
+                    {
+                        if (c.TelegramUserId == chatId)
+                        {
+                            filteredClients.Add(c);
+                        }
+                    }
 
                     foreach (var i in filteredClients)
                     {
