@@ -1,5 +1,6 @@
 ﻿using Dapper;
 using FitnessClub.DAL.Dtos;
+using FitnessClub.DAL.DTOs;
 using FitnessClub.DAL.IRepositories;
 using FitnessClub.DAL.StoredProcedures;
 using Microsoft.Data.SqlClient;
@@ -19,12 +20,12 @@ namespace FitnessClub.DAL
             }
         }
 
-        public void AddClientTimetable(int clientId, int timetableId)
+        public void AddClientTimetable(ClientTimetableDTO clientTimetable)
         {
             using (IDbConnection connection = new SqlConnection(Options.connectionString))
             {
                 connection.Query<int>(TimetableStoredProcedures.AddClientTimetable,
-                    new { clientId, timetableId },
+                    new { clientTimetable.ClientId, clientTimetable.TimetableId },
                     commandType: CommandType.StoredProcedure);
             }
         }
@@ -96,12 +97,12 @@ namespace FitnessClub.DAL
             }
         }
 
-        public void DeleteClientTimetable(int clientId, int timetableId)
+        public void DeleteClientTimetable(ClientTimetableDTO clientTimetable)
         {
             using (IDbConnection connection = new SqlConnection(Options.connectionString))
             {
                 connection.Query(TimetableStoredProcedures.DeleteClientTimetable,
-                    new { clientId, timetableId },
+                    new { clientTimetable.ClientId, clientTimetable.TimetableId },
                     commandType: CommandType.StoredProcedure);
             }
         }
