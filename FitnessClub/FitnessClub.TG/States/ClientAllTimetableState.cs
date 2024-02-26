@@ -218,7 +218,7 @@ namespace FitnessClub.TG.States
             {
                 ClientTimetableInputModel clientTimetable = new ClientTimetableInputModel
                 {
-                    СlientId = (int)_timetable.ClientId,
+                    ClientId = (int)_timetable.ClientId,
                     TimetableId = (int)_timetable.TimetableId
                 };
                 TimetableClient timetableClient = new();

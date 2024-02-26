@@ -6,6 +6,7 @@ using FitnessClub.DAL;
 using FitnessClub.DAL.Dtos;
 using FitnessClub.DAL.DTOs;
 using FitnessClub.DAL.IRepositories;
+using System.Reflection;
 
 namespace FitnessClub.BLL
 {

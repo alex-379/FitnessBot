@@ -2,7 +2,7 @@
 {
     public class ClientTimetableInputModel
     {
-        public int СlientId { get; set; }
+        public int ClientId { get; set; }
 
         public int TimetableId { get; set; }
     }
